@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="400" height="200">
+  <!-- Background -->
+  <rect width="400" height="200" fill="#e5e5e5"/>
+  
+  <!-- Magnifying Glass Circle -->
+  <circle cx="120" cy="100" r="45" stroke="#2c3e50" stroke-width="8" fill="none"/>
+  
+  <!-- Person Icon inside magnifying glass -->
+  <circle cx="120" cy="85" r="12" fill="#4a90a4"/>
+  <path d="M 105 115 Q 105 105 120 105 Q 135 105 135 115 L 135 125 L 105 125 Z" fill="#4a90a4"/>
+  
+  <!-- Magnifying Glass Handle -->
+  <line x1="155" y1="135" x2="175" y2="155" stroke="#2c3e50" stroke-width="8" stroke-linecap="round"/>
+  
+  <!-- Job Text -->
+  <text x="220" y="85" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#2c3e50">Job</text>
+  
+  <!-- Finder Text -->
+  <text x="220" y="140" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#2c3e50">Finder</text>
+</svg>
