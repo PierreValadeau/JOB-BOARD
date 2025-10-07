@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Développeur Full Stack Senior - TechCorp | Job Finder</title>
     <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/index.css">
     <link rel="stylesheet" href="../assets/css/job-detail.css">
     <link href="https:
 </head>
 <body>
     
-    <header class="header">
+    <header class="header header-white">
         <div class="container">
             <div class="nav-wrapper">
                 <div class="logo">
@@ -375,6 +377,7 @@
         </div>
     </footer>
     <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/job-cards-simple.js"></script>
 </body>
 </html>
 

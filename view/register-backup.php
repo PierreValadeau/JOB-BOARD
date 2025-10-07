@@ -8,97 +8,26 @@
     <link rel="stylesheet" href="../assets/css/common.css">
     <link rel="stylesheet" href="../assets/css/index.css">
     <link rel="stylesheet" href="../assets/css/register.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        /* Améliorations des boutons */
-        .auth-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-            border: none !important;
-            border-radius: 12px !important;
-            padding: 14px 28px !important;
-            font-size: 16px !important;
-            font-weight: 600 !important;
-            color: white !important;
-            cursor: pointer !important;
-            transition: all 0.3s ease !important;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4) !important;
-            text-decoration: none !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            gap: 8px !important;
-        }
-        
-        .auth-btn:hover {
-            transform: translateY(-3px) !important;
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6) !important;
-            background: linear-gradient(135deg, #5a67d8 0%, #667eea 100%) !important;
-        }
-        
-        .auth-btn:active {
-            transform: translateY(-1px) !important;
-        }
-        
-        .social-btn {
-            border-radius: 10px !important;
-            padding: 12px 20px !important;
-            border: 2px solid #e2e8f0 !important;
-            background: white !important;
-            color: #4a5568 !important;
-            font-weight: 500 !important;
-            transition: all 0.3s ease !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            gap: 10px !important;
-        }
-        
-        .social-btn:hover {
-            transform: translateY(-2px) !important;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
-            border-color: #cbd5e0 !important;
-        }
-        
-        .google-btn:hover {
-            border-color: #db4437 !important;
-            color: #db4437 !important;
-        }
-        
-        .linkedin-btn:hover {
-            border-color: #0077b5 !important;
-            color: #0077b5 !important;
-        }
-        
-        /* Amélioration des champs de saisie */
-        .form-group input, .form-group select {
-            border-radius: 10px !important;
-            border: 2px solid #e2e8f0 !important;
-            padding: 12px 16px !important;
-            transition: all 0.3s ease !important;
-        }
-        
-        .form-group input:focus, .form-group select:focus {
-            border-color: #667eea !important;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
-            outline: none !important;
-        }
-        
-        /* Amélioration de la carte auth */
-        .auth-card {
-            border-radius: 20px !important;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
-        }
-    </style>
+    <link href="https:
 </head>
 <body>
     
     <header class="header header-white">
         <div class="container">
-            <div class="nav-wrapper" style="justify-content: center;">
+            <div class="nav-wrapper">
                 <div class="logo">
                     <a href="index.php" class="logo-link">
                         <h1 class="logo-text">Job Finder</h1>
                     </a>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.php" class="home-btn"><i class="fas fa-home"></i> Accueil</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <a href="login.php" class="btn-link">Se connecter</a>
+                    <a href="register.php" class="btn-primary active">Créer un compte</a>
                 </div>
             </div>
         </div>
@@ -110,6 +39,7 @@
                 <div class="auth-card">
                     <div class="auth-header">
                         <h1>Créer un compte</h1>
+                        <p>Rejoignez Job Finder et trouvez votre emploi idéal</p>
                     </div>
                     <form class="auth-form" id="registerForm">
                         <div class="form-row">
@@ -264,9 +194,65 @@
                         <p>Déjà un compte ? <a href="login.html">Se connecter</a></p>
                     </div>
                 </div>
+                
+                <div class="info-panel">
+                    <div class="info-content">
+                        <h2>Rejoignez Job Finder</h2>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-number">15k+</div>
+                                <div class="stat-label">Offres d'emploi</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">5k+</div>
+                                <div class="stat-label">Entreprises</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">50k+</div>
+                                <div class="stat-label">Candidats</div>
+                            </div>
+                        </div>
+                        <ul class="benefits-list">
+                            <li>
+                                <i class="fas fa-rocket"></i>
+                                <div>
+                                    <strong>Candidature rapide</strong>
+                                    <p>Postulez en 1 clic avec votre profil pré-rempli</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-target"></i>
+                                <div>
+                                    <strong>Offres personnalisées</strong>
+                                    <p>Algorithme intelligent selon vos préférences</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-shield-alt"></i>
+                                <div>
+                                    <strong>100% gratuit</strong>
+                                    <p>Toutes nos fonctionnalités sont gratuites</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Job Finder. Tous droits réservés.</p>
+                <div class="footer-links">
+                    <a href="
+                    <a href="
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="../assets/js/auth.js"></script>
 </body>
 </html>
 

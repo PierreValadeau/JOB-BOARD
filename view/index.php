@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Finder - Trouvez votre emploi idéal</title>
     <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/common.css">
     <link rel="stylesheet" href="../assets/css/index.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -18,10 +19,7 @@
                         <h1 class="logo-text">Job Finder</h1>
                     </a>
                 </div>
-                <nav class="nav">
-                    <ul class="nav-list">
-                    </ul>
-                </nav>
+
                 <div class="auth-buttons">
                     <a href="login.php" class="btn-link">Se connecter</a>
                     <a href="register.php" class="btn-primary">Créer un compte</a>
