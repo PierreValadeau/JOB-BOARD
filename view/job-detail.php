@@ -5,33 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Développeur Full Stack Senior - TechCorp | Job Finder</title>
     <link rel="stylesheet" href="../assets/css/styles.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/job-detail.css">
+    <link href="https:
 </head>
 <body>
-    <!-- Header -->
+    
     <header class="header">
         <div class="container">
             <div class="nav-wrapper">
                 <div class="logo">
-                    <a href="index.html">
-                        <img src="../assets/images/logo.svg" alt="Job Finder" class="logo-img">
-                        <span class="logo-text">Job Finder</span>
+                    <a href="index.php" class="logo-link">
+                        <h1 class="logo-text">Job Finder</h1>
                     </a>
                 </div>
                 <nav class="nav">
                     <ul class="nav-list">
-                        <li><a href="job-ads.html">Annonces</a></li>
+                        <li><a href="index.php" class="home-btn"><i class="fas fa-home"></i> Accueil</a></li>
                     </ul>
                 </nav>
                 <div class="auth-buttons">
-                    <a href="login.html" class="btn-link">Se connecter</a>
-                    <a href="register.html" class="btn-primary">Créer un compte</a>
+                    <a href="login.php" class="btn-link">Se connecter</a>
+                    <a href="register.php" class="btn-primary">Créer un compte</a>
                 </div>
             </div>
         </div>
     </header>
-
-    <!-- Breadcrumb -->
+    
     <div class="breadcrumb-section">
         <div class="container">
             <nav class="breadcrumb">
@@ -43,14 +42,13 @@
             </nav>
         </div>
     </div>
-
-    <!-- Job Detail Section -->
+    
     <section class="job-detail-section">
         <div class="container">
             <div class="job-detail-layout">
-                <!-- Main Content -->
+                
                 <main class="job-detail-main">
-                    <!-- Job Header -->
+                    
                     <div class="job-detail-header">
                         <div class="job-title-section">
                             <h1 class="job-title">Développeur Full Stack Senior</h1>
@@ -66,7 +64,7 @@
                                             <i class="far fa-star"></i>
                                         </div>
                                         <span class="rating-score">4.2</span>
-                                        <a href="#" class="reviews-link">124 avis sur TechCorp</a>
+                                        <a href="
                                     </div>
                                 </div>
                                 <div class="job-meta">
@@ -104,8 +102,7 @@
                             </button>
                         </div>
                     </div>
-
-                    <!-- Job Tags -->
+                    
                     <div class="job-tags-section">
                         <div class="tags-list">
                             <span class="tag highlight">Urgent</span>
@@ -116,13 +113,11 @@
                             <span class="tag">Expérience 5+ ans</span>
                         </div>
                     </div>
-
-                    <!-- Job Description -->
+                    
                     <div class="job-description-section">
                         <h2>Description du poste</h2>
                         <div class="description-content">
                             <p>Nous recherchons un <strong>Développeur Full Stack Senior</strong> passionné et expérimenté pour rejoindre notre équipe de développement dynamique. Vous jouerez un rôle clé dans la conception et le développement de nos applications web innovantes.</p>
-
                             <h3>Vos missions principales :</h3>
                             <ul>
                                 <li>Développer des applications web complètes (front-end et back-end)</li>
@@ -133,7 +128,6 @@
                                 <li>Collaborer étroitement avec les équipes UX/UI et Product</li>
                                 <li>Assurer la maintenance et l'évolution des applications en production</li>
                             </ul>
-
                             <h3>Technologies utilisées :</h3>
                             <ul>
                                 <li><strong>Front-end :</strong> React.js, TypeScript, Redux, Sass</li>
@@ -141,7 +135,6 @@
                                 <li><strong>DevOps :</strong> Docker, AWS, CI/CD</li>
                                 <li><strong>Outils :</strong> Git, Jira, Slack</li>
                             </ul>
-
                             <h3>Votre profil :</h3>
                             <ul>
                                 <li>Diplôme en informatique ou équivalent</li>
@@ -153,7 +146,6 @@
                                 <li>Anglais technique courant</li>
                                 <li>Esprit d'équipe et capacités de communication</li>
                             </ul>
-
                             <h3>Ce que nous offrons :</h3>
                             <ul>
                                 <li>Salaire attractif : 55 000 € - 70 000 € selon profil</li>
@@ -168,15 +160,12 @@
                             </ul>
                         </div>
                     </div>
-
-                    <!-- Company Description -->
+                    
                     <div class="company-description-section">
                         <h2>À propos de TechCorp</h2>
                         <div class="company-content">
                             <p>TechCorp est une entreprise innovante spécialisée dans le développement de solutions logicielles pour les entreprises du secteur financier. Fondée en 2015, nous accompagnons nos clients dans leur transformation digitale grâce à des technologies de pointe.</p>
-                            
                             <p>Notre équipe de 150 collaborateurs travaille dans un environnement agile et bienveillant, favorisant l'innovation et l'épanouissement professionnel de chacun.</p>
-
                             <div class="company-stats">
                                 <div class="stat-item">
                                     <div class="stat-number">150+</div>
@@ -193,8 +182,7 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Similar Jobs -->
+                    
                     <div class="similar-jobs-section">
                         <h2>Offres similaires</h2>
                         <div class="similar-jobs-grid">
@@ -219,19 +207,17 @@
                         </div>
                     </div>
                 </main>
-
-                <!-- Sidebar -->
+                
                 <aside class="job-detail-sidebar">
-                    <!-- Apply Section -->
+                    
                     <div class="apply-section">
                         <button class="btn-primary full-width apply-btn">
                             <i class="fas fa-paper-plane"></i>
                             Postuler maintenant
                         </button>
-                        <p class="apply-note">En postulant, vous acceptez nos <a href="#">conditions d'utilisation</a></p>
+                        <p class="apply-note">En postulant, vous acceptez nos <a href="
                     </div>
-
-                    <!-- Job Info -->
+                    
                     <div class="job-info-section">
                         <h3>Informations sur l'emploi</h3>
                         <div class="info-list">
@@ -261,20 +247,19 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Share Section -->
+                    
                     <div class="share-section">
                         <h3>Partager cette offre</h3>
                         <div class="share-buttons">
-                            <a href="#" class="share-btn linkedin">
+                            <a href="
                                 <i class="fab fa-linkedin"></i>
                                 LinkedIn
                             </a>
-                            <a href="#" class="share-btn twitter">
+                            <a href="
                                 <i class="fab fa-twitter"></i>
                                 Twitter
                             </a>
-                            <a href="#" class="share-btn email">
+                            <a href="
                                 <i class="fas fa-envelope"></i>
                                 Email
                             </a>
@@ -284,10 +269,9 @@
                             </button>
                         </div>
                     </div>
-
-                    <!-- Report Section -->
+                    
                     <div class="report-section">
-                        <a href="#" class="report-link">
+                        <a href="
                             <i class="fas fa-flag"></i>
                             Signaler cette offre
                         </a>
@@ -296,8 +280,7 @@
             </div>
         </div>
     </section>
-
-    <!-- Application Modal -->
+    
     <div id="applicationModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -340,59 +323,58 @@
             </div>
         </div>
     </div>
-
-    <!-- Footer -->
+    
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h4>Job Finder</h4>
                     <ul>
-                        <li><a href="#">À propos</a></li>
-                        <li><a href="#">Presse</a></li>
-                        <li><a href="#">Carrières</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="
+                        <li><a href="
+                        <li><a href="
+                        <li><a href="
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Candidats</h4>
                     <ul>
-                        <li><a href="#">Parcourir les emplois</a></li>
-                        <li><a href="#">Guide des salaires</a></li>
-                        <li><a href="#">Conseils carrière</a></li>
-                        <li><a href="#">Créer un CV</a></li>
+                        <li><a href="
+                        <li><a href="
+                        <li><a href="
+                        <li><a href="
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Employeurs</h4>
                     <ul>
-                        <li><a href="#">Publier une offre</a></li>
-                        <li><a href="#">Solutions RH</a></li>
-                        <li><a href="#">Tarifs</a></li>
-                        <li><a href="#">Aide employeurs</a></li>
+                        <li><a href="
+                        <li><a href="
+                        <li><a href="
+                        <li><a href="
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Suivez-nous</h4>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="
+                        <a href="
+                        <a href="
+                        <a href="
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 Job Finder. Tous droits réservés.</p>
                 <div class="footer-links">
-                    <a href="#">Conditions d'utilisation</a>
-                    <a href="#">Politique de confidentialité</a>
-                    <a href="#">Cookies</a>
+                    <a href="
+                    <a href="
+                    <a href="
                 </div>
             </div>
         </div>
     </footer>
-
     <script src="../assets/js/script.js"></script>
 </body>
 </html>
+

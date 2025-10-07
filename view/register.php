@@ -5,34 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Créer un compte - Job Finder</title>
     <link rel="stylesheet" href="../assets/css/styles.css">
-    <link rel="stylesheet" href="../assets/css/auth.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/register.css">
+    <link href="https:
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
+    
+    <header class="header header-white">
         <div class="container">
             <div class="nav-wrapper">
                 <div class="logo">
-                    <a href="index.html">
-                        <img src="../assets/images/logo.svg" alt="Job Finder" class="logo-img">
-                        <span class="logo-text">Job Finder</span>
+                    <a href="index.php" class="logo-link">
+                        <h1 class="logo-text">Job Finder</h1>
                     </a>
                 </div>
                 <nav class="nav">
                     <ul class="nav-list">
-                        <li><a href="job-ads.html">Annonces</a></li>
+                        <li><a href="index.php" class="home-btn"><i class="fas fa-home"></i> Accueil</a></li>
                     </ul>
                 </nav>
                 <div class="auth-buttons">
-                    <a href="login.html" class="btn-link">Se connecter</a>
-                    <a href="register.html" class="btn-primary active">Créer un compte</a>
+                    <a href="login.php" class="btn-link">Se connecter</a>
+                    <a href="register.php" class="btn-primary active">Créer un compte</a>
                 </div>
             </div>
         </div>
     </header>
-
-    <!-- Main Content -->
+    
     <main class="auth-main">
         <div class="container">
             <div class="auth-container">
@@ -41,7 +39,6 @@
                         <h1>Créer un compte</h1>
                         <p>Rejoignez Job Finder et trouvez votre emploi idéal</p>
                     </div>
-
                     <form class="auth-form" id="registerForm">
                         <div class="form-row">
                             <div class="form-group half">
@@ -58,7 +55,6 @@
                                 >
                                 <div class="error-message" id="firstNameError"></div>
                             </div>
-
                             <div class="form-group half">
                                 <label for="lastName">
                                     <i class="fas fa-user"></i>
@@ -74,7 +70,6 @@
                                 <div class="error-message" id="lastNameError"></div>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <label for="email">
                                 <i class="fas fa-envelope"></i>
@@ -89,7 +84,6 @@
                             >
                             <div class="error-message" id="emailError"></div>
                         </div>
-
                         <div class="form-group">
                             <label for="phone">
                                 <i class="fas fa-phone"></i>
@@ -103,7 +97,6 @@
                             >
                             <div class="error-message" id="phoneError"></div>
                         </div>
-
                         <div class="form-group">
                             <label for="password">
                                 <i class="fas fa-lock"></i>
@@ -129,7 +122,6 @@
                             </div>
                             <div class="error-message" id="passwordError"></div>
                         </div>
-
                         <div class="form-group">
                             <label for="confirmPassword">
                                 <i class="fas fa-lock"></i>
@@ -149,7 +141,6 @@
                             </div>
                             <div class="error-message" id="confirmPasswordError"></div>
                         </div>
-
                         <div class="form-group">
                             <label for="userType">
                                 <i class="fas fa-briefcase"></i>
@@ -164,16 +155,14 @@
                             </select>
                             <div class="error-message" id="userTypeError"></div>
                         </div>
-
                         <div class="form-group">
                             <label class="checkbox-label">
                                 <input type="checkbox" name="terms" id="terms" required>
                                 <span class="checkmark"></span>
-                                J'accepte les <a href="#" target="_blank">conditions d'utilisation</a> et la <a href="#" target="_blank">politique de confidentialité</a>
+                                J'accepte les <a href="
                             </label>
                             <div class="error-message" id="termsError"></div>
                         </div>
-
                         <div class="form-group">
                             <label class="checkbox-label">
                                 <input type="checkbox" name="newsletter" id="newsletter">
@@ -181,16 +170,13 @@
                                 Je souhaite recevoir des alertes emploi et actualités par email
                             </label>
                         </div>
-
                         <button type="submit" class="auth-btn">
                             <i class="fas fa-user-plus"></i>
                             Créer mon compte
                         </button>
-
                         <div class="auth-divider">
                             <span>ou</span>
                         </div>
-
                         <div class="social-login">
                             <button type="button" class="social-btn google-btn">
                                 <i class="fab fa-google"></i>
@@ -202,13 +188,11 @@
                             </button>
                         </div>
                     </form>
-
                     <div class="auth-footer">
                         <p>Déjà un compte ? <a href="login.html">Se connecter</a></p>
                     </div>
                 </div>
-
-                <!-- Info Panel -->
+                
                 <div class="info-panel">
                     <div class="info-content">
                         <h2>Rejoignez Job Finder</h2>
@@ -226,7 +210,6 @@
                                 <div class="stat-label">Candidats</div>
                             </div>
                         </div>
-                        
                         <ul class="benefits-list">
                             <li>
                                 <i class="fas fa-rocket"></i>
@@ -255,20 +238,19 @@
             </div>
         </div>
     </main>
-
-    <!-- Footer -->
+    
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <p>&copy; 2025 Job Finder. Tous droits réservés.</p>
                 <div class="footer-links">
-                    <a href="#">Conditions d'utilisation</a>
-                    <a href="#">Politique de confidentialité</a>
+                    <a href="
+                    <a href="
                 </div>
             </div>
         </div>
     </footer>
-
     <script src="../assets/js/auth.js"></script>
 </body>
 </html>
+

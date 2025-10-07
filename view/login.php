@@ -5,34 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion - Job Finder</title>
     <link rel="stylesheet" href="../assets/css/styles.css">
-    <link rel="stylesheet" href="../assets/css/auth.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/login.css">
+    <link href="https:
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
+    
+    <header class="header header-white">
         <div class="container">
             <div class="nav-wrapper">
                 <div class="logo">
-                    <a href="index.html">
-                        <img src="../assets/images/logo.svg" alt="Job Finder" class="logo-img">
-                        <span class="logo-text">Job Finder</span>
+                    <a href="index.php" class="logo-link">
+                        <h1 class="logo-text">Job Finder</h1>
                     </a>
                 </div>
                 <nav class="nav">
                     <ul class="nav-list">
-                        <li><a href="job-ads.html">Annonces</a></li>
+                        <li><a href="index.php" class="home-btn"><i class="fas fa-home"></i> Accueil</a></li>
                     </ul>
                 </nav>
                 <div class="auth-buttons">
-                    <a href="login.html" class="btn-link active">Se connecter</a>
-                    <a href="register.html" class="btn-primary">Créer un compte</a>
+                    <a href="login.php" class="btn-link active">Se connecter</a>
+                    <a href="register.php" class="btn-primary">Créer un compte</a>
                 </div>
             </div>
         </div>
     </header>
-
-    <!-- Main Content -->
+    
     <main class="auth-main">
         <div class="container">
             <div class="auth-container">
@@ -41,7 +39,6 @@
                         <h1>Connexion</h1>
                         <p>Accédez à votre espace personnel Job Finder</p>
                     </div>
-
                     <form class="auth-form" id="loginForm">
                         <div class="form-group">
                             <label for="email">
@@ -57,7 +54,6 @@
                             >
                             <div class="error-message" id="emailError"></div>
                         </div>
-
                         <div class="form-group">
                             <label for="password">
                                 <i class="fas fa-lock"></i>
@@ -77,25 +73,21 @@
                             </div>
                             <div class="error-message" id="passwordError"></div>
                         </div>
-
                         <div class="form-options">
                             <label class="checkbox-label">
                                 <input type="checkbox" name="remember" id="remember">
                                 <span class="checkmark"></span>
                                 Se souvenir de moi
                             </label>
-                            <a href="#" class="forgot-password">Mot de passe oublié ?</a>
+                            <a href="
                         </div>
-
                         <button type="submit" class="auth-btn">
                             <i class="fas fa-sign-in-alt"></i>
                             Se connecter
                         </button>
-
                         <div class="auth-divider">
                             <span>ou</span>
                         </div>
-
                         <div class="social-login">
                             <button type="button" class="social-btn google-btn">
                                 <i class="fab fa-google"></i>
@@ -107,13 +99,11 @@
                             </button>
                         </div>
                     </form>
-
                     <div class="auth-footer">
                         <p>Pas encore de compte ? <a href="register.html">Créer un compte</a></p>
                     </div>
                 </div>
-
-                <!-- Info Panel -->
+                
                 <div class="info-panel">
                     <div class="info-content">
                         <h2>Pourquoi se connecter ?</h2>
@@ -152,20 +142,19 @@
             </div>
         </div>
     </main>
-
-    <!-- Footer -->
+    
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <p>&copy; 2025 Job Finder. Tous droits réservés.</p>
                 <div class="footer-links">
-                    <a href="#">Conditions d'utilisation</a>
-                    <a href="#">Politique de confidentialité</a>
+                    <a href="
+                    <a href="
                 </div>
             </div>
         </div>
     </footer>
-
     <script src="../assets/js/auth.js"></script>
 </body>
 </html>
+

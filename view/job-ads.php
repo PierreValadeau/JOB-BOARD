@@ -6,44 +6,40 @@
     <title>Annonces d'Emploi - Job Finder</title>
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link rel="stylesheet" href="../assets/css/job-ads.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https:
 </head>
 <body>
-    <!-- Header -->
+    
     <header class="header">
         <div class="container">
             <div class="nav-wrapper">
                 <div class="logo">
-                    <a href="index.html">
-                        <img src="../assets/images/logo.svg" alt="Job Finder" class="logo-img">
-                        <span class="logo-text">Job Finder</span>
+                    <a href="index.php" class="logo-link">
+                        <h1 class="logo-text">Job Finder</h1>
                     </a>
                 </div>
                 <nav class="nav">
                     <ul class="nav-list">
-                        <li><a href="job-ads.html" class="active">Annonces</a></li>
+                        <li><a href="index.php" class="home-btn"><i class="fas fa-home"></i> Accueil</a></li>
                     </ul>
                 </nav>
                 <div class="auth-buttons">
-                    <a href="login.html" class="btn-link">Se connecter</a>
-                    <a href="register.html" class="btn-primary">Créer un compte</a>
+                    <a href="login.php" class="btn-link">Se connecter</a>
+                    <a href="register.php" class="btn-primary">Créer un compte</a>
                 </div>
             </div>
         </div>
     </header>
-
-    <!-- Main Content -->
+    
     <main class="main-content">
         <div class="container">
             <div class="page-header">
                 <h1>Dernières Annonces d'Emploi</h1>
                 <p class="page-subtitle">Découvrez nos opportunités d'emploi disponibles</p>
             </div>
-
-            <!-- Job Ads Grid -->
+            
             <div class="job-ads-grid">
                 
-                <!-- Job Ad 1 -->
                 <article class="job-ad-card" data-job-id="1">
                     <div class="job-ad-header">
                         <h2 class="job-title">Développeur Full Stack Senior</h2>
@@ -52,71 +48,66 @@
                             <span class="job-location"><i class="fas fa-map-marker-alt"></i> Paris, France</span>
                         </div>
                     </div>
-                    
                     <div class="job-summary">
                         <p>Rejoignez notre équipe dynamique pour développer des applications web innovantes. Nous recherchons un développeur expérimenté maîtrisant React et Node.js.</p>
                     </div>
-                    
                     <div class="job-meta">
                         <span class="job-type">CDI</span>
                         <span class="salary-range">55k - 70k €</span>
                         <span class="posted-date">Il y a 2 jours</span>
                     </div>
+                    <div class="job-actions">
+                        <button class="learn-more-btn" onclick="toggleJobDetails(1)">
+                            <span class="btn-text">Learn More</span>
+                            <i class="fas fa-chevron-down btn-icon"></i>
+                        </button>
+                    </div>
                     
-                    <button class="learn-more-btn" onclick="toggleJobDetails(1)">
-                        <span class="btn-text">En savoir plus</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    
-                    <!-- Detailed Information (Hidden by default) -->
-                    <div class="job-details" id="job-details-1">
+                    <div class="job-details" id="job-details-1" style="display: none;">
                         <div class="details-content">
                             <div class="detail-section">
-                                <h3>Description complète du poste</h3>
-                                <p>En tant que Développeur Full Stack Senior, vous serez responsable de la conception, du développement et de la maintenance d'applications web complexes. Vous travaillerez en étroite collaboration avec nos équipes de design et de product management pour créer des expériences utilisateur exceptionnelles.</p>
-                                
-                                <h4>Responsabilités principales :</h4>
+                                <h3>Full Job Description</h3>
+                                <p>As a Senior Full Stack Developer, you will be responsible for designing, developing, and maintaining complex web applications. You will work closely with our design and product management teams to create exceptional user experiences.</p>
+                                <h4>Main Responsibilities:</h4>
                                 <ul>
-                                    <li>Développer des applications web front-end avec React.js</li>
-                                    <li>Créer des APIs robustes avec Node.js et Express</li>
-                                    <li>Optimiser les performances des applications</li>
-                                    <li>Participer aux code reviews et au mentoring</li>
-                                    <li>Collaborer avec les équipes UX/UI</li>
+                                    <li>Develop front-end applications with React.js</li>
+                                    <li>Create robust APIs with Node.js and Express</li>
+                                    <li>Optimize application performance</li>
+                                    <li>Participate in code reviews and mentoring</li>
+                                    <li>Collaborate with UX/UI teams</li>
                                 </ul>
                             </div>
-                            
                             <div class="detail-section">
-                                <h3>Informations détaillées</h3>
+                                <h3>Detailed Information</h3>
                                 <div class="info-grid">
                                     <div class="info-item">
-                                        <strong>Salaire :</strong>
-                                        <span>55 000 € - 70 000 € brut/an + avantages</span>
+                                        <strong>Salary:</strong>
+                                        <span>€55,000 - €70,000 gross/year + benefits</span>
                                     </div>
                                     <div class="info-item">
-                                        <strong>Lieu :</strong>
-                                        <span>Paris 8ème arrondissement (75008)</span>
+                                        <strong>Location:</strong>
+                                        <span>Paris 8th arrondissement (75008)</span>
                                     </div>
                                     <div class="info-item">
-                                        <strong>Temps de travail :</strong>
-                                        <span>Temps plein - 39h/semaine</span>
+                                        <strong>Working Time:</strong>
+                                        <span>Full-time - 39h/week</span>
                                     </div>
                                     <div class="info-item">
-                                        <strong>Expérience requise :</strong>
-                                        <span>5+ années en développement web</span>
+                                        <strong>Experience Required:</strong>
+                                        <span>5+ years in web development</span>
                                     </div>
                                     <div class="info-item">
-                                        <strong>Type de contrat :</strong>
-                                        <span>CDI - Période d'essai 3 mois</span>
+                                        <strong>Contract Type:</strong>
+                                        <span>Permanent - 3 months probation</span>
                                     </div>
                                     <div class="info-item">
-                                        <strong>Télétravail :</strong>
-                                        <span>Hybride - 3 jours/semaine possible</span>
+                                        <strong>Remote Work:</strong>
+                                        <span>Hybrid - 3 days/week possible</span>
                                     </div>
                                 </div>
                             </div>
-                            
                             <div class="detail-section">
-                                <h3>Compétences requises</h3>
+                                <h3>Required Skills</h3>
                                 <div class="skills-list">
                                     <span class="skill-tag">React.js</span>
                                     <span class="skill-tag">Node.js</span>
@@ -129,8 +120,7 @@
                         </div>
                     </div>
                 </article>
-
-                <!-- Job Ad 2 -->
+                
                 <article class="job-ad-card" data-job-id="2">
                     <div class="job-ad-header">
                         <h2 class="job-title">Designer UX/UI</h2>
@@ -139,29 +129,26 @@
                             <span class="job-location"><i class="fas fa-map-marker-alt"></i> Lyon, France</span>
                         </div>
                     </div>
-                    
                     <div class="job-summary">
                         <p>Nous cherchons un(e) designer créatif(ve) pour concevoir des interfaces utilisateur intuitives et esthétiques. Rejoignez une équipe passionnée par l'innovation.</p>
                     </div>
-                    
                     <div class="job-meta">
                         <span class="job-type">CDI</span>
                         <span class="salary-range">42k - 55k €</span>
                         <span class="posted-date">Il y a 1 jour</span>
                     </div>
+                    <div class="job-actions">
+                        <button class="learn-more-btn" onclick="toggleJobDetails(2)">
+                            <span class="btn-text">Learn More</span>
+                            <i class="fas fa-chevron-down btn-icon"></i>
+                        </button>
+                    </div>
                     
-                    <button class="learn-more-btn" onclick="toggleJobDetails(2)">
-                        <span class="btn-text">En savoir plus</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    
-                    <!-- Detailed Information -->
-                    <div class="job-details" id="job-details-2">
+                    <div class="job-details" id="job-details-2" style="display: none;">
                         <div class="details-content">
                             <div class="detail-section">
                                 <h3>Description complète du poste</h3>
                                 <p>En tant que Designer UX/UI, vous serez au cœur de la création d'expériences utilisateur exceptionnelles. Vous concevrez des interfaces innovantes et ergonomiques pour nos clients dans divers secteurs.</p>
-                                
                                 <h4>Missions principales :</h4>
                                 <ul>
                                     <li>Concevoir des wireframes et prototypes interactifs</li>
@@ -171,7 +158,6 @@
                                     <li>Maintenir et faire évoluer les design systems</li>
                                 </ul>
                             </div>
-                            
                             <div class="detail-section">
                                 <h3>Informations détaillées</h3>
                                 <div class="info-grid">
@@ -201,7 +187,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
                             <div class="detail-section">
                                 <h3>Compétences requises</h3>
                                 <div class="skills-list">
@@ -216,8 +201,7 @@
                         </div>
                     </div>
                 </article>
-
-                <!-- Job Ad 3 -->
+                
                 <article class="job-ad-card" data-job-id="3">
                     <div class="job-ad-header">
                         <h2 class="job-title">Chef de Projet Digital</h2>
@@ -226,29 +210,26 @@
                             <span class="job-location"><i class="fas fa-map-marker-alt"></i> Marseille, France</span>
                         </div>
                     </div>
-                    
                     <div class="job-summary">
                         <p>Pilotez des projets digitaux d'envergure et coordonnez des équipes multidisciplinaires. Une opportunité unique dans une agence en forte croissance.</p>
                     </div>
-                    
                     <div class="job-meta">
                         <span class="job-type">CDI</span>
                         <span class="salary-range">50k - 65k €</span>
                         <span class="posted-date">Il y a 3 jours</span>
                     </div>
+                    <div class="job-actions">
+                        <button class="learn-more-btn" onclick="toggleJobDetails(3)">
+                            <span class="btn-text">Learn More</span>
+                            <i class="fas fa-chevron-down btn-icon"></i>
+                        </button>
+                    </div>
                     
-                    <button class="learn-more-btn" onclick="toggleJobDetails(3)">
-                        <span class="btn-text">En savoir plus</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    
-                    <!-- Detailed Information -->
-                    <div class="job-details" id="job-details-3">
+                    <div class="job-details" id="job-details-3" style="display: none;">
                         <div class="details-content">
                             <div class="detail-section">
                                 <h3>Description complète du poste</h3>
                                 <p>En tant que Chef de Projet Digital, vous serez responsable de la planification, de l'exécution et de la livraison de projets digitaux complexes. Vous gérerez les relations clients et coordonnerez les équipes techniques et créatives.</p>
-                                
                                 <h4>Responsabilités :</h4>
                                 <ul>
                                     <li>Gérer le cycle de vie complet des projets digitaux</li>
@@ -258,7 +239,6 @@
                                     <li>Garantir la qualité et les délais de livraison</li>
                                 </ul>
                             </div>
-                            
                             <div class="detail-section">
                                 <h3>Informations détaillées</h3>
                                 <div class="info-grid">
@@ -288,7 +268,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
                             <div class="detail-section">
                                 <h3>Compétences requises</h3>
                                 <div class="skills-list">
@@ -303,8 +282,7 @@
                         </div>
                     </div>
                 </article>
-
-                <!-- Job Ad 4 -->
+                
                 <article class="job-ad-card" data-job-id="4">
                     <div class="job-ad-header">
                         <h2 class="job-title">Data Scientist</h2>
@@ -313,29 +291,26 @@
                             <span class="job-location"><i class="fas fa-map-marker-alt"></i> Toulouse, France</span>
                         </div>
                     </div>
-                    
                     <div class="job-summary">
                         <p>Analysez des données complexes et développez des modèles prédictifs pour optimiser nos algorithmes d'intelligence artificielle. Poste à fort impact technique.</p>
                     </div>
-                    
                     <div class="job-meta">
                         <span class="job-type">CDI</span>
                         <span class="salary-range">60k - 80k €</span>
                         <span class="posted-date">Il y a 5 jours</span>
                     </div>
+                    <div class="job-actions">
+                        <button class="learn-more-btn" onclick="toggleJobDetails(4)">
+                            <span class="btn-text">Learn More</span>
+                            <i class="fas fa-chevron-down btn-icon"></i>
+                        </button>
+                    </div>
                     
-                    <button class="learn-more-btn" onclick="toggleJobDetails(4)">
-                        <span class="btn-text">En savoir plus</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    
-                    <!-- Detailed Information -->
-                    <div class="job-details" id="job-details-4">
+                    <div class="job-details" id="job-details-4" style="display: none;">
                         <div class="details-content">
                             <div class="detail-section">
                                 <h3>Description complète du poste</h3>
                                 <p>En tant que Data Scientist, vous exploiterez des volumes importants de données pour en extraire des insights métier et développer des modèles d'apprentissage automatique. Vous travaillerez sur des projets innovants en IA.</p>
-                                
                                 <h4>Missions :</h4>
                                 <ul>
                                     <li>Analyser et traiter de gros volumes de données</li>
@@ -345,7 +320,6 @@
                                     <li>Collaborer avec les équipes produit et engineering</li>
                                 </ul>
                             </div>
-                            
                             <div class="detail-section">
                                 <h3>Informations détaillées</h3>
                                 <div class="info-grid">
@@ -375,7 +349,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
                             <div class="detail-section">
                                 <h3>Compétences requises</h3>
                                 <div class="skills-list">
@@ -390,8 +363,7 @@
                         </div>
                     </div>
                 </article>
-
-                <!-- Job Ad 5 -->
+                
                 <article class="job-ad-card" data-job-id="5">
                     <div class="job-ad-header">
                         <h2 class="job-title">DevOps Engineer</h2>
@@ -400,29 +372,26 @@
                             <span class="job-location"><i class="fas fa-map-marker-alt"></i> Nantes, France</span>
                         </div>
                     </div>
-                    
                     <div class="job-summary">
                         <p>Automatisez et optimisez notre infrastructure cloud. Rejoignez une équipe technique de haut niveau dans un environnement technologique de pointe.</p>
                     </div>
-                    
                     <div class="job-meta">
                         <span class="job-type">CDI</span>
                         <span class="salary-range">55k - 75k €</span>
                         <span class="posted-date">Il y a 1 semaine</span>
                     </div>
+                    <div class="job-actions">
+                        <button class="learn-more-btn" onclick="toggleJobDetails(5)">
+                            <span class="btn-text">Learn More</span>
+                            <i class="fas fa-chevron-down btn-icon"></i>
+                        </button>
+                    </div>
                     
-                    <button class="learn-more-btn" onclick="toggleJobDetails(5)">
-                        <span class="btn-text">En savoir plus</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    
-                    <!-- Detailed Information -->
-                    <div class="job-details" id="job-details-5">
+                    <div class="job-details" id="job-details-5" style="display: none;">
                         <div class="details-content">
                             <div class="detail-section">
                                 <h3>Description complète du poste</h3>
                                 <p>En tant que DevOps Engineer, vous serez responsable de l'automatisation, du déploiement et de la maintenance de notre infrastructure cloud. Vous travaillerez sur des systèmes critiques à haute disponibilité.</p>
-                                
                                 <h4>Responsabilités :</h4>
                                 <ul>
                                     <li>Automatiser les déploiements et la CI/CD</li>
@@ -432,7 +401,6 @@
                                     <li>Support technique et résolution d'incidents</li>
                                 </ul>
                             </div>
-                            
                             <div class="detail-section">
                                 <h3>Informations détaillées</h3>
                                 <div class="info-grid">
@@ -462,7 +430,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
                             <div class="detail-section">
                                 <h3>Compétences requises</h3>
                                 <div class="skills-list">
@@ -477,8 +444,7 @@
                         </div>
                     </div>
                 </article>
-
-                <!-- Job Ad 6 -->
+                
                 <article class="job-ad-card" data-job-id="6">
                     <div class="job-ad-header">
                         <h2 class="job-title">Commercial B2B</h2>
@@ -487,29 +453,26 @@
                             <span class="job-location"><i class="fas fa-map-marker-alt"></i> Bordeaux, France</span>
                         </div>
                     </div>
-                    
                     <div class="job-summary">
                         <p>Développez notre portefeuille client et générez de nouveaux revenus. Excellent package de rémunération avec commission attractive pour un commercial ambitieux.</p>
                     </div>
-                    
                     <div class="job-meta">
                         <span class="job-type">CDI</span>
                         <span class="salary-range">40k - 60k €</span>
                         <span class="posted-date">Il y a 4 jours</span>
                     </div>
+                    <div class="job-actions">
+                        <button class="learn-more-btn" onclick="toggleJobDetails(6)">
+                            <span class="btn-text">Learn More</span>
+                            <i class="fas fa-chevron-down btn-icon"></i>
+                        </button>
+                    </div>
                     
-                    <button class="learn-more-btn" onclick="toggleJobDetails(6)">
-                        <span class="btn-text">En savoir plus</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    
-                    <!-- Detailed Information -->
-                    <div class="job-details" id="job-details-6">
+                    <div class="job-details" id="job-details-6" style="display: none;">
                         <div class="details-content">
                             <div class="detail-section">
                                 <h3>Description complète du poste</h3>
                                 <p>En tant que Commercial B2B, vous développerez notre présence sur le marché en prospectant de nouveaux clients et en fidélisant notre portefeuille existant. Vous bénéficierez d'un excellent environnement de travail et d'outils performants.</p>
-                                
                                 <h4>Missions principales :</h4>
                                 <ul>
                                     <li>Prospecter et développer un portefeuille clients B2B</li>
@@ -519,7 +482,6 @@
                                     <li>Participer aux salons et événements professionnels</li>
                                 </ul>
                             </div>
-                            
                             <div class="detail-section">
                                 <h3>Informations détaillées</h3>
                                 <div class="info-grid">
@@ -549,7 +511,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
                             <div class="detail-section">
                                 <h3>Compétences requises</h3>
                                 <div class="skills-list">
@@ -564,12 +525,10 @@
                         </div>
                     </div>
                 </article>
-
             </div>
         </div>
     </main>
-
-    <!-- Footer -->
+    
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -577,8 +536,8 @@
             </div>
         </div>
     </footer>
-
     <script src="../assets/js/script.js"></script>
     <script src="../assets/js/job-ads.js"></script>
 </body>
 </html>
+
