@@ -1,0 +1,416 @@
+/* ====================================
+   REGISTER.CSS - Styles pour la page d'inscription
+   ==================================== */
+
+/* Layout principal de la page d'inscription */
+.auth-main {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+    background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+    position: relative;
+}
+
+.auth-main::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1.5" fill="%23673ab7" opacity="0.1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23dots)"/></svg>') repeat;
+    opacity: 0.4;
+}
+
+/* Conteneur du formulaire d'inscription */
+.auth-container {
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 25px 70px rgba(103, 58, 183, 0.15);
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    z-index: 2;
+    border: 1px solid rgba(103, 58, 183, 0.1);
+}
+
+/* En-tête du formulaire */
+.auth-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.auth-header h1 {
+    color: #2c3e50;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #673ab7, #2557a7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.auth-header p {
+    color: #666;
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* Formulaire d'inscription */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Groupes de champs en ligne */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* Groupes de champs */
+.form-group {
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #673ab7;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(103, 58, 183, 0.1);
+    transform: translateY(-1px);
+}
+
+.form-group input:valid {
+    border-color: #27ae60;
+}
+
+/* Champs avec validation */
+.form-group input.valid {
+    border-color: #27ae60;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2327ae60"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>');
+    background-size: 20px;
+    background-position: right 1rem center;
+    background-repeat: no-repeat;
+    padding-right: 3rem;
+}
+
+.form-group input.invalid {
+    border-color: #e74c3c;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23e74c3c"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>');
+    background-size: 20px;
+    background-position: right 1rem center;
+    background-repeat: no-repeat;
+    padding-right: 3rem;
+}
+
+/* Champ avec icône */
+.form-group-icon {
+    position: relative;
+}
+
+.form-group-icon input {
+    padding-left: 3rem;
+}
+
+.form-group-icon .input-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    font-size: 1.1rem;
+    z-index: 2;
+}
+
+.form-group-icon input:focus + .input-icon {
+    color: #673ab7;
+}
+
+/* Indicateur de force du mot de passe */
+.password-strength {
+    margin-top: 0.5rem;
+    height: 4px;
+    border-radius: 2px;
+    background: #e9ecef;
+    overflow: hidden;
+}
+
+.password-strength-bar {
+    height: 100%;
+    width: 0%;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.password-strength-bar.weak {
+    width: 33%;
+    background: #e74c3c;
+}
+
+.password-strength-bar.medium {
+    width: 66%;
+    background: #f39c12;
+}
+
+.password-strength-bar.strong {
+    width: 100%;
+    background: #27ae60;
+}
+
+.password-hints {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.3;
+}
+
+/* Cases à cocher et conditions */
+.checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+    accent-color: #673ab7;
+    transform: scale(1.2);
+    margin-top: 0.2rem;
+}
+
+.checkbox-group label {
+    color: #555;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin: 0;
+    cursor: pointer;
+}
+
+.checkbox-group a {
+    color: #673ab7;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.checkbox-group a:hover {
+    text-decoration: underline;
+}
+
+/* Bouton d'inscription */
+.btn-register {
+    background: linear-gradient(135deg, #673ab7 0%, #2557a7 100%);
+    color: white;
+    border: none;
+    padding: 1.2rem 2rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 1rem;
+}
+
+.btn-register:hover {
+    background: linear-gradient(135deg, #2557a7 0%, #673ab7 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(103, 58, 183, 0.3);
+}
+
+.btn-register:disabled {
+    background: #bbb;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Étapes d'inscription */
+.registration-steps {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    gap: 1rem;
+}
+
+.step {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e9ecef;
+    color: #666;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.step.active {
+    background: linear-gradient(135deg, #673ab7, #2557a7);
+    color: white;
+    transform: scale(1.1);
+}
+
+.step.completed {
+    background: #27ae60;
+    color: white;
+}
+
+/* Messages d'erreur et validation */
+.field-error {
+    color: #e74c3c;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.field-success {
+    color: #27ae60;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+/* Liens vers d'autres pages */
+.auth-footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #f1f3f4;
+}
+
+.auth-footer p {
+    color: #666;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.auth-footer a {
+    color: #673ab7;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.auth-footer a:hover {
+    color: #2557a7;
+    text-decoration: underline;
+}
+
+/* Animation de chargement */
+.btn-register.loading {
+    position: relative;
+    color: transparent;
+}
+
+.btn-register.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #fff;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .auth-container {
+        margin: 1rem;
+        padding: 2rem;
+        border-radius: 16px;
+    }
+    
+    .auth-header h1 {
+        font-size: 2rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .form-group input,
+    .form-group select {
+        padding: 0.8rem 1rem;
+    }
+    
+    .form-group-icon input {
+        padding-left: 2.5rem;
+    }
+    
+    .form-group-icon .input-icon {
+        left: 0.8rem;
+    }
+    
+    .registration-steps {
+        gap: 0.5rem;
+    }
+    
+    .step {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-container {
+        padding: 1.5rem;
+    }
+    
+    .auth-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .checkbox-group {
+        padding: 0.8rem;
+    }
+}
