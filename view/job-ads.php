@@ -13,20 +13,14 @@
     <header class="header">
         <div class="container">
             <div class="nav-wrapper">
-                <div class="logo">
-                    <a href="index.html">
-                        <img src="../assets/images/logo.svg" alt="Job Finder" class="logo-img">
-                        <span class="logo-text">Job Finder</span>
-                    </a>
-                </div>
                 <nav class="nav">
                     <ul class="nav-list">
-                        <li><a href="job-ads.html" class="active">Annonces</a></li>
+                        <li><a href="index.php" class="home-btn"><i class="fas fa-home"></i> Accueil</a></li>
                     </ul>
                 </nav>
                 <div class="auth-buttons">
-                    <a href="login.html" class="btn-link">Se connecter</a>
-                    <a href="register.html" class="btn-primary">Créer un compte</a>
+                    <a href="login.php" class="btn-link">Se connecter</a>
+                    <a href="register.php" class="btn-primary">Créer un compte</a>
                 </div>
             </div>
         </div>
@@ -63,60 +57,62 @@
                         <span class="posted-date">Il y a 2 jours</span>
                     </div>
                     
-                    <button class="learn-more-btn" onclick="toggleJobDetails(1)">
-                        <span class="btn-text">En savoir plus</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
+                    <div class="job-actions">
+                        <button class="learn-more-btn" onclick="toggleJobDetails(1)">
+                            <span class="btn-text">Learn More</span>
+                            <i class="fas fa-chevron-down btn-icon"></i>
+                        </button>
+                    </div>
                     
                     <!-- Detailed Information (Hidden by default) -->
-                    <div class="job-details" id="job-details-1">
+                    <div class="job-details" id="job-details-1" style="display: none;">
                         <div class="details-content">
                             <div class="detail-section">
-                                <h3>Description complète du poste</h3>
-                                <p>En tant que Développeur Full Stack Senior, vous serez responsable de la conception, du développement et de la maintenance d'applications web complexes. Vous travaillerez en étroite collaboration avec nos équipes de design et de product management pour créer des expériences utilisateur exceptionnelles.</p>
+                                <h3>Full Job Description</h3>
+                                <p>As a Senior Full Stack Developer, you will be responsible for designing, developing, and maintaining complex web applications. You will work closely with our design and product management teams to create exceptional user experiences.</p>
                                 
-                                <h4>Responsabilités principales :</h4>
+                                <h4>Main Responsibilities:</h4>
                                 <ul>
-                                    <li>Développer des applications web front-end avec React.js</li>
-                                    <li>Créer des APIs robustes avec Node.js et Express</li>
-                                    <li>Optimiser les performances des applications</li>
-                                    <li>Participer aux code reviews et au mentoring</li>
-                                    <li>Collaborer avec les équipes UX/UI</li>
+                                    <li>Develop front-end applications with React.js</li>
+                                    <li>Create robust APIs with Node.js and Express</li>
+                                    <li>Optimize application performance</li>
+                                    <li>Participate in code reviews and mentoring</li>
+                                    <li>Collaborate with UX/UI teams</li>
                                 </ul>
                             </div>
                             
                             <div class="detail-section">
-                                <h3>Informations détaillées</h3>
+                                <h3>Detailed Information</h3>
                                 <div class="info-grid">
                                     <div class="info-item">
-                                        <strong>Salaire :</strong>
-                                        <span>55 000 € - 70 000 € brut/an + avantages</span>
+                                        <strong>Salary:</strong>
+                                        <span>€55,000 - €70,000 gross/year + benefits</span>
                                     </div>
                                     <div class="info-item">
-                                        <strong>Lieu :</strong>
-                                        <span>Paris 8ème arrondissement (75008)</span>
+                                        <strong>Location:</strong>
+                                        <span>Paris 8th arrondissement (75008)</span>
                                     </div>
                                     <div class="info-item">
-                                        <strong>Temps de travail :</strong>
-                                        <span>Temps plein - 39h/semaine</span>
+                                        <strong>Working Time:</strong>
+                                        <span>Full-time - 39h/week</span>
                                     </div>
                                     <div class="info-item">
-                                        <strong>Expérience requise :</strong>
-                                        <span>5+ années en développement web</span>
+                                        <strong>Experience Required:</strong>
+                                        <span>5+ years in web development</span>
                                     </div>
                                     <div class="info-item">
-                                        <strong>Type de contrat :</strong>
-                                        <span>CDI - Période d'essai 3 mois</span>
+                                        <strong>Contract Type:</strong>
+                                        <span>Permanent - 3 months probation</span>
                                     </div>
                                     <div class="info-item">
-                                        <strong>Télétravail :</strong>
-                                        <span>Hybride - 3 jours/semaine possible</span>
+                                        <strong>Remote Work:</strong>
+                                        <span>Hybrid - 3 days/week possible</span>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="detail-section">
-                                <h3>Compétences requises</h3>
+                                <h3>Required Skills</h3>
                                 <div class="skills-list">
                                     <span class="skill-tag">React.js</span>
                                     <span class="skill-tag">Node.js</span>
@@ -150,13 +146,15 @@
                         <span class="posted-date">Il y a 1 jour</span>
                     </div>
                     
-                    <button class="learn-more-btn" onclick="toggleJobDetails(2)">
-                        <span class="btn-text">En savoir plus</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
+                    <div class="job-actions">
+                        <button class="learn-more-btn" onclick="toggleJobDetails(2)">
+                            <span class="btn-text">Learn More</span>
+                            <i class="fas fa-chevron-down btn-icon"></i>
+                        </button>
+                    </div>
                     
                     <!-- Detailed Information -->
-                    <div class="job-details" id="job-details-2">
+                    <div class="job-details" id="job-details-2" style="display: none;">
                         <div class="details-content">
                             <div class="detail-section">
                                 <h3>Description complète du poste</h3>
@@ -237,13 +235,15 @@
                         <span class="posted-date">Il y a 3 jours</span>
                     </div>
                     
-                    <button class="learn-more-btn" onclick="toggleJobDetails(3)">
-                        <span class="btn-text">En savoir plus</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
+                    <div class="job-actions">
+                        <button class="learn-more-btn" onclick="toggleJobDetails(3)">
+                            <span class="btn-text">Learn More</span>
+                            <i class="fas fa-chevron-down btn-icon"></i>
+                        </button>
+                    </div>
                     
                     <!-- Detailed Information -->
-                    <div class="job-details" id="job-details-3">
+                    <div class="job-details" id="job-details-3" style="display: none;">
                         <div class="details-content">
                             <div class="detail-section">
                                 <h3>Description complète du poste</h3>
@@ -324,13 +324,15 @@
                         <span class="posted-date">Il y a 5 jours</span>
                     </div>
                     
-                    <button class="learn-more-btn" onclick="toggleJobDetails(4)">
-                        <span class="btn-text">En savoir plus</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
+                    <div class="job-actions">
+                        <button class="learn-more-btn" onclick="toggleJobDetails(4)">
+                            <span class="btn-text">Learn More</span>
+                            <i class="fas fa-chevron-down btn-icon"></i>
+                        </button>
+                    </div>
                     
                     <!-- Detailed Information -->
-                    <div class="job-details" id="job-details-4">
+                    <div class="job-details" id="job-details-4" style="display: none;">
                         <div class="details-content">
                             <div class="detail-section">
                                 <h3>Description complète du poste</h3>
@@ -411,13 +413,15 @@
                         <span class="posted-date">Il y a 1 semaine</span>
                     </div>
                     
-                    <button class="learn-more-btn" onclick="toggleJobDetails(5)">
-                        <span class="btn-text">En savoir plus</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
+                    <div class="job-actions">
+                        <button class="learn-more-btn" onclick="toggleJobDetails(5)">
+                            <span class="btn-text">Learn More</span>
+                            <i class="fas fa-chevron-down btn-icon"></i>
+                        </button>
+                    </div>
                     
                     <!-- Detailed Information -->
-                    <div class="job-details" id="job-details-5">
+                    <div class="job-details" id="job-details-5" style="display: none;">
                         <div class="details-content">
                             <div class="detail-section">
                                 <h3>Description complète du poste</h3>
@@ -498,13 +502,15 @@
                         <span class="posted-date">Il y a 4 jours</span>
                     </div>
                     
-                    <button class="learn-more-btn" onclick="toggleJobDetails(6)">
-                        <span class="btn-text">En savoir plus</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
+                    <div class="job-actions">
+                        <button class="learn-more-btn" onclick="toggleJobDetails(6)">
+                            <span class="btn-text">Learn More</span>
+                            <i class="fas fa-chevron-down btn-icon"></i>
+                        </button>
+                    </div>
                     
                     <!-- Detailed Information -->
-                    <div class="job-details" id="job-details-6">
+                    <div class="job-details" id="job-details-6" style="display: none;">
                         <div class="details-content">
                             <div class="detail-section">
                                 <h3>Description complète du poste</h3>

@@ -9,23 +9,16 @@
 </head>
 <body>
     <!-- Header -->
-    <header class="header">
+    <header class="header header-white">
         <div class="container">
             <div class="nav-wrapper">
-                <div class="logo">
-                    <a href="index.html">
-                        <img src="../assets/images/logo.svg" alt="Job Finder" class="logo-img">
-                        <span class="logo-text">Job Finder</span>
-                    </a>
-                </div>
                 <nav class="nav">
                     <ul class="nav-list">
-                        <li><a href="job-ads.html">Annonces</a></li>
                     </ul>
                 </nav>
                 <div class="auth-buttons">
-                    <a href="login.html" class="btn-link">Se connecter</a>
-                    <a href="register.html" class="btn-primary">Créer un compte</a>
+                    <a href="login.php" class="btn-link">Se connecter</a>
+                    <a href="register.php" class="btn-primary">Créer un compte</a>
                 </div>
             </div>
         </div>
@@ -118,18 +111,6 @@
                         </div>
                     </div>
                 </form>
-
-                <!-- Popular Searches -->
-                <div class="popular-searches-home">
-                    <p>Recherches populaires :</p>
-                    <div class="popular-tags">
-                        <a href="job-ads.html?q=développeur" class="popular-tag">Développeur</a>
-                        <a href="job-ads.html?q=commercial" class="popular-tag">Commercial</a>
-                        <a href="job-ads.html?q=marketing" class="popular-tag">Marketing</a>
-                        <a href="job-ads.html?q=comptable" class="popular-tag">Comptable</a>
-                        <a href="job-ads.html?q=chef+de+projet" class="popular-tag">Chef de projet</a>
-                    </div>
-                </div>
             </div>
         </div>
     </section>

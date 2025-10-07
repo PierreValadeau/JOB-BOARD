@@ -20,12 +20,21 @@ body {
 
 /* Header Styles */
 .header {
-    background-color: #ffffff;
-    border-bottom: 1px solid #e9ecef;
+    background-color: #1e3a5f;
+    color: white;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(30, 58, 95, 0.1);
+}
+
+/* White Header Variant */
+.header-white {
+    background-color: #ffffff !important;
+    color: #2c3e50 !important;
+    border-bottom: 1px solid #e9ecef;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
 }
 
 .nav-wrapper {
@@ -75,10 +84,103 @@ body {
     color: #2557a7;
 }
 
+/* Home Button Styles */
+.home-btn {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%) !important;
+    color: white !important;
+    padding: 8px 16px !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    transition: all 0.3s ease !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    font-size: 0.9rem !important;
+}
+
+.home-btn:hover {
+    background: linear-gradient(135deg, #2c5282 0%, #1e3a5f 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 15px rgba(30, 58, 95, 0.3) !important;
+}
+
+.home-btn i {
+    font-size: 0.9rem !important;
+}
+
 .auth-buttons {
     display: flex;
     gap: 1rem;
     align-items: center;
+}
+
+/* Header Navigation Links */
+.header .nav-list a {
+    color: white !important;
+}
+
+.header .nav-list a:hover {
+    color: #e9ecef !important;
+}
+
+.header .btn-link {
+    color: white !important;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+}
+
+.header .btn-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white !important;
+}
+
+.header .btn-primary {
+    background-color: #e74c3c;
+    border: none;
+}
+
+.header .btn-primary:hover {
+    background-color: #c0392b;
+}
+
+/* White Header Navigation Links */
+.header-white .nav-list a {
+    color: #2c3e50 !important;
+}
+
+.header-white .nav-list a:hover {
+    color: #1e3a5f !important;
+}
+
+.header-white .home-btn {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%) !important;
+    color: white !important;
+}
+
+.header-white .home-btn:hover {
+    background: linear-gradient(135deg, #2c5282 0%, #1e3a5f 100%) !important;
+}
+
+.header-white .btn-link {
+    color: #1e3a5f !important;
+    border: 1px solid #1e3a5f;
+    border-radius: 6px;
+}
+
+.header-white .btn-link:hover {
+    background-color: #1e3a5f;
+    color: white !important;
+}
+
+.header-white .btn-primary {
+    background-color: #1e3a5f;
+    border: none;
+}
+
+.header-white .btn-primary:hover {
+    background-color: #2c5282;
 }
 
 /* Button Styles */

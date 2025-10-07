@@ -31,9 +31,10 @@ function initializeJobAds() {
 // Fonction principale pour basculer l'affichage des détails
 function toggleJobDetails(jobId) {
     const detailsElement = document.getElementById(`job-details-${jobId}`);
-    const button = document.querySelector(`[data-job-id="${jobId}"] .learn-more-btn`);
-    const buttonIcon = button.querySelector('i');
-    const buttonText = button.querySelector('.btn-text');
+    const jobCard = document.querySelector(`[data-job-id="${jobId}"]`);
+    const button = jobCard ? jobCard.querySelector('.learn-more-btn') : null;
+    const buttonIcon = button ? button.querySelector('.btn-icon') : null;
+    const buttonText = button ? button.querySelector('.btn-text') : null;
     
     if (!detailsElement || !button) {
         console.error(`Éléments non trouvés pour job ID: ${jobId}`);
@@ -41,14 +42,59 @@ function toggleJobDetails(jobId) {
     }
     
     // Vérifier si les détails sont actuellement affichés
-    const isExpanded = detailsElement.classList.contains('expanded');
+    const isExpanded = detailsElement.style.display !== 'none';
     
     if (isExpanded) {
         // Masquer les détails
         hideJobDetails(detailsElement, button, buttonIcon, buttonText);
     } else {
         // Afficher les détails
-        showJobDetails(detailsElement, button, buttonIcon, buttonText, jobId);
+        showJobDetails(detailsElement, button, buttonIcon, buttonText);
+    }
+}
+
+// Afficher les détails d'une offre d'emploi
+function showJobDetails(detailsElement, button, buttonIcon, buttonText) {
+    // Animation d'ouverture
+    detailsElement.style.display = 'block';
+    detailsElement.classList.remove('hiding');
+    
+    // Mettre à jour le bouton
+    button.classList.add('expanded');
+    if (buttonIcon) {
+        buttonIcon.style.transform = 'rotate(180deg)';
+    }
+    if (buttonText) {
+        buttonText.textContent = 'Show Less';
+    }
+    
+    // Scroll vers l'élément pour une meilleure UX
+    setTimeout(() => {
+        detailsElement.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'nearest' 
+        });
+    }, 200);
+}
+
+// Masquer les détails d'une offre d'emploi
+function hideJobDetails(detailsElement, button, buttonIcon, buttonText) {
+    // Animation de fermeture
+    detailsElement.classList.add('hiding');
+    
+    // Attendre la fin de l'animation avant de masquer
+    setTimeout(() => {
+        detailsElement.style.display = 'none';
+        detailsElement.classList.remove('hiding');
+    }, 300);
+    
+    // Mettre à jour le bouton
+    button.classList.remove('expanded');
+    if (buttonIcon) {
+        buttonIcon.style.transform = 'rotate(0deg)';
+    }
+    if (buttonText) {
+        buttonText.textContent = 'Learn More';
     }
 }
 
