@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializePagination();
     initializeModal();
     initializeMobileMenu();
+    initializeJobCardExpansion(); // Nouvelle fonctionnalité d'expansion des cartes
 });
 function initializeSearchFunctionality() {
     const searchForm = document.querySelector('.search-form');
@@ -727,6 +728,117 @@ function updateSuggestionSelection(items, activeIndex) {
 }
 if (window.location.pathname.includes('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/')) {
     document.addEventListener('DOMContentLoaded', initializeHomepageSearch);
+}
+
+// ====================================
+// FONCTIONNALITÉ D'EXPANSION DES CARTES D'EMPLOI
+// ====================================
+
+function initializeJobCardExpansion() {
+    // Sélectionner tous les boutons "En savoir plus"
+    const learnMoreButtons = document.querySelectorAll('.btn-learn-more');
+    
+    learnMoreButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Trouver la carte parente
+            const jobCard = this.closest('.job-card');
+            
+            if (jobCard) {
+                toggleJobCardExpansion(jobCard, this);
+            }
+        });
+    });
+}
+
+function toggleJobCardExpansion(jobCard, button) {
+    const isExpanded = jobCard.classList.contains('expanded');
+    
+    if (isExpanded) {
+        // Réduire la carte
+        collapseJobCard(jobCard, button);
+    } else {
+        // D'abord fermer toutes les autres cartes ouvertes
+        const allExpandedCards = document.querySelectorAll('.job-card.expanded');
+        allExpandedCards.forEach(card => {
+            if (card !== jobCard) {
+                const cardButton = card.querySelector('.btn-learn-more');
+                collapseJobCard(card, cardButton);
+            }
+        });
+        
+        // Ensuite ouvrir la carte actuelle
+        expandJobCard(jobCard, button);
+    }
+}
+
+function expandJobCard(jobCard, button) {
+    // Ajouter la classe d'expansion avec animation
+    jobCard.classList.add('expanded');
+    
+    // Changer le texte du bouton
+    button.textContent = 'Réduire';
+    
+    // Récupérer les données et remplir le contenu étendu
+    populateExpandedContent(jobCard);
+    
+    // Afficher le contenu étendu
+    const expandedContent = jobCard.querySelector('.job-expanded-content');
+    if (expandedContent) {
+        expandedContent.style.display = 'block';
+        
+        // Scroll smooth vers la carte
+        setTimeout(() => {
+            jobCard.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+        }, 200);
+    }
+}
+
+function collapseJobCard(jobCard, button) {
+    // Supprimer la classe d'expansion
+    jobCard.classList.remove('expanded');
+    
+    // Remettre le texte du bouton
+    button.textContent = 'En savoir plus';
+    
+    // Masquer le contenu étendu
+    const expandedContent = jobCard.querySelector('.job-expanded-content');
+    if (expandedContent) {
+        // Attendre la fin de l'animation CSS avant de cacher
+        setTimeout(() => {
+            expandedContent.style.display = 'none';
+        }, 400);
+    }
+}
+
+function populateExpandedContent(jobCard) {
+    // Récupérer les données depuis les attributs data-
+    const fullDescription = jobCard.getAttribute('data-full-description');
+    const fullSalary = jobCard.getAttribute('data-full-salary');
+    const workingTime = jobCard.getAttribute('data-working-time');
+    const preciseLocation = jobCard.getAttribute('data-precise-location');
+    const companyInfo = jobCard.getAttribute('data-company-info');
+    const benefits = jobCard.getAttribute('data-benefits');
+    
+    // Remplir les éléments du contenu étendu
+    const expandedDescription = jobCard.querySelector('.expanded-description');
+    const expandedSalary = jobCard.querySelector('.expanded-salary');
+    const expandedWorkingTime = jobCard.querySelector('.expanded-working-time');
+    const expandedLocation = jobCard.querySelector('.expanded-location');
+    const expandedCompany = jobCard.querySelector('.expanded-company');
+    const expandedBenefits = jobCard.querySelector('.expanded-benefits');
+    
+    if (expandedDescription) expandedDescription.textContent = fullDescription || 'Information non disponible';
+    if (expandedSalary) expandedSalary.textContent = fullSalary || 'Information non disponible';
+    if (expandedWorkingTime) expandedWorkingTime.textContent = workingTime || 'Information non disponible';
+    if (expandedLocation) expandedLocation.textContent = preciseLocation || 'Information non disponible';
+    if (expandedCompany) expandedCompany.textContent = companyInfo || 'Information non disponible';
+    if (expandedBenefits) expandedBenefits.textContent = benefits || 'Information non disponible';
 }
 
 

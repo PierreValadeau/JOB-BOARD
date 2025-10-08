@@ -1,0 +1,121 @@
+/* ====================================
+   COMMON.CSS - Styles partagés entre toutes les pages
+   ==================================== */
+
+/* Animations globales */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Styles communs pour les cartes d'emploi (si utilisées sur d'autres pages) */
+.job-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+}
+
+.job-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.job-card.expanded {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(37, 87, 167, 0.2);
+    border-color: #2557a7;
+}
+
+/* Extension naturelle de la description - disponible partout */
+.job-description-more {
+    display: none;
+    color: inherit;
+    line-height: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    margin: 0;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+.job-card.expanded .job-description-more {
+    display: inline;
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Styles pour les boutons "En savoir plus" */
+.btn-learn-more {
+    background: #2557a7;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.btn-learn-more:hover {
+    background: #1e4a8c;
+    transform: translateY(-1px);
+    text-decoration: none;
+}
+
+/* Suppression du soulignement sur tous les liens dans les cartes */
+.job-card a,
+.job-card button,
+.job-card .btn-learn-more {
+    text-decoration: none !important;
+}
+
+.job-card button:hover,
+.job-title:hover,
+.job-card .job-title:hover {
+    text-decoration: none !important;
+}
+
+/* Styles globaux pour maintenir la cohérence */
+.page-title {
+    color: #2c3e50;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.page-subtitle {
+    color: #6c757d;
+    font-size: 1.1rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Responsive global */
+@media (max-width: 768px) {
+    .job-card {
+        padding: 1rem;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+    }
+    
+    .page-subtitle {
+        font-size: 1rem;
+    }
+}
