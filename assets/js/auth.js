@@ -10,7 +10,7 @@ function initializeAuth() {
     if (registerForm) {
         initializeRegisterForm();
     }
-    initializeSocialButtons();
+
     initializePasswordToggles();
 }
 function initializeLoginForm() {
@@ -110,7 +110,6 @@ function validateRegisterForm() {
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
     const userType = document.getElementById('userType').value;
-    const terms = document.getElementById('terms').checked;
     let isValid = true;
     if (!firstName.trim()) {
         showError('firstNameError', 'Le prénom est requis');
@@ -141,12 +140,6 @@ function validateRegisterForm() {
         isValid = false;
     } else {
         hideError('userTypeError');
-    }
-    if (!terms) {
-        showError('termsError', 'Vous devez accepter les conditions d\'utilisation');
-        isValid = false;
-    } else {
-        hideError('termsError');
     }
     return isValid;
 }
@@ -296,7 +289,6 @@ function hideError(errorId) {
 function submitLoginForm() {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    const remember = document.getElementById('remember').checked;
     const submitBtn = document.querySelector('.auth-btn');
     const originalBtnText = submitBtn.innerHTML;
     
@@ -348,7 +340,10 @@ function submitRegisterForm() {
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Création du compte...';
     
     // Clear any previous error messages
-    hideError('registerError');
+    const existingError = document.querySelector('.register-error');
+    if (existingError) {
+        existingError.classList.remove('show');
+    }
     
     const registerData = {
         first_name: data.firstName,
@@ -384,15 +379,6 @@ function submitRegisterForm() {
         showRegisterError('Erreur de connexion. Veuillez réessayer.');
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalBtnText;
-    });
-}
-function initializeSocialButtons() {
-    const socialButtons = document.querySelectorAll('.social-btn');
-    socialButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const provider = this.classList.contains('google-btn') ? 'Google' : 'LinkedIn';
-            showNotification(`Connexion avec ${provider} sera bientôt disponible`, 'info');
-        });
     });
 }
 function initializePasswordToggles() {
