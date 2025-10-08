@@ -23,7 +23,9 @@ class JobController {
         
         switch ($method) {
             case 'GET':
-                if (isset($segments[2]) && is_numeric($segments[2])) {
+                if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                    $this->getJob($_GET['id']);
+                } elseif (isset($segments[2]) && is_numeric($segments[2])) {
                     $this->getJob($segments[2]);
                 } else {
                     $this->getAllJobs();
