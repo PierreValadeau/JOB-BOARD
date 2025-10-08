@@ -6,7 +6,6 @@ header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json');
 
-// Handle preflight OPTIONS request
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit(0);
 }
@@ -17,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 try {
-    // Destroy session
     session_destroy();
     
     echo json_encode([
