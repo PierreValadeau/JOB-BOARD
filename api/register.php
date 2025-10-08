@@ -4,7 +4,6 @@ header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json');
 
-// Handle preflight OPTIONS request
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit(0);
 }
@@ -24,7 +23,6 @@ try {
         exit;
     }
     
-    // Validate required fields
     $required_fields = ['first_name', 'last_name', 'email', 'password'];
     foreach ($required_fields as $field) {
         if (!isset($input[$field]) || empty(trim($input[$field]))) {
@@ -33,13 +31,11 @@ try {
         }
     }
     
-    // Validate email format
     if (!filter_var($input['email'], FILTER_VALIDATE_EMAIL)) {
         echo json_encode(['success' => false, 'message' => 'Format d\'email invalide']);
         exit;
     }
     
-    // Validate password strength
     if (strlen($input['password']) < 8) {
         echo json_encode(['success' => false, 'message' => 'Le mot de passe doit contenir au moins 8 caractères']);
         exit;
@@ -48,7 +44,6 @@ try {
     $controller = new UserController();
     $userModel = new UserModel();
     
-    // Prepare user data
     $userData = [
         'first_name' => trim($input['first_name']),
         'last_name' => trim($input['last_name']),
