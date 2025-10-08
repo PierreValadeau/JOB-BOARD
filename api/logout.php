@@ -1,0 +1,31 @@
+<?php
+session_start();
+
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+header('Content-Type: application/json');
+
+// Handle preflight OPTIONS request
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    exit(0);
+}
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo json_encode(['success' => false, 'message' => 'Only POST method allowed']);
+    exit;
+}
+
+try {
+    // Destroy session
+    session_destroy();
+    
+    echo json_encode([
+        'success' => true,
+        'message' => 'Déconnexion réussie'
+    ]);
+    
+} catch (Exception $e) {
+    echo json_encode(['success' => false, 'message' => 'Erreur lors de la déconnexion']);
+}
+?>
