@@ -449,3 +449,354 @@
         font-size: 2rem;
     }
 }
+
+/* ====================================
+   STYLES POUR L'EXPANSION DES CARTES D'EMPLOI
+   ==================================== */
+
+/* Transition smooth pour l'expansion */
+.job-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.job-card.expanded {
+    transform: scale(1.01);
+    box-shadow: 0 12px 40px rgba(37, 87, 167, 0.15);
+    z-index: 5;
+    position: relative;
+    border: 2px solid rgba(37, 87, 167, 0.2);
+}
+
+/* Supprimer tous les soulignements de texte */
+.job-card a,
+.job-card button,
+.job-title,
+.job-card .job-title {
+    text-decoration: none !important;
+}
+
+.job-card a:hover,
+.job-card button:hover,
+.job-title:hover,
+.job-card .job-title:hover {
+    text-decoration: none !important;
+}
+
+/* Extension naturelle de la description - continuité parfaite */
+.job-description-more {
+    display: none;
+    color: inherit; /* Même couleur que .job-description */
+    line-height: inherit; /* Même hauteur de ligne */
+    font-size: inherit; /* Même taille de police */
+    font-family: inherit; /* Même famille de police */
+    margin: 0; /* Pas d'espacement pour continuité */
+    padding: 0; /* Pas de padding pour continuité */
+    transition: all 0.3s ease;
+}
+
+.job-card.expanded .job-description-more {
+    display: inline; /* Affichage en ligne pour continuité naturelle */
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Indicateur de scroll en bas */
+.job-card.expanded .job-expanded-content::before {
+    content: '\2022 \2022 \2022';
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #999;
+    font-size: 0.8rem;
+    background: #fafbfc;
+    padding: 0 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Afficher l'indicateur si scroll possible */
+.job-expanded-content.has-scroll::before {
+    opacity: 1;
+}
+
+/* Effet de survol sur les sections */
+.expanded-section:hover {
+    background: #f0f2f5;
+    transform: translateX(5px);
+    border-left-width: 6px;
+}
+
+/* Scrollbar pour WebKit */
+.job-card.expanded .job-expanded-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.job-card.expanded .job-expanded-content::-webkit-scrollbar-track {
+    background: #f1f3f4;
+    border-radius: 4px;
+}
+
+.job-card.expanded .job-expanded-content::-webkit-scrollbar-thumb {
+    background: #2557a7;
+    border-radius: 4px;
+}
+
+.job-card.expanded .job-expanded-content::-webkit-scrollbar-thumb:hover {
+    background: #1e3a5f;
+}
+
+/* Sections du contenu étendu */
+.expanded-section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border-left: 4px solid #2557a7;
+}
+
+.expanded-section:last-child {
+    margin-bottom: 0;
+}
+
+.expanded-section h4 {
+    color: #2557a7;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.expanded-section h4 i {
+    color: #2557a7;
+    font-size: 1.2rem;
+    width: 20px;
+    text-align: center;
+}
+
+.expanded-section p {
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* Bouton En savoir plus ergonomique */
+.btn-learn-more {
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 0.8rem 2rem 0.8rem 1rem;
+    background: linear-gradient(135deg, #2557a7 0%, #1e3a5f 100%);
+    color: white;
+    border-radius: 25px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 15px rgba(37, 87, 167, 0.2);
+    overflow: hidden;
+}
+
+/* Icône flèche */
+.btn-learn-more::after {
+    content: '\2193'; /* Flèche vers le bas */
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+/* Hover du bouton normal */
+.btn-learn-more:hover {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2557a7 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 87, 167, 0.3);
+}
+
+.btn-learn-more:hover::after {
+    transform: translateY(2px);
+}
+
+/* État étendu */
+.job-card.expanded .btn-learn-more {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: white;
+}
+
+.job-card.expanded .btn-learn-more::after {
+    content: '\2191'; /* Flèche vers le haut */
+    transform: rotate(0deg);
+}
+
+.job-card.expanded .btn-learn-more:hover {
+    background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
+    transform: translateY(-2px);
+}
+
+/* Animation de pulsation pour attirer l'attention */
+.btn-learn-more.pulse {
+    animation: pulseButton 2s infinite;
+}
+
+@keyframes pulseButton {
+    0% { box-shadow: 0 4px 15px rgba(37, 87, 167, 0.2); }
+    50% { box-shadow: 0 4px 20px rgba(37, 87, 167, 0.4); }
+    100% { box-shadow: 0 4px 15px rgba(37, 87, 167, 0.2); }
+}
+
+/* Indicateur de chargement */
+.loading-indicator {
+    display: none;
+    text-align: center;
+    padding: 1rem;
+    color: #666;
+}
+
+.loading-indicator.active {
+    display: block;
+}
+
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #2557a7;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Animation d'entrée pour les sections étendues améliorée */
+.job-card.expanded .expanded-section {
+    animation: slideInUp 0.4s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.job-card.expanded .expanded-section.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.job-card.expanded .expanded-section:nth-child(1) { animation-delay: 0.1s; }
+.job-card.expanded .expanded-section:nth-child(2) { animation-delay: 0.15s; }
+.job-card.expanded .expanded-section:nth-child(3) { animation-delay: 0.2s; }
+.job-card.expanded .expanded-section:nth-child(4) { animation-delay: 0.25s; }
+.job-card.expanded .expanded-section:nth-child(5) { animation-delay: 0.3s; }
+.job-card.expanded .expanded-section:nth-child(6) { animation-delay: 0.35s; }
+
+/* Effet de progression */
+.progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #2557a7, #27ae60);
+    width: 0;
+    transition: width 0.4s ease;
+    border-radius: 0 0 2px 2px;
+}
+
+.job-card.expanded .progress-bar {
+    width: 100%;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Supprimer les soulignements */
+.job-card a,
+.job-card button,
+.job-title {
+    text-decoration: none !important;
+}
+
+.job-card a:hover,
+.job-card button:hover,
+.job-title:hover {
+    text-decoration: none !important;
+}
+
+/* Gradient pour indiquer plus de contenu */
+.job-card.expanded .job-expanded-content::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: linear-gradient(transparent, white);
+    pointer-events: none;
+}
+
+/* Grille simple des emplois */
+.jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+/* Responsif pour les cartes étendues */
+@media (max-width: 768px) {
+    .job-card.expanded {
+        transform: scale(1);
+        margin: 0 -1rem;
+        border-radius: 0;
+    }
+    
+    .job-expanded-content {
+        padding: 0 1rem;
+    }
+    
+    .job-card.expanded .job-expanded-content {
+        padding: 1.5rem 1rem;
+    }
+    
+    .expanded-section {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .expanded-section h4 {
+        font-size: 1rem;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .expanded-section {
+        padding: 0.8rem;
+        border-radius: 8px;
+    }
+    
+    .expanded-section h4 {
+        font-size: 0.9rem;
+    }
+    
+    .expanded-section p {
+        font-size: 0.85rem;
+    }
+}
