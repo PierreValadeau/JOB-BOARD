@@ -226,46 +226,21 @@
                             </select>
                             <div class="error-message" id="userTypeError"></div>
                         </div>
-                        <div class="form-group">
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="terms" id="terms" required>
-                                <span class="checkmark"></span>
-                                J'accepte les <a href="
-                            </label>
-                            <div class="error-message" id="termsError"></div>
-                        </div>
-                        <div class="form-group">
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="newsletter" id="newsletter">
-                                <span class="checkmark"></span>
-                                Je souhaite recevoir des alertes emploi et actualités par email
-                            </label>
-                        </div>
+
                         <button type="submit" class="auth-btn">
                             <i class="fas fa-user-plus"></i>
                             Créer mon compte
                         </button>
-                        <div class="auth-divider">
-                            <span>ou</span>
-                        </div>
-                        <div class="social-login">
-                            <button type="button" class="social-btn google-btn">
-                                <i class="fab fa-google"></i>
-                                S'inscrire avec Google
-                            </button>
-                            <button type="button" class="social-btn linkedin-btn">
-                                <i class="fab fa-linkedin"></i>
-                                S'inscrire avec LinkedIn
-                            </button>
-                        </div>
                     </form>
                     <div class="auth-footer">
-                        <p>Déjà un compte ? <a href="login.html">Se connecter</a></p>
+                        <p>Déjà un compte ? <a href="login.php">Se connecter</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </main>
+    
+    <script src="../assets/js/auth.js"></script>
 </body>
 </html>
 

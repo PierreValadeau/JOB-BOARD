@@ -1,18 +1,22 @@
 <?php
 class Config {
-    const DB_HOST = 'localhost:8889';  // MAMP MySQL port (NOT 8888!)
-    const DB_NAME = 'job';  // Base de données job (remplace l'ancienne)
-    const DB_USER = 'root';
-    const DB_PASS = 'root';  // MAMP default password is 'root'
-    const DB_CHARSET = 'utf8';
-    
-    const API_VERSION = 'v1';
-    const BASE_URL = 'http://localhost';
-    
-    const CORS_ORIGIN = '*';
-    const CORS_METHODS = 'GET, POST, PUT, DELETE, OPTIONS';
-    const CORS_HEADERS = 'Content-Type, Authorization, X-Requested-With';
+    public static function dbDsn(): string {
+        $host    = $_ENV['DB_HOST']    ?? 'localhost';
+        $port    = $_ENV['DB_PORT']    ?? '3306';
+        $dbname  = $_ENV['DB_NAME']    ?? 'job';
+        $charset = $_ENV['DB_CHARSET'] ?? 'utf8mb4';
+        return "mysql:host={$host};port={$port};dbname={$dbname};charset={$charset}";
+    }
+
+    public static function dbUser(): string {
+        return $_ENV['DB_USER'] ?? 'root';
+    }
+
+    public static function dbPass(): string {
+        return $_ENV['DB_PASS'] ?? '';
+    }
 }
+
 
 class Database {
     private static $instance = null;
