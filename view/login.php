@@ -147,30 +147,12 @@
                             <div class="error-message" id="passwordError"></div>
                         </div>
                         <div class="form-options">
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="remember" id="remember">
-                                <span class="checkmark"></span>
-                                Se souvenir de moi
-                            </label>
                             <a href="#" class="forgot-password">Mot de passe oublié ?</a>
                         </div>
                         <button type="submit" class="auth-btn">
                             <i class="fas fa-sign-in-alt"></i>
                             Se connecter
                         </button>
-                        <div class="auth-divider">
-                            <span>ou</span>
-                        </div>
-                        <div class="social-login">
-                            <button type="button" class="social-btn google-btn">
-                                <i class="fab fa-google"></i>
-                                Continuer avec Google
-                            </button>
-                            <button type="button" class="social-btn linkedin-btn">
-                                <i class="fab fa-linkedin"></i>
-                                Continuer avec LinkedIn
-                            </button>
-                        </div>
                         <div class="auth-success" id="loginSuccess">
                             <i class="fas fa-check-circle"></i>
                             <p>Connexion réussie ! Redirection en cours...</p>
