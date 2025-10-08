@@ -1,9 +1,9 @@
 <?php
 class Config {
-    const DB_HOST = 'localhost:8889';  // MAMP MySQL port (NOT 8888!)
+    const DB_HOST = 'localhost';  // Laragon utilise le port standard 3306
     const DB_NAME = 'job';  
     const DB_USER = 'root';
-    const DB_PASS = 'root';  // MAMP default password is 'root'
+    const DB_PASS = '';  // Laragon par défaut n'a pas de mot de passe
     const DB_CHARSET = 'utf8';
     
     const API_VERSION = 'v1';
