@@ -1,5 +1,4 @@
 <?php
-// Chargement du fichier .env
 function loadEnv($path) {
     if (!file_exists($path)) {
         return;
@@ -21,28 +20,32 @@ function loadEnv($path) {
     }
 }
 
-// Charger le fichier .env
+// Charger le fichier .env s'il existe
 loadEnv(__DIR__ . '/../.env');
 
-// Définir les constantes pour compatibilité
-define('DB_HOST', $_ENV['DB_HOST'] ?? 'localhost');
-define('DB_PORT', $_ENV['DB_PORT'] ?? '3306');
-define('DB_NAME', $_ENV['DB_NAME'] ?? 'job');
-define('DB_USER', $_ENV['DB_USER'] ?? 'root');
-define('DB_PASS', $_ENV['DB_PASS'] ?? '');
-define('DB_CHARSET', $_ENV['DB_CHARSET'] ?? 'utf8mb4');
-
 class Config {
+    // Constantes pour compatibilité avec la classe Database
+    const DB_HOST = 'localhost';
+    const DB_PORT = '3306';
+    const DB_NAME = 'job';
+    const DB_CHARSET = 'utf8mb4';
+    const DB_USER = 'root';
+    const DB_PASS = '';
+
     public static function dbDsn(): string {
-        return "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
+        $host    = $_ENV['DB_HOST']    ?? self::DB_HOST;
+        $port    = $_ENV['DB_PORT']    ?? self::DB_PORT;
+        $dbname  = $_ENV['DB_NAME']    ?? self::DB_NAME;
+        $charset = $_ENV['DB_CHARSET'] ?? self::DB_CHARSET;
+        return "mysql:host={$host};port={$port};dbname={$dbname};charset={$charset}";
     }
 
     public static function dbUser(): string {
-        return DB_USER;
+        return $_ENV['DB_USER'] ?? self::DB_USER;
     }
 
     public static function dbPass(): string {
-        return DB_PASS;
+        return $_ENV['DB_PASS'] ?? self::DB_PASS;
     }
 }
 
