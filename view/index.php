@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../assets/css/index.css?v=<?= time() ?>">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Style pour le menu utilisateur */
         .user-menu {
             display: flex;
             align-items: center;
@@ -267,19 +266,16 @@
             }
         }
         
-        // Vérifier si l'utilisateur est connecté
         async function checkUserSession() {
             try {
                 const response = await fetch('../api/check-session.php');
                 const data = await response.json();
                 
                 if (data.success && data.is_logged_in) {
-                    // Utilisateur connecté
                     document.getElementById('authButtons').style.display = 'none';
                     document.getElementById('userMenu').style.display = 'flex';
                     document.getElementById('userName').textContent = data.user.name;
                 } else {
-                    // Utilisateur non connecté
                     document.getElementById('authButtons').style.display = 'flex';
                     document.getElementById('userMenu').style.display = 'none';
                 }
@@ -288,12 +284,11 @@
             }
         }
         
-        // Fonction de déconnexion
         async function logout() {
             try {
                 const response = await fetch('../api/logout.php', { method: 'POST' });
                 if (response.ok) {
-                    window.location.reload(); // Recharger la page
+                    window.location.reload();
                 }
             } catch (error) {
                 console.error('Erreur lors de la déconnexion:', error);
@@ -301,7 +296,6 @@
             }
         }
         
-        // Vérifier la session au chargement de la page
         document.addEventListener('DOMContentLoaded', checkUserSession);
     </script>
     <script src="../assets/js/featured-jobs.js"></script>
