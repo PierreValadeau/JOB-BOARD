@@ -7,7 +7,7 @@ function loadEnv($path) {
     $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach ($lines as $line) {
         if (strpos(trim($line), '#') === 0) {
-            continue; // Ignorer les commentaires
+            continue;
         }
         
         list($name, $value) = explode('=', $line, 2);
@@ -20,7 +20,7 @@ function loadEnv($path) {
     }
 }
 
-// Charger le fichier .env s'il existe
+
 loadEnv(__DIR__ . '/../.env');
 
 class Config {

@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../assets/css/index.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Style pour le menu utilisateur */
         .user-menu {
             display: flex;
             align-items: center;
@@ -34,8 +33,6 @@
             align-items: center;
             gap: 15px;
         }
-
-        /* Styles spécifiques pour la page de connexion */
         .auth-section {
             padding: 4rem 0;
             background: #f8fafc;
@@ -347,17 +344,14 @@
     </footer>
 
     <script>
-        // Vérifier si l'utilisateur est connecté
         async function checkUserSession() {
             try {
                 const response = await fetch('../api/check-session.php');
                 const data = await response.json();
                 
                 if (data.success && data.is_logged_in) {
-                    // Utilisateur déjà connecté - rediriger vers l'accueil
                     window.location.href = 'index.php';
                 } else {
-                    // Utilisateur non connecté - afficher les boutons d'auth
                     document.getElementById('authButtons').style.display = 'flex';
                     document.getElementById('userMenu').style.display = 'none';
                 }
@@ -366,7 +360,6 @@
             }
         }
         
-        // Soumettre le formulaire de connexion
         document.getElementById('loginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -406,7 +399,6 @@
             }
         });
         
-        // Fonction pour basculer l'affichage du mot de passe
         function togglePassword() {
             const passwordInput = document.getElementById('password');
             const toggleIcon = document.getElementById('passwordToggleIcon');
@@ -422,7 +414,6 @@
             }
         }
         
-        // Fonction de déconnexion
         async function logout() {
             try {
                 const response = await fetch('../api/logout.php', { method: 'POST' });
@@ -435,7 +426,6 @@
             }
         }
         
-        // Fonctions utilitaires pour l'interface
         function showLoading(show) {
             const spinner = document.getElementById('loadingSpinner');
             const form = document.getElementById('loginForm');
@@ -462,7 +452,6 @@
             document.getElementById('errorAlert').style.display = 'none';
         }
         
-        // Vérifier la session au chargement de la page
         document.addEventListener('DOMContentLoaded', checkUserSession);
     </script>
 </body>

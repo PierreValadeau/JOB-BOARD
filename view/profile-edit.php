@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../assets/css/index.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Style pour le menu utilisateur */
         .user-menu {
             display: flex;
             align-items: center;
@@ -34,8 +33,6 @@
             align-items: center;
             gap: 15px;
         }
-
-        /* Styles spécifiques pour la page de profil */
         .profile-section {
             padding: 4rem 0;
             background: #f8fafc;
@@ -307,14 +304,12 @@
     <script>
         let currentUser = null;
         
-        // Vérifier si l'utilisateur est connecté
         async function checkUserSession() {
             try {
                 const response = await fetch('../api/check-session.php');
                 const data = await response.json();
                 
                 if (data.success && data.is_logged_in) {
-                    // Utilisateur connecté
                     document.getElementById('authButtons').style.display = 'none';
                     document.getElementById('userMenu').style.display = 'flex';
                     document.getElementById('userName').textContent = data.user.name;
@@ -322,7 +317,6 @@
                     currentUser = data.user;
                     loadUserProfile();
                 } else {
-                    // Utilisateur non connecté - rediriger vers login
                     window.location.href = 'login.php';
                 }
             } catch (error) {
@@ -331,7 +325,6 @@
             }
         }
         
-        // Charger les données du profil utilisateur
         async function loadUserProfile() {
             if (!currentUser) return;
             
@@ -342,7 +335,6 @@
                 const data = await response.json();
                 
                 if (data.success && data.user) {
-                    // Préremplir le formulaire
                     document.getElementById('first_name').value = data.user.first_name || '';
                     document.getElementById('last_name').value = data.user.last_name || '';
                     document.getElementById('email').value = data.user.email || '';
@@ -359,7 +351,6 @@
             }
         }
         
-        // Soumettre le formulaire de mise à jour
         document.getElementById('profileForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -384,7 +375,6 @@
                 
                 if (result.success) {
                     showSuccess('Profil mis à jour avec succès!');
-                    // Mettre à jour le nom dans la navbar si il a changé
                     if (data.first_name) {
                         document.getElementById('userName').textContent = data.first_name + ' ' + (data.last_name || '');
                     }
@@ -399,7 +389,6 @@
             }
         });
         
-        // Fonction de déconnexion
         async function logout() {
             try {
                 const response = await fetch('../api/logout.php', { method: 'POST' });
@@ -412,7 +401,6 @@
             }
         }
         
-        // Fonctions utilitaires pour l'interface
         function showLoading(show) {
             const spinner = document.getElementById('loadingSpinner');
             const form = document.getElementById('profileForm');
@@ -426,7 +414,6 @@
             messageSpan.textContent = message;
             alert.style.display = 'block';
             
-            // Masquer après 5 secondes
             setTimeout(() => {
                 alert.style.display = 'none';
             }, 5000);
@@ -444,7 +431,6 @@
             document.getElementById('errorAlert').style.display = 'none';
         }
         
-        // Vérifier la session au chargement de la page
         document.addEventListener('DOMContentLoaded', checkUserSession);
     </script>
 </body>

@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../assets/css/index.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Style pour le menu utilisateur */
         .user-menu {
             display: flex;
             align-items: center;
@@ -34,8 +33,6 @@
             align-items: center;
             gap: 15px;
         }
-
-        /* Styles spécifiques pour la page d'inscription */
         .register-section {
             padding: 4rem 0;
             background: #f8fafc;
@@ -403,17 +400,14 @@
     </footer>
 
     <script>
-        // Vérifier si l'utilisateur est connecté
         async function checkUserSession() {
             try {
                 const response = await fetch('../api/check-session.php');
                 const data = await response.json();
                 
                 if (data.success && data.is_logged_in) {
-                    // Utilisateur déjà connecté - rediriger vers l'accueil
                     window.location.href = 'index.php';
                 } else {
-                    // Utilisateur non connecté - afficher les boutons d'auth
                     document.getElementById('authButtons').style.display = 'flex';
                     document.getElementById('userMenu').style.display = 'none';
                 }
@@ -422,20 +416,17 @@
             }
         }
         
-        // Soumettre le formulaire d'inscription
         document.getElementById('registerForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const formData = new FormData(this);
             const data = Object.fromEntries(formData.entries());
             
-            // Vérifier que les mots de passe correspondent
             if (data.password !== data.confirmPassword) {
                 showError('Les mots de passe ne correspondent pas');
                 return;
             }
             
-            // Vérifier la force du mot de passe
             if (data.password.length < 8) {
                 showError('Le mot de passe doit contenir au moins 8 caractères');
                 return;
@@ -471,7 +462,6 @@
             }
         });
         
-        // Fonction pour basculer l'affichage du mot de passe
         function togglePassword(fieldId) {
             const passwordInput = document.getElementById(fieldId);
             const toggleIcon = document.getElementById(fieldId + 'ToggleIcon');
@@ -487,7 +477,6 @@
             }
         }
         
-        // Vérification de la force du mot de passe
         document.getElementById('password').addEventListener('input', function() {
             const password = this.value;
             const strengthFill = document.getElementById('strengthFill');
@@ -518,7 +507,6 @@
             strengthText.textContent = text;
         });
         
-        // Fonction de déconnexion
         async function logout() {
             try {
                 const response = await fetch('../api/logout.php', { method: 'POST' });
@@ -531,7 +519,6 @@
             }
         }
         
-        // Fonctions utilitaires pour l'interface
         function showLoading(show) {
             const spinner = document.getElementById('loadingSpinner');
             const form = document.getElementById('registerForm');
@@ -558,7 +545,6 @@
             document.getElementById('errorAlert').style.display = 'none';
         }
         
-        // Vérifier la session au chargement de la page
         document.addEventListener('DOMContentLoaded', checkUserSession);
     </script>
 </body>
