@@ -55,6 +55,7 @@
                 <!-- User menu (hidden by default, shown when logged in) -->
                 <div class="user-menu" id="userMenu" style="display: none;">
                     <span class="welcome-text">Bonjour, <span id="userName"></span></span>
+                    <a href="profile-edit.php" class="btn-link">Mon profil</a>
                     <a href="#" class="btn-link" onclick="logout()">Déconnexion</a>
                 </div>
             </div>
