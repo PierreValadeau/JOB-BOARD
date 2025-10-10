@@ -96,7 +96,7 @@
                         </button>
                     </div>
                     
-                    <div class="advanced-search" id="advancedSearch">
+                    <div class="advanced-search" id="advancedSearch" style="display: none;">
                         <div class="advanced-grid">
                             <div class="advanced-field">
                                 <label>Type de contrat</label>

@@ -841,4 +841,23 @@ function populateExpandedContent(jobCard) {
     if (expandedBenefits) expandedBenefits.textContent = benefits || 'Information non disponible';
 }
 
-
+// Fonction pour basculer l'affichage de la recherche avancée
+function toggleAdvancedSearch() {
+    const advancedSearch = document.getElementById('advancedSearch');
+    const toggleButton = document.querySelector('.advanced-toggle');
+    const icon = toggleButton.querySelector('i');
+    
+    if (advancedSearch.style.display === 'none' || advancedSearch.style.display === '') {
+        advancedSearch.style.display = 'block';
+        icon.className = 'fas fa-chevron-up';
+        toggleButton.querySelector('span') ? 
+            toggleButton.querySelector('span').textContent = 'Masquer la recherche avancée' :
+            toggleButton.innerHTML = '<i class="fas fa-chevron-up"></i> Masquer la recherche avancée';
+    } else {
+        advancedSearch.style.display = 'none';
+        icon.className = 'fas fa-sliders-h';
+        toggleButton.querySelector('span') ? 
+            toggleButton.querySelector('span').textContent = 'Recherche avancée' :
+            toggleButton.innerHTML = '<i class="fas fa-sliders-h"></i> Recherche avancée';
+    }
+}
