@@ -1,5 +1,4 @@
 <?php
-// Chargement des variables d'environnement depuis le fichier .env
 function loadEnv($path) {
     if (!file_exists($path)) {
         return;
@@ -57,8 +56,8 @@ class Database {
     
     private function __construct() {
         try {
-            $dsn = 'mysql:host=' . Config::DB_HOST . ';dbname=' . Config::DB_NAME . ';charset=' . Config::DB_CHARSET;
-            $this->connection = new PDO($dsn, Config::DB_USER, Config::DB_PASS);
+            $dsn = Config::dbDsn();
+            $this->connection = new PDO($dsn, Config::dbUser(), Config::dbPass());
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         } catch (PDOException $e) {

@@ -304,6 +304,7 @@
         document.addEventListener('DOMContentLoaded', checkUserSession);
     </script>
     <script src="../assets/js/featured-jobs.js"></script>
+    <script src="../assets/js/application-manager.js"></script>
 </body>
 </html>
 

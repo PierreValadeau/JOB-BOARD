@@ -315,7 +315,15 @@ function submitLoginForm() {
         if (data.success) {
             showSuccessMessage('Connexion réussie ! Redirection en cours...');
             setTimeout(() => {
-                window.location.href = '../view/index.php'; // Redirection vers l'accueil
+                // Vérifier s'il y a un paramètre de redirection
+                const urlParams = new URLSearchParams(window.location.search);
+                const redirectUrl = urlParams.get('redirect');
+                
+                if (redirectUrl) {
+                    window.location.href = decodeURIComponent(redirectUrl);
+                } else {
+                    window.location.href = '../view/index.php'; // Redirection vers l'accueil par défaut
+                }
             }, 1500);
         } else {
             showLoginError(data.message || 'Erreur de connexion');
