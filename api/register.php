@@ -50,7 +50,7 @@ try {
         'email' => trim($input['email']),
         'password' => $input['password'],
         'phone' => isset($input['phone']) ? trim($input['phone']) : null,
-        'role' => isset($input['user_type']) ? $input['user_type'] : 'candidate'
+        'role' => isset($input['role']) ? $input['role'] : 'candidate'
     ];
     
     $result = $userModel->create($userData);
