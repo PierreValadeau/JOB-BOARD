@@ -110,7 +110,7 @@ class UserModel {
     }
     
     public function login($email, $password) {
-        $sql = "SELECT user_id, first_name, last_name, email, password, role 
+        $sql = "SELECT user_id, first_name, last_name, email, phone, password, role 
                 FROM users WHERE email = :email";
         
         $stmt = $this->db->prepare($sql);

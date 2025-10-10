@@ -15,6 +15,9 @@ class ApplicationManager {
         // Ajouter les boutons Apply à toutes les cartes d'emploi existantes
         this.addApplyButtons();
         
+        // Vérifier s'il faut ouvrir automatiquement le modal de candidature
+        this.checkAutoApply();
+        
         // Écouter les changements dynamiques du DOM
         const observer = new MutationObserver(() => {
             this.addApplyButtons();
@@ -41,6 +44,45 @@ class ApplicationManager {
         } catch (error) {
             console.error('Erreur vérification session:', error);
             this.currentUser = null;
+        }
+    }
+    
+    checkAutoApply() {
+        // Vérifier les paramètres URL pour l'auto-ouverture du modal
+        const urlParams = new URLSearchParams(window.location.search);
+        const applyJobId = urlParams.get('apply');
+        const jobTitle = urlParams.get('jobTitle');
+        
+        if (applyJobId && this.currentUser) {
+            console.log('Auto-apply détecté pour job ID:', applyJobId);
+            
+            // Attendre que les cartes soient chargées et réessayer plusieurs fois si nécessaire
+            let attempts = 0;
+            const maxAttempts = 10;
+            
+            const tryOpenModal = () => {
+                attempts++;
+                console.log(`Tentative ${attempts} d'ouverture du modal`);
+                
+                // Vérifier si les cartes d'emploi sont présentes
+                const jobCards = document.querySelectorAll('.job-card');
+                if (jobCards.length > 0) {
+                    console.log('Cartes d\'emploi trouvées, ouverture du modal');
+                    this.openApplicationModal(parseInt(applyJobId), decodeURIComponent(jobTitle || 'Offre d\'emploi'));
+                    
+                    // Nettoyer l'URL après ouverture du modal
+                    const newUrl = window.location.pathname;
+                    window.history.replaceState({}, document.title, newUrl);
+                } else if (attempts < maxAttempts) {
+                    console.log('Cartes non encore chargées, nouvelle tentative dans 500ms');
+                    setTimeout(tryOpenModal, 500);
+                } else {
+                    console.warn('Impossible de trouver les cartes d\'emploi après', maxAttempts, 'tentatives');
+                }
+            };
+            
+            // Commencer les tentatives après un petit délai
+            setTimeout(tryOpenModal, 500);
         }
     }
     
@@ -125,8 +167,10 @@ class ApplicationManager {
     openApplicationModal(jobId, jobTitle) {
         // Vérifier si l'utilisateur est connecté
         if (!this.currentUser) {
-            // Rediriger vers la page de connexion
-            window.location.href = 'login.php?redirect=' + encodeURIComponent(window.location.href);
+            // Rediriger vers la page de connexion avec les informations de candidature
+            const currentUrl = window.location.href;
+            const redirectUrl = `${currentUrl}${currentUrl.includes('?') ? '&' : '?'}apply=${jobId}&jobTitle=${encodeURIComponent(jobTitle)}`;
+            window.location.href = 'login.php?redirect=' + encodeURIComponent(redirectUrl);
             return;
         }
         
@@ -312,6 +356,12 @@ class ApplicationManager {
         const emailInput = modal.querySelector('input[name="applicant_email"]');
         if (emailInput && this.currentUser.email) {
             emailInput.value = this.currentUser.email;
+        }
+        
+        // Pré-remplir le téléphone (si disponible)
+        const phoneInput = modal.querySelector('input[name="applicant_phone"]');
+        if (phoneInput && this.currentUser.phone) {
+            phoneInput.value = this.currentUser.phone;
         }
         
         // Ajouter un message personnalisé

@@ -39,6 +39,7 @@ try {
         $_SESSION['user_email'] = $result['user']['email'];
         $_SESSION['user_role'] = $result['user']['role'];
         $_SESSION['user_name'] = $result['user']['first_name'] . ' ' . $result['user']['last_name'];
+        $_SESSION['user_phone'] = $result['user']['phone'] ?? '';
         
         echo json_encode([
             'success' => true,

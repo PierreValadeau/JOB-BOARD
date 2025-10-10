@@ -19,7 +19,8 @@ try {
                 'user_id' => $_SESSION['user_id'],
                 'email' => $_SESSION['user_email'],
                 'role' => $_SESSION['user_role'],
-                'name' => $_SESSION['user_name']
+                'name' => $_SESSION['user_name'],
+                'phone' => $_SESSION['user_phone'] ?? ''
             ]
         ]);
     } else {
