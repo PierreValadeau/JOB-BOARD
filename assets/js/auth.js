@@ -10,24 +10,43 @@ function initializeAuth() {
     if (registerForm) {
         initializeRegisterForm();
     }
-    initializeSocialButtons();
+
     initializePasswordToggles();
 }
 function initializeLoginForm() {
     const form = document.getElementById('loginForm');
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
+    
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         if (validateLoginForm()) {
             submitLoginForm();
         }
     });
-    emailInput.addEventListener('blur', function() {
-        validateEmail(this.value, 'emailError');
+    
+    // Validation en temps réel avec correction
+    emailInput.addEventListener('input', function() {
+        if (this.value.trim()) {
+            validateEmail(this.value, 'emailError');
+        } else {
+            hideError('emailError');
+        }
     });
-    passwordInput.addEventListener('blur', function() {
-        validatePassword(this.value, 'passwordError', false);
+    
+    passwordInput.addEventListener('input', function() {
+        if (this.value.trim()) {
+            hideError('passwordError'); // Pas de validation stricte pour la connexion
+        }
+    });
+    
+    // Clear errors when user starts typing
+    emailInput.addEventListener('focus', function() {
+        hideError('emailError');
+    });
+    
+    passwordInput.addEventListener('focus', function() {
+        hideError('passwordError');
     });
 }
 function initializeRegisterForm() {
@@ -54,16 +73,35 @@ function initializeRegisterForm() {
     });
 }
 function validateLoginForm() {
-    const email = document.getElementById('email').value;
+    const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;
     let isValid = true;
-    if (!validateEmail(email, 'emailError')) {
+    
+    // Clear previous errors
+    hideError('emailError');
+    hideError('passwordError');
+    
+    // Simple validation for login
+    if (!email) {
+        showError('emailError', 'L\'email est requis');
+        isValid = false;
+    } else if (!isValidEmail(email)) {
+        showError('emailError', 'Format d\'email invalide');
         isValid = false;
     }
-    if (!validatePassword(password, 'passwordError', false)) {
+    
+    if (!password) {
+        showError('passwordError', 'Le mot de passe est requis');
         isValid = false;
     }
+    
     return isValid;
+}
+
+// Fonction simplifiée de validation email
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
 }
 function validateRegisterForm() {
     const firstName = document.getElementById('firstName').value;
@@ -72,7 +110,6 @@ function validateRegisterForm() {
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
     const userType = document.getElementById('userType').value;
-    const terms = document.getElementById('terms').checked;
     let isValid = true;
     if (!firstName.trim()) {
         showError('firstNameError', 'Le prénom est requis');
@@ -103,12 +140,6 @@ function validateRegisterForm() {
         isValid = false;
     } else {
         hideError('userTypeError');
-    }
-    if (!terms) {
-        showError('termsError', 'Vous devez accepter les conditions d\'utilisation');
-        isValid = false;
-    } else {
-        hideError('termsError');
     }
     return isValid;
 }
@@ -229,7 +260,9 @@ function updatePasswordStrength(password) {
 }
 function showError(errorId, message) {
     const errorElement = document.getElementById(errorId);
-    const inputElement = document.querySelector(`[name="${errorId.replace('Error', '')}"]`);
+    const fieldName = errorId.replace('Error', '');
+    const inputElement = document.getElementById(fieldName) || document.querySelector(`[name="${fieldName}"]`);
+    
     if (errorElement) {
         errorElement.textContent = message;
         errorElement.classList.add('show');
@@ -241,51 +274,119 @@ function showError(errorId, message) {
 }
 function hideError(errorId) {
     const errorElement = document.getElementById(errorId);
-    const inputElement = document.querySelector(`[name="${errorId.replace('Error', '')}"]`);
+    const fieldName = errorId.replace('Error', '');
+    const inputElement = document.getElementById(fieldName) || document.querySelector(`[name="${fieldName}"]`);
+    
     if (errorElement) {
         errorElement.classList.remove('show');
+        errorElement.textContent = '';
     }
     if (inputElement) {
         inputElement.classList.remove('error');
-        inputElement.classList.add('success');
+        inputElement.classList.remove('success');
     }
 }
 function submitLoginForm() {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    const remember = document.getElementById('remember').checked;
     const submitBtn = document.querySelector('.auth-btn');
+    const originalBtnText = submitBtn.innerHTML;
+    
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connexion en cours...';
-    setTimeout(() => {
-        console.log('Connexion:', { email, password, remember });
-        showSuccessMessage('Connexion réussie ! Redirection en cours...');
-        setTimeout(() => {
-            window.location.href = 'job-ads.html';
-        }, 1500);
-    }, 2000);
+    
+    // Clear any previous error messages
+    hideError('loginError');
+    
+    const loginData = {
+        email: email,
+        password: password
+    };
+    
+    fetch('../api/login.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(loginData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showSuccessMessage('Connexion réussie ! Redirection en cours...');
+            setTimeout(() => {
+                // Vérifier s'il y a un paramètre de redirection
+                const urlParams = new URLSearchParams(window.location.search);
+                const redirectUrl = urlParams.get('redirect');
+                
+                if (redirectUrl) {
+                    window.location.href = decodeURIComponent(redirectUrl);
+                } else {
+                    window.location.href = '../view/index.php'; // Redirection vers l'accueil par défaut
+                }
+            }, 1500);
+        } else {
+            showLoginError(data.message || 'Erreur de connexion');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+        }
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+        showLoginError('Erreur de connexion. Veuillez réessayer.');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+    });
 }
 function submitRegisterForm() {
     const formData = new FormData(document.getElementById('registerForm'));
     const data = Object.fromEntries(formData);
     const submitBtn = document.querySelector('.auth-btn');
+    const originalBtnText = submitBtn.innerHTML;
+    
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Création du compte...';
-    setTimeout(() => {
-        console.log('Inscription:', data);
-        showSuccessMessage('Compte créé avec succès ! Un email de confirmation a été envoyé.');
-        setTimeout(() => {
-            window.location.href = 'login.html';
-        }, 2000);
-    }, 2500);
-}
-function initializeSocialButtons() {
-    const socialButtons = document.querySelectorAll('.social-btn');
-    socialButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const provider = this.classList.contains('google-btn') ? 'Google' : 'LinkedIn';
-            showNotification(`Connexion avec ${provider} sera bientôt disponible`, 'info');
-        });
+    
+    // Clear any previous error messages
+    const existingError = document.querySelector('.register-error');
+    if (existingError) {
+        existingError.classList.remove('show');
+    }
+    
+    const registerData = {
+        first_name: data.firstName,
+        last_name: data.lastName,
+        email: data.email,
+        phone: data.phone,
+        password: data.password,
+        user_type: data.userType
+    };
+    
+    fetch('../api/register.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(registerData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showSuccessMessage('Compte créé avec succès ! Vous pouvez maintenant vous connecter.');
+            setTimeout(() => {
+                window.location.href = 'login.php';
+            }, 2000);
+        } else {
+            showRegisterError(data.message || 'Erreur lors de la création du compte');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+        }
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+        showRegisterError('Erreur de connexion. Veuillez réessayer.');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
     });
 }
 function initializePasswordToggles() {
@@ -320,6 +421,46 @@ function showSuccessMessage(message) {
     }
     successElement.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
     successElement.classList.add('show');
+}
+
+function showLoginError(message) {
+    const errorElement = document.getElementById('loginError');
+    const errorMessageElement = document.getElementById('loginErrorMessage');
+    
+    if (errorElement && errorMessageElement) {
+        errorMessageElement.textContent = message;
+        errorElement.classList.add('show');
+        
+        // Hide after 5 seconds
+        setTimeout(() => {
+            errorElement.classList.remove('show');
+        }, 5000);
+    }
+}
+
+function showRegisterError(message) {
+    let errorElement = document.querySelector('.register-error');
+    if (!errorElement) {
+        errorElement = document.createElement('div');
+        errorElement.className = 'auth-error register-error';
+        errorElement.innerHTML = `
+            <i class="fas fa-exclamation-triangle"></i>
+            <p class="register-error-message"></p>
+        `;
+        const form = document.querySelector('.auth-form');
+        form.appendChild(errorElement);
+    }
+    
+    const messageElement = errorElement.querySelector('.register-error-message');
+    if (messageElement) {
+        messageElement.textContent = message;
+        errorElement.classList.add('show');
+        
+        // Hide after 5 seconds
+        setTimeout(() => {
+            errorElement.classList.remove('show');
+        }, 5000);
+    }
 }
 function showNotification(message, type = 'info') {
     const notification = document.createElement('div');

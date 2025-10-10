@@ -4,9 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Finder - Trouvez votre emploi idéal</title>
-    <link rel="stylesheet" href="../assets/css/common.css">
-    <link rel="stylesheet" href="../assets/css/index.css">
+    <link rel="stylesheet" href="../assets/css/common.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="../assets/css/index.css?v=<?= time() ?>">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Style pour le menu utilisateur */
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .welcome-text {
+            color: #333;
+            font-weight: 500;
+        }
+        .user-menu .btn-link {
+            color: #666;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .user-menu .btn-link:hover {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+    </style>
 </head>
 <body>
     
@@ -19,9 +47,16 @@
                     </a>
                 </div>
 
-                <div class="auth-buttons">
+                <div class="auth-buttons" id="authButtons">
                     <a href="login.php" class="btn-link">Se connecter</a>
                     <a href="register.php" class="btn-primary">Créer un compte</a>
+                </div>
+                
+                <!-- User menu (hidden by default, shown when logged in) -->
+                <div class="user-menu" id="userMenu" style="display: none;">
+                    <span class="welcome-text">Bonjour, <span id="userName"></span></span>
+                    <a href="profile-edit.php" class="btn-link">Mon profil</a>
+                    <a href="#" class="btn-link" onclick="logout()">Déconnexion</a>
                 </div>
             </div>
         </div>
@@ -231,8 +266,46 @@
                 advancedSearch.style.display = advancedSearch.style.display === 'none' ? 'block' : 'none';
             }
         }
+        
+        // Vérifier si l'utilisateur est connecté
+        async function checkUserSession() {
+            try {
+                const response = await fetch('../api/check-session.php');
+                const data = await response.json();
+                
+                if (data.success && data.is_logged_in) {
+                    // Utilisateur connecté
+                    document.getElementById('authButtons').style.display = 'none';
+                    document.getElementById('userMenu').style.display = 'flex';
+                    document.getElementById('userName').textContent = data.user.name;
+                } else {
+                    // Utilisateur non connecté
+                    document.getElementById('authButtons').style.display = 'flex';
+                    document.getElementById('userMenu').style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Erreur lors de la vérification de session:', error);
+            }
+        }
+        
+        // Fonction de déconnexion
+        async function logout() {
+            try {
+                const response = await fetch('../api/logout.php', { method: 'POST' });
+                if (response.ok) {
+                    window.location.reload(); // Recharger la page
+                }
+            } catch (error) {
+                console.error('Erreur lors de la déconnexion:', error);
+                window.location.reload();
+            }
+        }
+        
+        // Vérifier la session au chargement de la page
+        document.addEventListener('DOMContentLoaded', checkUserSession);
     </script>
     <script src="../assets/js/featured-jobs.js"></script>
+    <script src="../assets/js/application-manager.js"></script>
 </body>
 </html>
 
