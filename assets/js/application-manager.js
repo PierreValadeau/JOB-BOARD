@@ -3,10 +3,15 @@ class ApplicationManager {
         this.currentJobId = null;
         this.currentJobTitle = null;
         this.appliedJobs = new Set(); // Pour tracker les candidatures déjà envoyées
+        this.checkSessionUrl = '../api/check-session.php';
+        this.currentUser = null;
         this.init();
     }
     
-    init() {
+    async init() {
+        // Vérifier la session utilisateur
+        await this.checkUserSession();
+        
         // Ajouter les boutons Apply à toutes les cartes d'emploi existantes
         this.addApplyButtons();
         
@@ -19,6 +24,24 @@ class ApplicationManager {
             childList: true,
             subtree: true
         });
+    }
+    
+    async checkUserSession() {
+        try {
+            const response = await fetch(this.checkSessionUrl);
+            const data = await response.json();
+            
+            if (data.success && data.is_logged_in) {
+                this.currentUser = data.user;
+                console.log('Utilisateur connecté:', this.currentUser);
+            } else {
+                this.currentUser = null;
+                console.log('Utilisateur non connecté');
+            }
+        } catch (error) {
+            console.error('Erreur vérification session:', error);
+            this.currentUser = null;
+        }
     }
     
     addApplyButtons() {
@@ -100,6 +123,13 @@ class ApplicationManager {
     }
     
     openApplicationModal(jobId, jobTitle) {
+        // Vérifier si l'utilisateur est connecté
+        if (!this.currentUser) {
+            // Rediriger vers la page de connexion
+            window.location.href = 'login.php?redirect=' + encodeURIComponent(window.location.href);
+            return;
+        }
+        
         this.currentJobId = jobId;
         this.currentJobTitle = jobTitle;
         
@@ -107,11 +137,14 @@ class ApplicationManager {
         document.body.appendChild(modal);
         document.body.style.overflow = 'hidden';
         
-        // Focus sur le premier champ
+        // Pré-remplir le formulaire avec les infos utilisateur
+        this.prefillUserData(modal);
+        
+        // Focus sur le premier champ vide
         setTimeout(() => {
-            const firstInput = modal.querySelector('input[name="applicant_name"]');
-            if (firstInput) {
-                firstInput.focus();
+            const firstEmptyInput = modal.querySelector('textarea[name="cover_letter"]');
+            if (firstEmptyInput) {
+                firstEmptyInput.focus();
             }
         }, 100);
     }
@@ -264,6 +297,28 @@ class ApplicationManager {
                 }
             }
         });
+    }
+    
+    prefillUserData(modal) {
+        if (!this.currentUser) return;
+        
+        // Pré-remplir le nom (si disponible)
+        const nameInput = modal.querySelector('input[name="applicant_name"]');
+        if (nameInput && this.currentUser.name) {
+            nameInput.value = this.currentUser.name;
+        }
+        
+        // Pré-remplir l'email
+        const emailInput = modal.querySelector('input[name="applicant_email"]');
+        if (emailInput && this.currentUser.email) {
+            emailInput.value = this.currentUser.email;
+        }
+        
+        // Ajouter un message personnalisé
+        const formTitle = modal.querySelector('h2');
+        if (formTitle) {
+            formTitle.innerHTML = `<i class="fas fa-paper-plane"></i> Postuler pour "${this.currentJobTitle}" - Connecté en tant que ${this.currentUser.name || this.currentUser.email}`;
+        }
     }
     
     closeModal(modal) {
