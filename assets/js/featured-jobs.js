@@ -2,6 +2,10 @@ class FeaturedJobs {
     constructor() {
         this.apiUrl = '../api/jobs.php';
         this.container = document.getElementById('featuredJobsGrid');
+        this.currentPage = 1;
+        this.itemsPerPage = 3;
+        this.totalPages = 1;
+        this.totalJobs = 0;
         this.init();
     }
 
@@ -12,11 +16,16 @@ class FeaturedJobs {
 
     async loadFeaturedJobs() {
         try {
-            const response = await fetch(`${this.apiUrl}?limit=3`);
+            this.showLoadingSpinner();
+            
+            const response = await fetch(`${this.apiUrl}?limit=${this.itemsPerPage}&page=${this.currentPage}`);
             const data = await response.json();
             
             if (data.success && data.jobs.length > 0) {
+                this.totalJobs = data.total || data.jobs.length;
+                this.totalPages = Math.ceil(this.totalJobs / this.itemsPerPage);
                 this.renderJobs(data.jobs);
+                this.renderPagination();
             } else {
                 this.showError('Aucune offre disponible pour le moment');
             }
@@ -374,6 +383,102 @@ class FeaturedJobs {
         return html;
     }
 
+    createPaginationContainer() {
+        const featuredSection = document.querySelector('.featured-jobs');
+        if (featuredSection) {
+            const paginationContainer = document.createElement('div');
+            paginationContainer.className = 'pagination-container';
+            paginationContainer.id = 'jobsPagination';
+            
+            // Insérer la pagination après la grille des jobs
+            const container = document.querySelector('.featured-jobs .container');
+            if (container) {
+                container.appendChild(paginationContainer);
+            }
+        }
+    }
+
+    renderPagination() {
+        const paginationContainer = document.getElementById('jobsPagination');
+        if (!paginationContainer) {
+            return;
+        }
+        
+        if (this.totalPages <= 1) {
+            paginationContainer.style.display = 'none';
+            return;
+        }
+        
+        paginationContainer.style.display = 'block';
+        
+        let paginationHTML = `
+            <div class="pagination">
+                <button class="pagination-btn prev-btn" 
+                        onclick="featuredJobsInstance.goToPage(${this.currentPage - 1})"
+                        ${this.currentPage === 1 ? 'disabled' : ''}>
+                    <i class="fas fa-chevron-left"></i>
+                    Précédent
+                </button>
+                
+                <div class="pagination-numbers">
+        `;
+
+        for (let i = 1; i <= this.totalPages; i++) {
+            if (i === this.currentPage) {
+                paginationHTML += `
+                    <button class="pagination-number active">${i}</button>
+                `;
+            } else {
+                paginationHTML += `
+                    <button class="pagination-number" 
+                            onclick="featuredJobsInstance.goToPage(${i})">${i}</button>
+                `;
+            }
+        }
+
+        paginationHTML += `
+                </div>
+                
+                <button class="pagination-btn next-btn" 
+                        onclick="featuredJobsInstance.goToPage(${this.currentPage + 1})"
+                        ${this.currentPage === this.totalPages ? 'disabled' : ''}>
+                    Suivant
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <div class="pagination-info">
+                Page ${this.currentPage} sur ${this.totalPages} 
+                (${this.totalJobs} offres au total)
+            </div>
+        `;
+
+        paginationContainer.innerHTML = paginationHTML;
+    }
+
+    async goToPage(pageNumber) {
+        if (pageNumber < 1 || pageNumber > this.totalPages || pageNumber === this.currentPage) {
+            return;
+        }
+
+        this.currentPage = pageNumber;
+        await this.loadFeaturedJobs();
+        
+        const jobsGrid = document.getElementById('featuredJobsGrid');
+        if (jobsGrid) {
+            jobsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+
+    showLoadingSpinner() {
+        this.container.innerHTML = `
+            <div class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Chargement des offres...</p>
+            </div>
+        `;
+    }
+
     showError(message) {
         this.container.innerHTML = `
             <div class="error-message">
@@ -384,6 +489,8 @@ class FeaturedJobs {
     }
 }
 
+let featuredJobsInstance = null;
+
 document.addEventListener('DOMContentLoaded', () => {
-    new FeaturedJobs();
+    featuredJobsInstance = new FeaturedJobs();
 });

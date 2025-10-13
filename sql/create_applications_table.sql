@@ -5,7 +5,6 @@ CREATE TABLE IF NOT EXISTS applications (
     applicant_email VARCHAR(255) NOT NULL,
     applicant_phone VARCHAR(20),
     cover_letter TEXT,
-    cv_filename VARCHAR(255),
     application_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     status ENUM('pending', 'reviewed', 'accepted', 'rejected') DEFAULT 'pending',
     FOREIGN KEY (job_id) REFERENCES offers(offers_id) ON DELETE CASCADE,
