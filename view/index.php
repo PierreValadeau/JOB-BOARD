@@ -149,15 +149,12 @@
         <div class="container">
             <h2>Offres d'emploi en vedette</h2>
             <div class="jobs-grid" id="featuredJobsGrid">
-                <!-- Les offres seront chargées dynamiquement via l'API -->
                 <div class="loading-spinner">
                     <i class="fas fa-spinner fa-spin"></i>
                     <p>Chargement des offres...</p>
                 </div>
             </div>
-            <div class="view-all-jobs">
-                <a href="search-results.html" class="btn-secondary">Voir toutes les offres</a>
-            </div>
+            <div class="pagination-container" id="jobsPagination"></div>
         </div>
     </section>
     

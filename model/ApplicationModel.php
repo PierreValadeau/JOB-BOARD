@@ -11,8 +11,8 @@ class ApplicationModel {
 
     public function createApplication($data) {
         try {
-            $sql = "INSERT INTO applications (job_id, applicant_name, applicant_email, applicant_phone, cover_letter, cv_filename) 
-                    VALUES (:job_id, :applicant_name, :applicant_email, :applicant_phone, :cover_letter, :cv_filename)";
+            $sql = "INSERT INTO applications (job_id, applicant_name, applicant_email, applicant_phone, cover_letter) 
+                    VALUES (:job_id, :applicant_name, :applicant_email, :applicant_phone, :cover_letter)";
             
             $stmt = $this->db->prepare($sql);
             
@@ -21,8 +21,7 @@ class ApplicationModel {
                 ':applicant_name' => $data['applicant_name'],
                 ':applicant_email' => $data['applicant_email'],
                 ':applicant_phone' => $data['applicant_phone'] ?? null,
-                ':cover_letter' => $data['cover_letter'] ?? null,
-                ':cv_filename' => $data['cv_filename'] ?? null
+                ':cover_letter' => $data['cover_letter'] ?? null
             ]);
             
             if ($result) {
