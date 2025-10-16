@@ -8,22 +8,33 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeJobCardExpansion(); // Nouvelle fonctionnalité d'expansion des cartes
 });
 function initializeSearchFunctionality() {
-    const searchForm = document.querySelector('.search-form');
+    const searchForm = document.querySelector('.enhanced-search-form');
     const searchInput = document.querySelector('.search-input');
     const locationInput = document.querySelector('.location-input');
     if (searchForm) {
         searchForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const query = searchInput.value.trim();
-            const location = locationInput.value.trim();
+            const query = (searchInput && searchInput.value) ? searchInput.value.trim() : '';
+            const location = (locationInput && locationInput.value) ? locationInput.value.trim() : '';
             if (!query) {
                 showNotification('Veuillez saisir un mot-clé de recherche', 'warning');
                 return;
             }
+            const params = new URLSearchParams();
+            params.set('q', query);
+            if (location) params.set('location', location);
+            const contract = searchForm.querySelector('select[name="contract"]')?.value || '';
+            const salary = searchForm.querySelector('select[name="salary"]')?.value || '';
+            const remote = searchForm.querySelector('select[name="remote"]')?.value || '';
+            const experience = searchForm.querySelector('select[name="experience"]')?.value || '';
+            if (contract) params.set('contract', contract);
+            if (salary) params.set('salary', salary);
+            if (remote) params.set('remote', remote);
+            if (experience) params.set('experience', experience);
             showLoadingState();
             setTimeout(() => {
-                window.location.href = `search-results.html?q=${encodeURIComponent(query)}&location=${encodeURIComponent(location)}`;
-            }, 500);
+                window.location.href = `view/job-ads.php?${params.toString()}`;
+            }, 200);
         });
     }
     if (searchInput) {
