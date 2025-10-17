@@ -1,5 +1,5 @@
 <?php
-require_once '../config/config.php';
+require_once __DIR__ . '/../config/config.php';
 
 class UserModel {
     private $db;
@@ -117,9 +117,26 @@ class UserModel {
         $stmt->execute([':email' => $email]);
         $user = $stmt->fetch();
         
-        if ($user && password_verify($password, $user['password'])) {
-            unset($user['password']);
-            return ['success' => true, 'user' => $user, 'message' => 'Login ok'];
+        if ($user) {
+            // Vérifier d'abord si c'est un mot de passe haché
+            if (password_verify($password, $user['password'])) {
+                unset($user['password']);
+                return ['success' => true, 'user' => $user, 'message' => 'Login ok'];
+            }
+            // Si ce n'est pas un hash, vérifier si c'est un mot de passe en clair
+            elseif ($user['password'] === $password) {
+                // Mot de passe en clair trouvé, le hacher et le mettre à jour
+                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+                $updateSql = "UPDATE users SET password = :password WHERE user_id = :user_id";
+                $updateStmt = $this->db->prepare($updateSql);
+                $updateStmt->execute([
+                    ':password' => $hashedPassword,
+                    ':user_id' => $user['user_id']
+                ]);
+                
+                unset($user['password']);
+                return ['success' => true, 'user' => $user, 'message' => 'Login ok'];
+            }
         }
         
         return ['success' => false, 'message' => 'Invalid credentials'];

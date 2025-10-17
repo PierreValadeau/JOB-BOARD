@@ -44,7 +44,8 @@ try {
         echo json_encode([
             'success' => true,
             'message' => 'Connexion réussie',
-            'user' => $result['user']
+            'user' => $result['user'],
+            'redirect_admin' => ($result['user']['role'] === 'admin')
         ]);
     } else {
         echo json_encode($result);

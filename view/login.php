@@ -354,8 +354,12 @@
                 const data = await response.json();
                 
                 if (data.success && data.is_logged_in) {
-                    // Utilisateur déjà connecté - rediriger vers l'accueil
-                    window.location.href = 'index.php';
+                    // Utilisateur déjà connecté - rediriger selon le rôle
+                    if (data.user.role === 'admin') {
+                        window.location.href = 'admin/index.php';
+                    } else {
+                        window.location.href = 'index.php';
+                    }
                 } else {
                     // Utilisateur non connecté - afficher les boutons d'auth
                     document.getElementById('authButtons').style.display = 'flex';
@@ -393,7 +397,11 @@
                 if (result.success) {
                     showSuccess('Connexion réussie! Redirection en cours...');
                     setTimeout(() => {
-                        window.location.href = 'index.php';
+                        if (result.redirect_admin) {
+                            window.location.href = 'admin/index.php';
+                        } else {
+                            window.location.href = 'index.php';
+                        }
                     }, 1500);
                 } else {
                     showError(result.message || 'Email ou mot de passe incorrect');

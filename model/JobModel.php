@@ -1,5 +1,5 @@
 <?php
-require_once '../config/config.php';
+require_once __DIR__ . '/../config/config.php';
 
 class JobModel {
     private $db;
@@ -10,28 +10,28 @@ class JobModel {
     
     public function create($data) {
         $sql = "INSERT INTO offers (id_companies, title, location, description, contract_type, published_date, salary) 
-                VALUES (:id_companies, :title, :location, :description, :contract_type, :published_date, :salary)";
+                VALUES (:company_id, :title, :location, :description, :employment_type, :published_date, :salary)";
         
         $stmt = $this->db->prepare($sql);
         $stmt->execute([
-            ':id_companies' => $data['id_companies'],
+            ':company_id' => $data['company_id'],
             ':title' => $data['title'],
             ':location' => $data['location'] ?? null,
             ':description' => $data['description'] ?? null,
-            ':contract_type' => $data['contract_type'] ?? null,
+            ':employment_type' => $data['employment_type'] ?? 'CDI',
             ':published_date' => $data['published_date'] ?? date('Y-m-d'),
             ':salary' => $data['salary'] ?? null
         ]);
         
         return [
             'success' => true,
-            'offer_id' => $this->db->lastInsertId(),
+            'job_id' => $this->db->lastInsertId(),
             'message' => 'Job created'
         ];
     }
     
     public function getById($id) {
-        $sql = "SELECT o.*, c.name as company_name 
+        $sql = "SELECT o.offers_id as job_id, o.title, o.description, o.location, o.contract_type as employment_type, o.salary, o.id_companies as company_id, c.name as company_name 
                 FROM offers o 
                 LEFT JOIN companies c ON o.id_companies = c.id_companies 
                 WHERE o.offers_id = :id";
@@ -49,7 +49,7 @@ class JobModel {
     }
     
     public function getAll($filters = [], $limit = 20, $offset = 0) {
-        $sql = "SELECT o.*, c.name as company_name 
+        $sql = "SELECT o.offers_id as job_id, o.title, o.description, o.location, o.contract_type as employment_type, o.salary, c.name as company_name 
                 FROM offers o 
                 LEFT JOIN companies c ON o.id_companies = c.id_companies 
                 WHERE 1=1";
@@ -113,10 +113,16 @@ class JobModel {
         $fields = [];
         $params = [':id' => $id];
         
-        $allowed = ['id_companies', 'title', 'location', 'description', 'contract_type', 'salary'];
+        $allowed = ['company_id', 'title', 'location', 'description', 'employment_type', 'salary'];
         
         foreach ($data as $key => $value) {
-            if (in_array($key, $allowed)) {
+            if ($key === 'company_id') {
+                $fields[] = "id_companies = :company_id";
+                $params[":company_id"] = $value;
+            } elseif ($key === 'employment_type') {
+                $fields[] = "contract_type = :employment_type";
+                $params[":employment_type"] = $value;
+            } elseif (in_array($key, ['title', 'location', 'description', 'salary'])) {
                 $fields[] = "$key = :$key";
                 $params[":$key"] = $value;
             }

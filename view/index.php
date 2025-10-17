@@ -34,6 +34,14 @@
             align-items: center;
             gap: 15px;
         }
+        #adminLink {
+            color: #dc3545 !important;
+            font-weight: 600;
+        }
+        #adminLink:hover {
+            background-color: #f8d7da !important;
+            color: #721c24 !important;
+        }
     </style>
 </head>
 <body>
@@ -56,6 +64,9 @@
                 <div class="user-menu" id="userMenu" style="display: none;">
                     <span class="welcome-text">Bonjour, <span id="userName"></span></span>
                     <a href="profile-edit.php" class="btn-link">Mon profil</a>
+                    <a href="admin/index.php" class="btn-link" id="adminLink" style="display: none;">
+                        <i class="fas fa-cogs"></i> Administration
+                    </a>
                     <a href="#" class="btn-link" onclick="logout()">Déconnexion</a>
                 </div>
             </div>
@@ -249,6 +260,14 @@
                     document.getElementById('authButtons').style.display = 'none';
                     document.getElementById('userMenu').style.display = 'flex';
                     document.getElementById('userName').textContent = data.user.name;
+                    
+                    // Afficher le lien admin si l'utilisateur est admin
+                    const adminLink = document.getElementById('adminLink');
+                    if (data.user.role === 'admin') {
+                        adminLink.style.display = 'inline-flex';
+                    } else {
+                        adminLink.style.display = 'none';
+                    }
                 } else {
                     // Utilisateur non connecté
                     document.getElementById('authButtons').style.display = 'flex';
