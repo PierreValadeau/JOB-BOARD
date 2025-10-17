@@ -18,7 +18,6 @@
     }
     ?>
     
-    <!-- Header -->
     <header class="admin-header">
         <h1><i class="fas fa-cogs"></i> Panel Administrateur</h1>
         <div class="admin-user-info">
@@ -29,12 +28,9 @@
         </div>
     </header>
 
-    <!-- Container principal -->
     <div class="admin-container">
-        <!-- Messages d'alerte -->
         <div id="alert-container"></div>
         
-        <!-- Navigation par onglets -->
         <div class="admin-tabs">
             <div class="tab-buttons">
                 <button class="tab-btn active" data-tab="dashboard">
@@ -54,11 +50,9 @@
                 </button>
             </div>
 
-            <!-- Contenu Dashboard -->
             <div id="dashboard" class="tab-content active">
                 <h2>Statistiques générales</h2>
                 <div class="stats-grid" id="stats-grid">
-                    <!-- Les stats seront chargées dynamiquement -->
                 </div>
                 
                 <div class="admin-actions">
@@ -68,61 +62,63 @@
                 </div>
             </div>
 
-            <!-- Contenu Utilisateurs -->
             <div id="users" class="tab-content">
-                <h2>Gestion des utilisateurs</h2>
+                <div class="section-header">
+                    <h2>Gestion des utilisateurs</h2>
+                    <button class="btn btn-primary" onclick="openUserModal()">
+                        <i class="fas fa-plus"></i> Ajouter un utilisateur
+                    </button>
+                </div>
 
                 <div class="admin-table" id="users-table">
-                    <!-- Tableau des utilisateurs chargé dynamiquement -->
                 </div>
                 
                 <div class="pagination" id="users-pagination">
-                    <!-- Pagination chargée dynamiquement -->
                 </div>
             </div>
 
-            <!-- Contenu Entreprises -->
             <div id="companies" class="tab-content">
-                <h2>Gestion des entreprises</h2>
+                <div class="section-header">
+                    <h2>Gestion des entreprises</h2>
+                    <button class="btn btn-primary" onclick="openCompanyModal()">
+                        <i class="fas fa-plus"></i> Ajouter une entreprise
+                    </button>
+                </div>
 
                 <div class="admin-table" id="companies-table">
-                    <!-- Tableau des entreprises chargé dynamiquement -->
                 </div>
                 
                 <div class="pagination" id="companies-pagination">
-                    <!-- Pagination chargée dynamiquement -->
                 </div>
             </div>
 
-            <!-- Contenu Offres -->
             <div id="offers" class="tab-content">
-                <h2>Gestion des offres d'emploi</h2>
+                <div class="section-header">
+                    <h2>Gestion des offres d'emploi</h2>
+                    <button class="btn btn-primary" onclick="openOfferModal()">
+                        <i class="fas fa-plus"></i> Ajouter une offre
+                    </button>
+                </div>
 
                 <div class="admin-table" id="offers-table">
-                    <!-- Tableau des offres chargé dynamiquement -->
                 </div>
                 
                 <div class="pagination" id="offers-pagination">
-                    <!-- Pagination chargée dynamiquement -->
                 </div>
             </div>
 
-            <!-- Contenu Candidatures -->
             <div id="applications" class="tab-content">
                 <h2>Gestion des candidatures</h2>
 
                 <div class="admin-table" id="applications-table">
-                    <!-- Tableau des candidatures chargé dynamiquement -->
                 </div>
                 
                 <div class="pagination" id="applications-pagination">
-                    <!-- Pagination chargée dynamiquement -->
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal utilisateur -->
     <div id="user-modal" class="modal-overlay">
         <div class="modal">
             <div class="modal-header">
@@ -176,7 +172,6 @@
         </div>
     </div>
 
-    <!-- Modal entreprise -->
     <div id="company-modal" class="modal-overlay">
         <div class="modal">
             <div class="modal-header">
@@ -224,7 +219,6 @@
         </div>
     </div>
 
-    <!-- Modal offre -->
     <div id="offer-modal" class="modal-overlay">
         <div class="modal">
             <div class="modal-header">
@@ -291,7 +285,6 @@
         </div>
     </div>
 
-    <!-- Modal de confirmation de suppression -->
     <div id="delete-modal" class="modal-overlay">
         <div class="modal">
             <div class="modal-header">
