@@ -55,20 +55,20 @@ CREATE TABLE `offers` (
   CONSTRAINT `offers_ibfk_1` FOREIGN KEY (`id_companies`) REFERENCES `companies` (`id_companies`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+
 -- Table des candidatures
-CREATE TABLE `application` (
-  `application_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `offers_id` int(11) NOT NULL,
-  `application_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `status` enum('pending','accepted','rejected') NOT NULL DEFAULT 'pending',
-  `cover_letter` text DEFAULT NULL,
-  PRIMARY KEY (`application_id`),
-  KEY `user_id` (`user_id`),
-  KEY `offers_id` (`offers_id`),
-  CONSTRAINT `application_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
-  CONSTRAINT `application_ibfk_2` FOREIGN KEY (`offers_id`) REFERENCES `offers` (`offers_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE IF NOT EXISTS applications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    job_id INT NOT NULL,
+    applicant_name VARCHAR(255) NOT NULL,
+    applicant_email VARCHAR(255) NOT NULL,
+    applicant_phone VARCHAR(20),
+    cover_letter TEXT,
+    application_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('pending', 'reviewed', 'accepted', 'rejected') DEFAULT 'pending',
+    FOREIGN KEY (job_id) REFERENCES offers(offers_id) ON DELETE CASCADE,
+    UNIQUE KEY unique_application (job_id, applicant_email)
+);
 
 -- Insertion des données d'exemple pour les entreprises
 INSERT INTO `companies` (`name`, `email`, `phone`, `location`, `description`, `website`) VALUES
@@ -166,16 +166,15 @@ JSON_OBJECT(
     'working_conditions', 'CDI, Lille centre, déplacements clients 20%, astreintes compensées'
 ));
 
--- Insertion de quelques candidatures d'exemple
-INSERT INTO `application` (`user_id`, `offers_id`, `status`, `cover_letter`) VALUES
-(1, 1, 'pending', 'Motivé par le développement web et les nouvelles technologies.'),
-(2, 2, 'accepted', 'Expérience en data science et passion pour l\'analyse de données.'),
-(1, 3, 'rejected', 'Intéressé par le développement frontend et l\'UX.'),
-(4, 4, 'pending', 'Expérience DevOps et envie de rejoindre une équipe dynamique.');
+INSERT INTO `applications` (job_id, applicant_name, applicant_email, applicant_phone, cover_letter, status) VALUES
+(1, 'Jean Dupont', 'jean.dupont@email.com', '0600000000', 'Motivé par le développement web et les nouvelles technologies.', 'pending'),
+(2, 'Alice Martin', 'alice.martin@email.com', '0600000001', 'Expérience en data science et passion pour l\'analyse de données.', 'accepted'),
+(3, 'Jean Dupont', 'jean.dupont@email.com', '0600000000', 'Intéressé par le développement frontend et l\'UX.', 'rejected'),
+(4, 'Sophie Leroy', 'sophie.leroy@email.com', '0600000002', 'Expérience DevOps et envie de rejoindre une équipe dynamique.', 'pending');
 
 -- Affichage des statistiques
 SELECT 'Base de données job recréée avec succès !' as message;
 SELECT COUNT(*) as total_companies FROM companies;
 SELECT COUNT(*) as total_users FROM users;
 SELECT COUNT(*) as total_offers FROM offers;
-SELECT COUNT(*) as total_applications FROM application;
+SELECT COUNT(*) as total_applications FROM applications;

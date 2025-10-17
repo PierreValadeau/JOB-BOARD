@@ -68,33 +68,7 @@
                 <p class="hero-subtitle">Découvrez des milliers d'opportunités professionnelles adaptées à votre profil</p>
                 
                 <form class="enhanced-search-form" action="job-ads.html" method="GET">
-                    <div class="search-wrapper">
-                        <div class="search-container">
-                            <div class="search-field">
-                                <div class="field-icon">
-                                    <i class="fas fa-search"></i>
-                                </div>
-                                <input type="text" name="q" placeholder="Poste, entreprise ou mots-clés..." class="search-input" autocomplete="off">
-                                <div class="search-suggestions" id="jobSuggestions"></div>
-                            </div>
-                            <div class="location-field">
-                                <div class="field-icon">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                                <input type="text" name="location" placeholder="Ville ou région..." class="location-input" autocomplete="off">
-                                <div class="search-suggestions" id="locationSuggestions"></div>
-                            </div>
-                            <button type="submit" class="enhanced-search-btn">
-                                <i class="fas fa-search"></i>
-                                <span>Rechercher</span>
-                            </button>
-                        </div>
-                        
-                        <button type="button" class="advanced-toggle" onclick="toggleAdvancedSearch()">
-                            <i class="fas fa-sliders-h"></i>
-                            Recherche avancée
-                        </button>
-                    </div>
+                    <!-- search-wrapper supprimé -->
                     
                     <div class="advanced-search" id="advancedSearch" style="display: none;">
                         <div class="advanced-grid">
