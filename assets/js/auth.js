@@ -313,16 +313,40 @@ function submitLoginForm() {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
+            // ALERT DE DEBUG - À SUPPRIMER APRÈS TEST
+            alert('CONNEXION OK!\nRole: ' + (data.user ? data.user.role : 'undefined') + '\nRedirect URL: ' + data.redirect_url);
+            
+            // Debug temporaire
+            console.log('LOGIN DEBUG:', data);
+            console.log('Role reçu:', data.debug_role);
+            console.log('URL de redirection:', data.redirect_url);
+            
             showSuccessMessage('Connexion réussie ! Redirection en cours...');
             setTimeout(() => {
-                // Vérifier s'il y a un paramètre de redirection
-                const urlParams = new URLSearchParams(window.location.search);
-                const redirectUrl = urlParams.get('redirect');
+                // Si l'utilisateur est admin, forcer la redirection vers le panel
+                if (data.user && data.user.role === 'admin') {
+                    alert('ADMIN DETECTE - Redirection vers admin.php');
+                    console.log('Admin détecté, redirection forcée vers admin.php');
+                    window.location.href = '../view/admin.php';
+                    return;
+                }
                 
-                if (redirectUrl) {
-                    window.location.href = decodeURIComponent(redirectUrl);
+                alert('PAS ADMIN - Redirection normale vers: ' + data.redirect_url);
+                
+                // Utiliser l'URL de redirection fournie par l'API selon le rôle
+                if (data.redirect_url) {
+                    console.log('Redirection vers:', data.redirect_url);
+                    window.location.href = data.redirect_url;
                 } else {
-                    window.location.href = '../view/index.php'; // Redirection vers l'accueil par défaut
+                    // Vérifier s'il y a un paramètre de redirection
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const redirectUrl = urlParams.get('redirect');
+                    
+                    if (redirectUrl) {
+                        window.location.href = decodeURIComponent(redirectUrl);
+                    } else {
+                        window.location.href = '../view/index.php'; // Redirection vers l'accueil par défaut
+                    }
                 }
             }, 1500);
         } else {

@@ -38,13 +38,22 @@ try {
         $_SESSION['user_id'] = $result['user']['user_id'];
         $_SESSION['user_email'] = $result['user']['email'];
         $_SESSION['user_role'] = $result['user']['role'];
+        $_SESSION['first_name'] = $result['user']['first_name'];
+        $_SESSION['last_name'] = $result['user']['last_name'];
         $_SESSION['user_name'] = $result['user']['first_name'] . ' ' . $result['user']['last_name'];
         $_SESSION['user_phone'] = $result['user']['phone'] ?? '';
+        
+        // Déterminer l'URL de redirection selon le rôle
+        $redirect_url = '../view/index.php'; // Par défaut
+        if ($result['user']['role'] === 'admin') {
+            $redirect_url = '../view/admin.php';
+        }
         
         echo json_encode([
             'success' => true,
             'message' => 'Connexion réussie',
-            'user' => $result['user']
+            'user' => $result['user'],
+            'redirect_url' => $redirect_url
         ]);
     } else {
         echo json_encode($result);

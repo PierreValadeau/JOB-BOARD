@@ -393,7 +393,14 @@
                 if (result.success) {
                     showSuccess('Connexion réussie! Redirection en cours...');
                     setTimeout(() => {
-                        window.location.href = 'index.php';
+                        // Redirection selon le rôle
+                        if (result.user && result.user.role === 'admin') {
+                            window.location.href = 'admin.php';
+                        } else if (result.redirect_url) {
+                            window.location.href = result.redirect_url;
+                        } else {
+                            window.location.href = 'index.php';
+                        }
                     }, 1500);
                 } else {
                     showError(result.message || 'Email ou mot de passe incorrect');
