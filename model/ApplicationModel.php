@@ -49,11 +49,11 @@ class ApplicationModel {
      */
     public function getApplicationsForJob($jobId) {
         try {
-            $sql = "SELECT a.*, o.title as job_title 
-                    FROM applications a 
-                    JOIN offers o ON a.job_id = o.id 
-                    WHERE a.job_id = :job_id 
-                    ORDER BY a.application_date DESC";
+        $sql = "SELECT a.*, o.title as job_title 
+            FROM applications a 
+            JOIN offers o ON a.job_id = o.offers_id 
+            WHERE a.job_id = :job_id 
+            ORDER BY a.application_date DESC";
             
             $stmt = $this->db->prepare($sql);
             $stmt->execute([':job_id' => $jobId]);
@@ -69,10 +69,10 @@ class ApplicationModel {
      */
     public function getAllApplications() {
         try {
-            $sql = "SELECT a.*, o.title as job_title, o.company_name 
-                    FROM applications a 
-                    JOIN offers o ON a.job_id = o.id 
-                    ORDER BY a.application_date DESC";
+        $sql = "SELECT a.*, o.title as job_title, o.company_name 
+            FROM applications a 
+            JOIN offers o ON a.job_id = o.offers_id 
+            ORDER BY a.application_date DESC";
             
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
