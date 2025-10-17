@@ -45,7 +45,7 @@ class ApplicationModel {
         try {
             $sql = "SELECT a.*, o.title as job_title 
                     FROM applications a 
-                    JOIN offers o ON a.job_id = o.offers_id 
+                    JOIN offers o ON a.job_id = o.id 
                     WHERE a.job_id = :job_id 
                     ORDER BY a.application_date DESC";
             
@@ -100,10 +100,9 @@ class ApplicationModel {
 
     public function getAllApplications() {
         try {
-            $sql = "SELECT a.*, o.title as job_title, c.name as company_name 
+            $sql = "SELECT a.*, o.title as job_title, o.company_name 
                     FROM applications a 
-                    JOIN offers o ON a.job_id = o.offers_id 
-                    JOIN companies c ON o.id_companies = c.id_companies
+                    JOIN offers o ON a.job_id = o.id 
                     ORDER BY a.application_date DESC";
             
             $stmt = $this->db->prepare($sql);
