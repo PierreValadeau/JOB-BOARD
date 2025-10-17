@@ -350,7 +350,11 @@
                 const data = await response.json();
                 
                 if (data.success && data.is_logged_in) {
-                    window.location.href = 'index.php';
+                    if (data.user && data.user.role === 'admin') {
+                        window.location.href = 'admin.php';
+                    } else {
+                        window.location.href = 'index.php';
+                    }
                 } else {
                     document.getElementById('authButtons').style.display = 'flex';
                     document.getElementById('userMenu').style.display = 'none';
@@ -386,7 +390,11 @@
                 if (result.success) {
                     showSuccess('Connexion réussie! Redirection en cours...');
                     setTimeout(() => {
-                        window.location.href = 'index.php';
+                        if (result.user && result.user.role === 'admin') {
+                            window.location.href = 'admin.php';
+                        } else {
+                            window.location.href = 'index.php';
+                        }
                     }, 1500);
                 } else {
                     showError(result.message || 'Email ou mot de passe incorrect');
