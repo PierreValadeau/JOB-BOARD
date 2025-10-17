@@ -665,6 +665,10 @@ function openOfferModal(offerId = null) {
     
     form.reset();
     
+    // Réinitialiser le mode d'entreprise par défaut
+    document.querySelector('input[name="company_mode"][value="existing"]').checked = true;
+    toggleCompanyMode();
+    
     // Définir la date par défaut à aujourd'hui
     document.getElementById('offer-published-date').value = new Date().toISOString().split('T')[0];
     
@@ -703,10 +707,45 @@ function loadOfferForEdit(offerId) {
         });
 }
 
+function toggleCompanyMode() {
+    const existingSection = document.getElementById('existing-company-section');
+    const manualSection = document.getElementById('manual-company-section');
+    const existingRadio = document.querySelector('input[name="company_mode"][value="existing"]');
+    const manualRadio = document.querySelector('input[name="company_mode"][value="manual"]');
+    
+    if (existingRadio.checked) {
+        existingSection.style.display = 'block';
+        manualSection.style.display = 'none';
+        // Rendre le champ entreprise requis
+        document.getElementById('offer-company').required = true;
+        // Supprimer l'exigence des champs manuels
+        clearManualFieldRequirements();
+    } else if (manualRadio.checked) {
+        existingSection.style.display = 'none';
+        manualSection.style.display = 'block';
+        // Supprimer l'exigence du champ entreprise
+        document.getElementById('offer-company').required = false;
+        document.getElementById('offer-company').value = '';
+        // Rendre certains champs manuels requis
+        setManualFieldRequirements();
+    }
+}
+
+function clearManualFieldRequirements() {
+    document.getElementById('offer-company-name').required = false;
+    document.getElementById('offer-company-email').required = false;
+}
+
+function setManualFieldRequirements() {
+    document.getElementById('offer-company-name').required = true;
+    document.getElementById('offer-company-email').required = true;
+}
+
 function saveOffer() {
     const form = document.getElementById('offer-form');
     const formData = new FormData(form);
     const offerId = formData.get('offer_id');
+    const companyMode = formData.get('company_mode');
     
     const data = {};
     for (let [key, value] of formData.entries()) {
@@ -714,6 +753,11 @@ function saveOffer() {
             data[key] = value;
         }
     }
+    
+    // Ajouter le mode d'entreprise aux données
+    data.company_mode = companyMode;
+    
+    console.log('Données envoyées:', data); // Debug
     
     const url = offerId ? 
         `../api/admin.php?action=update_offer&id=${offerId}` : 
@@ -734,8 +778,13 @@ function saveOffer() {
     })
     .then(response => response.json())
     .then(result => {
+        console.log('Réponse du serveur:', result); // Debug
         if (result.error) {
-            showAlert('error', result.message || 'Erreur lors de la sauvegarde');
+            let errorMessage = result.message || 'Erreur lors de la sauvegarde';
+            if (result.details) {
+                errorMessage += '\nDétails: ' + result.details.join(', ');
+            }
+            showAlert('error', errorMessage);
             return;
         }
         

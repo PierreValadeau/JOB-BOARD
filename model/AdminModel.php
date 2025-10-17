@@ -350,6 +350,22 @@ class AdminModel {
         }
     }
     
+    public function findCompanyByNameOrEmail($name, $email) {
+        try {
+            $stmt = $this->pdo->prepare("
+                SELECT id_companies, name, email 
+                FROM companies 
+                WHERE name = ? OR email = ?
+                LIMIT 1
+            ");
+            $stmt->execute([$name, $email]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Erreur findCompanyByNameOrEmail: " . $e->getMessage());
+            return false;
+        }
+    }
+    
     public function updateCompany($id, $data) {
         try {
             $fields = [];

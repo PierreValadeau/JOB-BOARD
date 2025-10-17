@@ -372,6 +372,28 @@ class AdminController {
                 return json_encode(['error' => 'Données invalides', 'details' => $errors]);
             }
             
+            $companyMode = $data['company_mode'] ?? 'existing';
+            
+            if ($companyMode === 'manual') {
+                // Créer d'abord l'entreprise
+                $companyData = [
+                    'name' => $data['company_name'],
+                    'email' => $data['company_email'],
+                    'phone' => $data['company_phone'] ?? null,
+                    'website' => $data['company_website'] ?? null,
+                    'description' => $data['company_description'] ?? null,
+                    'location' => $data['location'] // Utiliser la localisation de l'offre pour l'entreprise
+                ];
+                
+                $companyId = $this->adminModel->createCompany($companyData);
+                if (!$companyId) {
+                    return json_encode(['error' => 'Erreur lors de la création de l\'entreprise']);
+                }
+                
+                // Utiliser l'ID de la nouvelle entreprise pour l'offre
+                $data['id_companies'] = $companyId;
+            }
+            
             $offerId = $this->adminModel->createOffer($data);
             if ($offerId) {
                 return json_encode(['success' => true, 'offer_id' => $offerId, 'message' => 'Offre créée avec succès']);
@@ -555,8 +577,31 @@ class AdminController {
             $errors[] = 'La localisation est requise';
         }
         
-        if (empty($data['id_companies']) || !is_numeric($data['id_companies'])) {
-            $errors[] = 'Entreprise invalide';
+        // Validation du mode d'entreprise
+        $companyMode = $data['company_mode'] ?? 'existing';
+        
+        if ($companyMode === 'existing') {
+            // Mode entreprise existante : id_companies requis
+            if (empty($data['id_companies']) || !is_numeric($data['id_companies'])) {
+                $errors[] = 'Entreprise invalide';
+            }
+        } else if ($companyMode === 'manual') {
+            // Mode saisie manuelle : nom et email de l'entreprise requis
+            if (empty($data['company_name']) || strlen($data['company_name']) < 2) {
+                $errors[] = 'Le nom de l\'entreprise doit contenir au moins 2 caractères';
+            }
+            
+            if (empty($data['company_email']) || !filter_var($data['company_email'], FILTER_VALIDATE_EMAIL)) {
+                $errors[] = 'Email de l\'entreprise invalide';
+            }
+            
+            // Vérifier que l'entreprise n'existe pas déjà
+            if (!empty($data['company_name']) && !empty($data['company_email'])) {
+                $existingCompany = $this->adminModel->findCompanyByNameOrEmail($data['company_name'], $data['company_email']);
+                if ($existingCompany) {
+                    $errors[] = 'Une entreprise avec ce nom ou cet email existe déjà. Veuillez utiliser le mode "Entreprise existante".';
+                }
+            }
         }
         
         $validContractTypes = ['CDI', 'CDD', 'Stage', 'Freelance', 'Alternance'];

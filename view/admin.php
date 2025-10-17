@@ -232,24 +232,64 @@
                         <label class="form-label">Titre du poste *</label>
                         <input type="text" class="form-control" id="offer-title" name="title" required>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">Entreprise *</label>
-                            <select class="form-control" id="offer-company" name="id_companies" required>
-                                <option value="">Sélectionner une entreprise</option>
-                            </select>
+                    <div class="form-group">
+                        <label class="form-label">Mode d'entreprise</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="company_mode" value="existing" checked onchange="toggleCompanyMode()">
+                                <span>Choisir une entreprise existante</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="company_mode" value="manual" onchange="toggleCompanyMode()">
+                                <span>Saisir manuellement les informations</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div id="existing-company-section" class="form-group">
+                        <label class="form-label">Entreprise</label>
+                        <select class="form-control" id="offer-company" name="id_companies">
+                            <option value="">Sélectionner une entreprise</option>
+                        </select>
+                    </div>
+                    
+                    <div id="manual-company-section" class="company-manual-fields" style="display: none;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Nom de l'entreprise</label>
+                                <input type="text" class="form-control" id="offer-company-name" name="company_name">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email de l'entreprise</label>
+                                <input type="email" class="form-control" id="offer-company-email" name="company_email">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Téléphone de l'entreprise</label>
+                                <input type="tel" class="form-control" id="offer-company-phone" name="company_phone">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Site web</label>
+                                <input type="url" class="form-control" id="offer-company-website" name="company_website">
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Type de contrat *</label>
-                            <select class="form-control" id="offer-contract-type" name="contract_type" required>
-                                <option value="">Sélectionner</option>
-                                <option value="CDI">CDI</option>
-                                <option value="CDD">CDD</option>
-                                <option value="Stage">Stage</option>
-                                <option value="Freelance">Freelance</option>
-                                <option value="Alternance">Alternance</option>
-                            </select>
+                            <label class="form-label">Description de l'entreprise</label>
+                            <textarea class="form-control" id="offer-company-description" name="company_description" rows="3"></textarea>
                         </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Type de contrat *</label>
+                        <select class="form-control" id="offer-contract-type" name="contract_type" required>
+                            <option value="">Sélectionner</option>
+                            <option value="CDI">CDI</option>
+                            <option value="CDD">CDD</option>
+                            <option value="Stage">Stage</option>
+                            <option value="Freelance">Freelance</option>
+                            <option value="Alternance">Alternance</option>
+                        </select>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
