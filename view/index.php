@@ -54,6 +54,7 @@
                 <!-- User menu (hidden by default, shown when logged in) -->
                 <div class="user-menu" id="userMenu" style="display: none;">
                     <span class="welcome-text">Bonjour, <span id="userName"></span></span>
+                    <a href="admin.php" class="btn-link" id="adminLink" style="display: none;">Administration</a>
                     <a href="profile-edit.php" class="btn-link">Mon profil</a>
                     <a href="#" class="btn-link" onclick="logout()">Déconnexion</a>
                 </div>
@@ -272,6 +273,12 @@
                     document.getElementById('authButtons').style.display = 'none';
                     document.getElementById('userMenu').style.display = 'flex';
                     document.getElementById('userName').textContent = data.user.name;
+                    
+                    if (data.user.role === 'admin') {
+                        document.getElementById('adminLink').style.display = 'inline';
+                    } else {
+                        document.getElementById('adminLink').style.display = 'none';
+                    }
                 } else {
                     document.getElementById('authButtons').style.display = 'flex';
                     document.getElementById('userMenu').style.display = 'none';

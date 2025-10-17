@@ -1,5 +1,5 @@
 <?php
-require_once '../config/config.php';
+require_once __DIR__ . '/../config/config.php';
 
 class CompanyModel {
     private $db;
@@ -9,14 +9,17 @@ class CompanyModel {
     }
     
     public function create($data) {
-        $sql = "INSERT INTO companies (name, industry, description) 
-                VALUES (:name, :industry, :description)";
+        $sql = "INSERT INTO companies (name, email, phone, location, description, website) 
+                VALUES (:name, :email, :phone, :location, :description, :website)";
         
         $stmt = $this->db->prepare($sql);
         $stmt->execute([
             ':name' => $data['name'],
-            ':industry' => $data['industry'] ?? null,
-            ':description' => $data['description'] ?? null
+            ':email' => $data['email'] ?? $data['name'] . '@company.com',
+            ':phone' => $data['phone'] ?? null,
+            ':location' => $data['location'] ?? null,
+            ':description' => $data['description'] ?? null,
+            ':website' => $data['website'] ?? null
         ]);
         
         return [
@@ -27,7 +30,7 @@ class CompanyModel {
     }
     
     public function getById($id) {
-        $sql = "SELECT * FROM companies WHERE id_companies = :id";
+        $sql = "SELECT id_companies as company_id, name, email, phone, location, description, website FROM companies WHERE id_companies = :id";
         
         $stmt = $this->db->prepare($sql);
         $stmt->execute([':id' => $id]);
@@ -41,7 +44,7 @@ class CompanyModel {
     }
     
     public function getAll($limit = 10, $offset = 0) {
-        $sql = "SELECT * FROM companies ORDER BY name LIMIT :limit OFFSET :offset";
+        $sql = "SELECT id_companies as company_id, name, email, phone, location, description, website FROM companies ORDER BY name LIMIT :limit OFFSET :offset";
         
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
@@ -64,7 +67,7 @@ class CompanyModel {
     public function update($id, $data) {
         $fields = [];
         $params = [':id' => $id];
-        $allowed = ['name', 'industry', 'description'];
+        $allowed = ['name', 'email', 'phone', 'location', 'description', 'website'];
         
         foreach ($data as $key => $value) {
             if (in_array($key, $allowed)) {
