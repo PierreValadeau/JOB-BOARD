@@ -8,9 +8,7 @@ class ApplicationModel {
         $this->db = Database::getInstance()->getConnection();
     }
     
-    /**
-     * Créer une nouvelle candidature
-     */
+   
     public function createApplication($data) {
         try {
             $sql = "INSERT INTO applications (job_id, applicant_name, applicant_email, applicant_phone, cover_letter) 
@@ -44,9 +42,7 @@ class ApplicationModel {
         }
     }
     
-    /**
-     * Récupérer les candidatures pour une offre
-     */
+  
     public function getApplicationsForJob($jobId) {
         try {
         $sql = "SELECT a.*, o.title as job_title 
@@ -64,9 +60,7 @@ class ApplicationModel {
         }
     }
     
-    /**
-     * Récupérer toutes les candidatures
-     */
+   
     public function getAllApplications() {
         try {
         $sql = "SELECT a.*, o.title as job_title, o.company_name 
@@ -83,9 +77,7 @@ class ApplicationModel {
         }
     }
     
-    /**
-     * Mettre à jour le statut d'une candidature
-     */
+  
     public function updateApplicationStatus($applicationId, $status) {
         try {
             $sql = "UPDATE applications SET status = :status WHERE id = :id";
@@ -100,9 +92,7 @@ class ApplicationModel {
         }
     }
     
-    /**
-     * Vérifier si un utilisateur a déjà postulé pour une offre
-     */
+   
     public function hasUserApplied($jobId, $email) {
         try {
             $sql = "SELECT COUNT(*) FROM applications WHERE job_id = :job_id AND applicant_email = :email";

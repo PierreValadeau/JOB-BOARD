@@ -15,7 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 require_once __DIR__ . '/../controller/AdminController.php';
 
-// Vérifier que la session est démarrée
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -28,27 +27,18 @@ try {
     $path = parse_url($uri, PHP_URL_PATH);
     $pathParts = explode('/', trim($path, '/'));
     
-    // Récupérer les paramètres de la requête
     $action = $_GET['action'] ?? '';
     $entity = $_GET['entity'] ?? '';
     $id = $_GET['id'] ?? null;
     
-    // Pour les requêtes POST/PUT, récupérer les données JSON
     $input = file_get_contents('php://input');
     $data = $input ? json_decode($input, true) : $_POST;
     
-    // Routage des requêtes
     switch ($action) {
-        // ================================
-        // DASHBOARD
-        // ================================
         case 'dashboard':
             echo $adminController->getDashboardStats();
             break;
             
-        // ================================
-        // GESTION DES UTILISATEURS
-        // ================================
         case 'get_users':
             $page = $_GET['page'] ?? 1;
             $search = $_GET['search'] ?? '';
@@ -90,9 +80,7 @@ try {
             echo $adminController->deleteUser($id);
             break;
             
-        // ================================
-        // GESTION DES ENTREPRISES
-        // ================================
+
         case 'get_companies':
             $page = $_GET['page'] ?? 1;
             $search = $_GET['search'] ?? '';
@@ -133,9 +121,7 @@ try {
             echo $adminController->deleteCompany($id);
             break;
             
-        // ================================
-        // GESTION DES OFFRES
-        // ================================
+  
         case 'get_offers':
             $page = $_GET['page'] ?? 1;
             $search = $_GET['search'] ?? '';
@@ -177,9 +163,7 @@ try {
             echo $adminController->deleteOffer($id);
             break;
             
-        // ================================
-        // GESTION DES CANDIDATURES
-        // ================================
+     
         case 'get_applications':
             $page = $_GET['page'] ?? 1;
             $search = $_GET['search'] ?? '';
@@ -211,11 +195,8 @@ try {
             echo $adminController->deleteApplication($id);
             break;
             
-        // ================================
-        // ROUTES UTILITAIRES
-        // ================================
+      
         case 'get_companies_list':
-            // Pour les sélecteurs dans les formulaires
             require_once __DIR__ . '/../model/AdminModel.php';
             $adminModel = new AdminModel();
             $companies = $adminModel->getAllCompaniesForSelect();

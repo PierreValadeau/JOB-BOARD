@@ -80,7 +80,6 @@ class FeaturedJobs {
     async showJobDetails(jobId) {
         const button = document.querySelector(`[data-job-id="${jobId}"]`);
         
-        // Changer le texte du bouton pendant le chargement
         button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Chargement...';
         button.disabled = true;
         
@@ -88,12 +87,11 @@ class FeaturedJobs {
             const response = await fetch(`${this.apiUrl}?id=${jobId}`);
             const data = await response.json();
             
-            console.log('API Response:', data); // Debug
+            console.log('API Response:', data); 
             
             if (data.success && data.job) {
                 this.showFullJobPage(data.job);
             } else if (data.success && data.jobs && data.jobs.length > 0) {
-                // Si l'API retourne un tableau, prendre le premier élément
                 const job = data.jobs.find(j => j.offers_id == jobId);
                 if (job) {
                     this.showFullJobPage(job);
@@ -120,21 +118,16 @@ class FeaturedJobs {
     }
 
     showFullJobPage(job) {
-        // Sauvegarder le contenu actuel
         this.originalContent = document.body.innerHTML;
         
-        // Créer la page détaillée
         const jobPageHtml = this.createJobDetailPage(job);
         
-        // Remplacer le contenu avec animation
         document.body.style.opacity = '0';
         document.body.style.transition = 'opacity 0.3s ease-in-out';
         
         setTimeout(() => {
             document.body.innerHTML = jobPageHtml;
             document.body.style.opacity = '1';
-            
-            // Défiler automatiquement vers la section hero (bandeau bleu)
             setTimeout(() => {
                 const heroSection = document.querySelector('.hero');
                 if (heroSection) {
@@ -145,7 +138,6 @@ class FeaturedJobs {
                 }
             }, 100);
             
-            // Ajouter l'événement pour revenir (mais maintenant via le logo)
             const logoLink = document.querySelector('.logo-link');
             if (logoLink) {
                 logoLink.addEventListener('click', (e) => {
@@ -157,14 +149,12 @@ class FeaturedJobs {
     }
 
     goBackToHome() {
-        // Animation de retour
         document.body.style.opacity = '0';
         
         setTimeout(() => {
             document.body.innerHTML = this.originalContent;
             document.body.style.opacity = '1';
             
-            // Réinitialiser l'instance
             new FeaturedJobs();
         }, 300);
     }
@@ -311,7 +301,6 @@ class FeaturedJobs {
     renderJobRequirements(requirements) {
         if (!requirements) return '';
         
-        // Parse JSON si c'est une string, sinon utilise directement l'objet
         const req = typeof requirements === 'string' ? JSON.parse(requirements) : requirements;
         
         let html = '';
@@ -353,7 +342,6 @@ class FeaturedJobs {
     renderCompanyInfo(companyInfo) {
         if (!companyInfo) return '';
         
-        // Parse JSON si c'est une string, sinon utilise directement l'objet
         const info = typeof companyInfo === 'string' ? JSON.parse(companyInfo) : companyInfo;
         
         let html = '';
@@ -390,7 +378,6 @@ class FeaturedJobs {
             paginationContainer.className = 'pagination-container';
             paginationContainer.id = 'jobsPagination';
             
-            // Insérer la pagination après la grille des jobs
             const container = document.querySelector('.featured-jobs .container');
             if (container) {
                 container.appendChild(paginationContainer);

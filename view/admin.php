@@ -11,7 +11,6 @@
     <?php
     session_start();
     
-    // Vérifier l'authentification et les droits admin
     if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
         header('Location: login.php?redirect=' . urlencode('admin.php'));
         exit();

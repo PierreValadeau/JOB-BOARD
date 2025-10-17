@@ -1,9 +1,4 @@
-/**
- * Admin.js - JavaScript pour le panel administrateur
- * Gestion des interactions et appels AJAX
- */
 
-// Variables globales
 let currentTab = 'dashboard';
 let currentPage = {
     users: 1,
@@ -18,10 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
     loadDashboard();
     initSearchFilters();
 });
-
-// ================================
-// GESTION DES ONGLETS
-// ================================
 
 function initTabs() {
     const tabButtons = document.querySelectorAll('.tab-btn');
@@ -68,16 +59,11 @@ function loadTabContent(tab) {
     }
 }
 
-// ================================
-// GESTION DES FILTRES ET RECHERCHE
-// ================================
 
 function initSearchFilters() {
-    // Toutes les recherches et filtres ont été supprimés de l'interface admin
-    // Le panel admin affiche maintenant simplement les listes complètes
+   
 }
 
-// Fonction debounce pour limiter les appels API
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -90,15 +76,13 @@ function debounce(func, wait) {
     };
 }
 
-// ================================
-// DASHBOARD
-// ================================
+
 
 function loadDashboard() {
     fetch('../api/admin.php?action=dashboard')
         .then(response => response.json())
         .then(data => {
-            console.log('Dashboard data:', data); // Debug
+            console.log('Dashboard data:', data); 
             if (!data.success) {
                 showAlert('error', data.message || data.error || 'Erreur lors du chargement du dashboard');
                 return;
@@ -146,12 +130,9 @@ function refreshDashboard() {
     showAlert('success', 'Dashboard actualisé');
 }
 
-// ================================
-// GESTION DES UTILISATEURS
-// ================================
+
 
 function loadUsers(page = 1) {
-    // Plus de recherche ni de filtre de rôle
     const search = '';
     const role = '';
     
@@ -165,7 +146,7 @@ function loadUsers(page = 1) {
     fetch(`../api/admin.php?${params}`)
         .then(response => response.json())
         .then(data => {
-            console.log('Users data:', data); // Debug
+            console.log('Users data:', data); 
             if (!data.success) {
                 showAlert('error', data.message || data.error || 'Erreur lors du chargement des utilisateurs');
                 return;
@@ -354,12 +335,8 @@ function deleteUser(userId, userName) {
     );
 }
 
-// ================================
-// GESTION DES ENTREPRISES
-// ================================
 
 function loadCompanies(page = 1) {
-    // Plus de recherche
     const search = '';
     
     const params = new URLSearchParams({
@@ -371,7 +348,7 @@ function loadCompanies(page = 1) {
     fetch(`../api/admin.php?${params}`)
         .then(response => response.json())
         .then(data => {
-            console.log('Companies data:', data); // Debug
+            console.log('Companies data:', data); 
             if (!data.success) {
                 showAlert('error', data.message || data.error || 'Erreur lors du chargement des entreprises');
                 return;
@@ -555,12 +532,8 @@ function deleteCompany(companyId, companyName) {
     );
 }
 
-// ================================
-// GESTION DES OFFRES
-// ================================
 
 function loadOffers(page = 1) {
-    // Plus de recherche ni de filtre
     const search = '';
     const contract_type = '';
     
@@ -574,7 +547,7 @@ function loadOffers(page = 1) {
     fetch(`../api/admin.php?${params}`)
         .then(response => response.json())
         .then(data => {
-            console.log('Offers data:', data); // Debug
+            console.log('Offers data:', data); 
             if (!data.success) {
                 showAlert('error', data.message || data.error || 'Erreur lors du chargement des offres');
                 return;
@@ -665,7 +638,6 @@ function openOfferModal(offerId = null) {
     
     form.reset();
     
-    // Définir la date par défaut à aujourd'hui
     document.getElementById('offer-published-date').value = new Date().toISOString().split('T')[0];
     
     if (offerId) {
@@ -782,12 +754,10 @@ function deleteOffer(offerId, offerTitle) {
     );
 }
 
-// ================================
-// GESTION DES CANDIDATURES
-// ================================
+
 
 function loadApplications(page = 1) {
-    // Plus de recherche ni de filtre de statut
+
     const search = '';
     const status = '';
     
@@ -801,7 +771,7 @@ function loadApplications(page = 1) {
     fetch(`../api/admin.php?${params}`)
         .then(response => response.json())
         .then(data => {
-            console.log('Applications data:', data); // Debug
+            console.log('Applications data:', data); 
             if (!data.success) {
                 showAlert('error', data.message || data.error || 'Erreur lors du chargement des candidatures');
                 return;
@@ -899,7 +869,6 @@ function updateApplicationStatus(applicationId, status) {
 }
 
 function viewApplication(applicationId) {
-    // TODO: Implémenter une modal pour voir les détails de la candidature
     showAlert('info', 'Fonctionnalité à implémenter');
 }
 
@@ -928,9 +897,7 @@ function deleteApplication(applicationId, applicantName) {
     );
 }
 
-// ================================
-// GESTION DES MODALES
-// ================================
+
 
 function closeModal(modalId) {
     const modal = document.getElementById(modalId);
@@ -944,11 +911,9 @@ function openDeleteModal(message, confirmCallback) {
     
     messageElement.textContent = message;
     
-    // Supprimer l'ancien gestionnaire d'événements
     const newConfirmBtn = confirmBtn.cloneNode(true);
     confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
-    
-    // Ajouter le nouveau gestionnaire
+
     newConfirmBtn.addEventListener('click', () => {
         const loading = newConfirmBtn.querySelector('.loading');
         newConfirmBtn.disabled = true;
@@ -966,9 +931,6 @@ function openDeleteModal(message, confirmCallback) {
     modal.classList.add('active');
 }
 
-// ================================
-// PAGINATION
-// ================================
 
 function displayPagination(entity, currentPageNum, totalPages) {
     const paginationContainer = document.getElementById(`${entity}-pagination`);
@@ -980,12 +942,12 @@ function displayPagination(entity, currentPageNum, totalPages) {
     
     let paginationHtml = '';
     
-    // Bouton précédent
+
     if (currentPageNum > 1) {
         paginationHtml += `<button class="pagination-btn" onclick="changePage('${entity}', ${currentPageNum - 1})">‹ Précédent</button>`;
     }
     
-    // Numéros de pages
+
     const startPage = Math.max(1, currentPageNum - 2);
     const endPage = Math.min(totalPages, currentPageNum + 2);
     
@@ -1008,7 +970,6 @@ function displayPagination(entity, currentPageNum, totalPages) {
         paginationHtml += `<button class="pagination-btn" onclick="changePage('${entity}', ${totalPages})">${totalPages}</button>`;
     }
     
-    // Bouton suivant
     if (currentPageNum < totalPages) {
         paginationHtml += `<button class="pagination-btn" onclick="changePage('${entity}', ${currentPageNum + 1})">Suivant ›</button>`;
     }
@@ -1035,9 +996,7 @@ function changePage(entity, page) {
     }
 }
 
-// ================================
-// UTILITAIRES
-// ================================
+
 
 function showAlert(type, message) {
     const alertContainer = document.getElementById('alert-container');
@@ -1059,7 +1018,6 @@ function showAlert(type, message) {
     
     alertContainer.insertAdjacentHTML('beforeend', alertHtml);
     
-    // Auto-supprimer après 5 secondes
     setTimeout(() => {
         removeAlert(alertId);
     }, 5000);

@@ -1,8 +1,5 @@
 <?php
-/**
- * AdminModel - Modèle pour la gestion administrative
- * Toutes les requêtes SQL pour le panel admin
- */
+
 
 require_once __DIR__ . '/../config/config.php';
 
@@ -11,7 +8,6 @@ class AdminModel {
     
     public function __construct() {
         try {
-            // Utiliser la même méthode que les autres modèles
             $database = Database::getInstance();
             $this->pdo = $database->getConnection();
         } catch (Exception $e) {
@@ -20,31 +16,23 @@ class AdminModel {
         }
     }
     
-    // ================================
-    // STATISTIQUES DASHBOARD
-    // ================================
     
     public function getDashboardStats() {
         try {
             $stats = [];
             
-            // Nombre total d'utilisateurs
             $stmt = $this->pdo->query("SELECT COUNT(*) as total FROM users");
             $stats['total_users'] = $stmt->fetch()['total'];
             
-            // Nombre total d'entreprises
             $stmt = $this->pdo->query("SELECT COUNT(*) as total FROM companies");
             $stats['total_companies'] = $stmt->fetch()['total'];
             
-            // Nombre total d'offres
             $stmt = $this->pdo->query("SELECT COUNT(*) as total FROM offers");
             $stats['total_offers'] = $stmt->fetch()['total'];
             
-            // Nombre total de candidatures
             $stmt = $this->pdo->query("SELECT COUNT(*) as total FROM applications");
             $stats['total_applications'] = $stmt->fetch()['total'];
             
-            // Candidatures par statut
             $stmt = $this->pdo->query("
                 SELECT status, COUNT(*) as count 
                 FROM applications 
@@ -52,7 +40,6 @@ class AdminModel {
             ");
             $stats['applications_by_status'] = $stmt->fetchAll();
             
-            // Utilisateurs par rôle
             $stmt = $this->pdo->query("
                 SELECT role, COUNT(*) as count 
                 FROM users 
@@ -60,7 +47,6 @@ class AdminModel {
             ");
             $stats['users_by_role'] = $stmt->fetchAll();
             
-            // Offres récentes (7 derniers jours)
             $stmt = $this->pdo->query("
                 SELECT COUNT(*) as total 
                 FROM offers 
@@ -68,7 +54,6 @@ class AdminModel {
             ");
             $stats['recent_offers'] = $stmt->fetch()['total'];
             
-            // Candidatures récentes (7 derniers jours)
             $stmt = $this->pdo->query("
                 SELECT COUNT(*) as total 
                 FROM applications 
@@ -83,13 +68,10 @@ class AdminModel {
         }
     }
     
-    // ================================
-    // GESTION DES UTILISATEURS
-    // ================================
+
     
     public function getUsers($limit, $offset, $search = '', $role = '') {
         try {
-            // Convertir en entiers pour éviter les injections SQL
             $limit = (int)$limit;
             $offset = (int)$offset;
             
@@ -110,7 +92,6 @@ class AdminModel {
                 $params[] = $role;
             }
             
-            // Ajouter LIMIT et OFFSET directement dans la requête
             $sql .= " ORDER BY created_at DESC LIMIT $limit OFFSET $offset";
             
             $stmt = $this->pdo->prepare($sql);
@@ -241,13 +222,10 @@ class AdminModel {
         }
     }
     
-    // ================================
-    // GESTION DES ENTREPRISES
-    // ================================
+ 
     
     public function getCompanies($limit, $offset, $search = '') {
         try {
-            // Convertir en entiers pour éviter les injections SQL
             $limit = (int)$limit;
             $offset = (int)$offset;
             
@@ -263,7 +241,7 @@ class AdminModel {
                 $params[] = $searchTerm;
             }
             
-            // Ajouter LIMIT et OFFSET directement dans la requête
+
             $sql .= " ORDER BY created_at DESC LIMIT $limit OFFSET $offset";
             
             $stmt = $this->pdo->prepare($sql);
@@ -375,7 +353,7 @@ class AdminModel {
     
     public function deleteCompany($id) {
         try {
-            // Les offres seront supprimées automatiquement grâce à la contrainte CASCADE
+           
             $stmt = $this->pdo->prepare("DELETE FROM companies WHERE id_companies = ?");
             return $stmt->execute([$id]);
         } catch (PDOException $e) {
@@ -384,13 +362,10 @@ class AdminModel {
         }
     }
     
-    // ================================
-    // GESTION DES OFFRES D'EMPLOI
-    // ================================
+  
     
     public function getOffers($limit, $offset, $search = '', $contract_type = '') {
         try {
-            // Convertir en entiers pour éviter les injections SQL
             $limit = (int)$limit;
             $offset = (int)$offset;
             
@@ -415,7 +390,6 @@ class AdminModel {
                 $params[] = $contract_type;
             }
             
-            // Ajouter LIMIT et OFFSET directement dans la requête
             $sql .= " ORDER BY o.created_at DESC LIMIT $limit OFFSET $offset";
             
             $stmt = $this->pdo->prepare($sql);
@@ -481,7 +455,6 @@ class AdminModel {
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ");
             
-            // Préparer les données JSON
             $job_requirements = null;
             if (!empty($data['job_requirements'])) {
                 $job_requirements = is_string($data['job_requirements']) ? 
@@ -528,7 +501,6 @@ class AdminModel {
                 }
             }
             
-            // Gérer les champs JSON
             if (isset($data['job_requirements'])) {
                 $fields[] = "job_requirements = ?";
                 $params[] = is_string($data['job_requirements']) ? 
@@ -554,7 +526,6 @@ class AdminModel {
     
     public function deleteOffer($id) {
         try {
-            // Les candidatures seront supprimées automatiquement grâce à la contrainte CASCADE
             $stmt = $this->pdo->prepare("DELETE FROM offers WHERE offers_id = ?");
             return $stmt->execute([$id]);
         } catch (PDOException $e) {
@@ -563,13 +534,10 @@ class AdminModel {
         }
     }
     
-    // ================================
-    // GESTION DES CANDIDATURES
-    // ================================
+ 
     
     public function getApplications($limit, $offset, $search = '', $status = '') {
         try {
-            // Convertir en entiers pour éviter les injections SQL
             $limit = (int)$limit;
             $offset = (int)$offset;
             
@@ -595,7 +563,6 @@ class AdminModel {
                 $params[] = $status;
             }
             
-            // Ajouter LIMIT et OFFSET directement dans la requête
             $sql .= " ORDER BY a.application_date DESC LIMIT $limit OFFSET $offset";
             
             $stmt = $this->pdo->prepare($sql);
@@ -656,9 +623,7 @@ class AdminModel {
         }
     }
     
-    // ================================
-    // MÉTHODES UTILITAIRES
-    // ================================
+
     
     public function getAllCompaniesForSelect() {
         try {

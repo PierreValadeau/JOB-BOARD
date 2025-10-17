@@ -1,8 +1,4 @@
-/* ====================================
-   JOB-ADS.CSS - Styles spécifiques à la page des annonces d'emploi
-   ==================================== */
 
-/* Layout principal de la page des annonces */
 .main-content {
     padding: 2rem 0;
     min-height: calc(100vh - 200px);

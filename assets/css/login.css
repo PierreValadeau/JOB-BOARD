@@ -1,8 +1,4 @@
-/* ====================================
-   LOGIN.CSS - Styles pour la page de connexion
-   ==================================== */
 
-/* Layout principal de la page de connexion */
 .auth-main {
     min-height: calc(100vh - 80px);
     display: flex;

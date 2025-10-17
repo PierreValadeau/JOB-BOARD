@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializePagination();
     initializeModal();
     initializeMobileMenu();
-    initializeJobCardExpansion(); // Nouvelle fonctionnalité d'expansion des cartes
+    initializeJobCardExpansion(); 
 });
 function initializeSearchFunctionality() {
     const searchForm = document.querySelector('.enhanced-search-form');

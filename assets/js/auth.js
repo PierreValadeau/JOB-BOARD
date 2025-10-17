@@ -24,8 +24,7 @@ function initializeLoginForm() {
             submitLoginForm();
         }
     });
-    
-    // Validation en temps réel avec correction
+   
     emailInput.addEventListener('input', function() {
         if (this.value.trim()) {
             validateEmail(this.value, 'emailError');
@@ -36,11 +35,10 @@ function initializeLoginForm() {
     
     passwordInput.addEventListener('input', function() {
         if (this.value.trim()) {
-            hideError('passwordError'); // Pas de validation stricte pour la connexion
+            hideError('passwordError'); 
         }
     });
     
-    // Clear errors when user starts typing
     emailInput.addEventListener('focus', function() {
         hideError('emailError');
     });
@@ -77,11 +75,9 @@ function validateLoginForm() {
     const password = document.getElementById('password').value;
     let isValid = true;
     
-    // Clear previous errors
     hideError('emailError');
     hideError('passwordError');
     
-    // Simple validation for login
     if (!email) {
         showError('emailError', 'L\'email est requis');
         isValid = false;
@@ -98,7 +94,6 @@ function validateLoginForm() {
     return isValid;
 }
 
-// Fonction simplifiée de validation email
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -295,7 +290,6 @@ function submitLoginForm() {
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connexion en cours...';
     
-    // Clear any previous error messages
     hideError('loginError');
     
     const loginData = {
@@ -313,17 +307,14 @@ function submitLoginForm() {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            // ALERT DE DEBUG - À SUPPRIMER APRÈS TEST
             alert('CONNEXION OK!\nRole: ' + (data.user ? data.user.role : 'undefined') + '\nRedirect URL: ' + data.redirect_url);
             
-            // Debug temporaire
             console.log('LOGIN DEBUG:', data);
             console.log('Role reçu:', data.debug_role);
             console.log('URL de redirection:', data.redirect_url);
             
             showSuccessMessage('Connexion réussie ! Redirection en cours...');
             setTimeout(() => {
-                // Si l'utilisateur est admin, forcer la redirection vers le panel
                 if (data.user && data.user.role === 'admin') {
                     alert('ADMIN DETECTE - Redirection vers admin.php');
                     console.log('Admin détecté, redirection forcée vers admin.php');
@@ -333,19 +324,19 @@ function submitLoginForm() {
                 
                 alert('PAS ADMIN - Redirection normale vers: ' + data.redirect_url);
                 
-                // Utiliser l'URL de redirection fournie par l'API selon le rôle
+
                 if (data.redirect_url) {
                     console.log('Redirection vers:', data.redirect_url);
                     window.location.href = data.redirect_url;
                 } else {
-                    // Vérifier s'il y a un paramètre de redirection
+                    
                     const urlParams = new URLSearchParams(window.location.search);
                     const redirectUrl = urlParams.get('redirect');
                     
                     if (redirectUrl) {
                         window.location.href = decodeURIComponent(redirectUrl);
                     } else {
-                        window.location.href = '../view/index.php'; // Redirection vers l'accueil par défaut
+                        window.location.href = '../view/index.php';
                     }
                 }
             }, 1500);
@@ -371,7 +362,7 @@ function submitRegisterForm() {
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Création du compte...';
     
-    // Clear any previous error messages
+
     const existingError = document.querySelector('.register-error');
     if (existingError) {
         existingError.classList.remove('show');
@@ -454,8 +445,7 @@ function showLoginError(message) {
     if (errorElement && errorMessageElement) {
         errorMessageElement.textContent = message;
         errorElement.classList.add('show');
-        
-        // Hide after 5 seconds
+    
         setTimeout(() => {
             errorElement.classList.remove('show');
         }, 5000);
@@ -480,7 +470,7 @@ function showRegisterError(message) {
         messageElement.textContent = message;
         errorElement.classList.add('show');
         
-        // Hide after 5 seconds
+
         setTimeout(() => {
             errorElement.classList.remove('show');
         }, 5000);
