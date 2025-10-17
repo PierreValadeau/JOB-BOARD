@@ -34,37 +34,22 @@ This project is a comprehensive job board platform that allows users to browse j
   - User management dashboard
   - Paginated data views for easy navigation
 
-## 🛠 Technologies
+# 🛠 Technologies
 
+## Frontend
+- **HTML5**
+- **CSS3**
+- **JavaScript (Vanilla)**
 
-### `offers`
-Stocke les offres d'emploi avec les champs :
-- `offers_id` (Primary Key)
-- `id_companies` (Foreign Key vers companies)
-- `title`
-- `description`
-- `long_description`
-- `location`
-- `contract_type` (CDI, CDD, Stage, Freelance, Alternance)
-- `salary`
-- `published_date`
-- `job_requirements` (JSON)
-- `company_info` (JSON)
-- `created_at`
+## Backend
+- **PHP**
+- **MySQL**
 
-### `companies`
-Stocke les informations sur les entreprises :
-- `id_companies` (Primary Key)
-- `name`
-- `email`
-- `phone`
-- `location`
-- `description`
-- `website`
-- `created_at`
-- phpMyAdmin (recommended)
-- A local server environment (XAMPP, WAMP, MAMP, or similar)
-- A web browser
+## Database
+- **MySQL** via **phpMyAdmin**
+
+## Environment
+- **.env** configuration file for sensitive data
 
 ## 🚀 Installation
 
@@ -78,7 +63,6 @@ Stocke les informations sur les entreprises :
    ```bash
    cp .env.example .env
    ```
-   
    Edit the `.env` file with your database credentials:
    ```env
    DB_HOST=localhost
@@ -93,8 +77,8 @@ Stocke les informations sur les entreprises :
    - Import the SQL file located in `database/job_board.sql`
 
 4. **Start your local server**
-   - If using XAMPP: Place the project in `htdocs/`
-   - If using WAMP: Place the project in `www/`
+   - If using XAMPP: place the project in `htdocs/`
+   - If using WAMP: place the project in `www/`
    - Start Apache and MySQL services
 
 5. **Access the application**
@@ -106,31 +90,34 @@ Stocke les informations sur les entreprises :
 
 The database consists of the following main tables:
 
-### `jobs`
-Stores job advertisements with fields:
-- `id` (Primary Key)
+### `offers`
+Stores job offers with the following fields:
+- `offers_id` (Primary Key)
+- `id_companies` (Foreign Key to companies)
 - `title`
-- `short_description`
-- `full_description`
-- `company_id` (Foreign Key)
-- `salary`
+- `description`
+- `long_description`
 - `location`
-- `working_time`
+- `contract_type` (Permanent, Fixed-term, Internship, Freelance, Apprenticeship)
+- `salary`
+- `published_date`
+- `job_requirements` (JSON)
+- `company_info` (JSON)
 - `created_at`
-- `updated_at`
 
 ### `companies`
 Stores company information:
-- `id` (Primary Key)
+- `id_companies` (Primary Key)
 - `name`
+- `email`
+- `phone`
+- `location`
 - `description`
-- `logo`
 - `website`
 - `created_at`
 
-
 ### `users`
-Stocke les comptes utilisateurs et admin :
+Stores user and admin accounts:
 - `user_id` (Primary Key)
 - `first_name`
 - `last_name`
@@ -140,11 +127,10 @@ Stocke les comptes utilisateurs et admin :
 - `role` (candidate/recruiter/admin)
 - `created_at`
 
-
 ### `applications`
-Stocke les candidatures :
+Stores job applications:
 - `id` (Primary Key)
-- `job_id` (Foreign Key vers offers)
+- `job_id` (Foreign Key to offers)
 - `applicant_name`
 - `applicant_email`
 - `applicant_phone`
@@ -173,7 +159,7 @@ Built a PHP backend API with CRUD operations:
 Added application functionality:
 - "Apply" button for each job
 - Application form with validation
-- Data persistence in database
+- Data persistence in the database
 - Email notification system
 
 ### Step 06: Authentication System ✅
@@ -184,7 +170,7 @@ Implemented user authentication:
 - Auto-fill for logged-in users
 
 ### Step 07: Admin Dashboard ✅
-Created administrative interface:
+Created an administrative interface:
 - CRUD operations on all tables
 - Pagination for large datasets
 - Role-based access control
@@ -238,13 +224,11 @@ Enhanced user experience:
 1. Navigate to the homepage
 2. Browse available job listings
 3. Click "Learn More" to see full job details
-4. Register or login to apply for jobs
+4. Register or log in to apply for jobs
 5. Fill in the application form and submit
 
 ### For Administrators
-1. Login with admin credentials
+1. Log in with admin credentials
 2. Access the admin dashboard
 3. Manage jobs, companies, users, and applications
 4. Use CRUD operations to maintain the platform
-
-
