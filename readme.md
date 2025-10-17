@@ -247,9 +247,4 @@ Enhanced user experience:
 3. Manage jobs, companies, users, and applications
 4. Use CRUD operations to maintain the platform
 
-### Default Admin Credentials (Change after first login!)
-```
-Email: admin@jobboard.com
-Password: admin123
-```
 
