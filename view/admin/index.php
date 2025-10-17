@@ -1,17 +1,14 @@
 <?php
 session_start();
-
 if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
     header('Location: ../login.php');
     exit;
 }
-
 require_once '../../model/UserModel.php';
 require_once '../../model/JobModel.php';
 require_once '../../model/CompanyModel.php';
 require_once '../../model/ApplicationModel.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -36,7 +33,6 @@ require_once '../../model/ApplicationModel.php';
             </button>
         </div>
     </div>
-
     <div class="admin-container">
         <div class="tabs">
             <button class="tab-button active" onclick="openTab(event, 'users')">
@@ -56,7 +52,6 @@ require_once '../../model/ApplicationModel.php';
                 Candidatures
             </button>
         </div>
-
         <div id="users" class="tab-content active">
             <div class="table-controls">
                 <input type="text" class="search-box" id="userSearch" placeholder="Rechercher un utilisateur...">
@@ -67,7 +62,6 @@ require_once '../../model/ApplicationModel.php';
             </div>
             <div id="usersTable"></div>
         </div>
-
         <div id="jobs" class="tab-content">
             <div class="table-controls">
                 <input type="text" class="search-box" id="jobSearch" placeholder="Rechercher une offre...">
@@ -78,7 +72,6 @@ require_once '../../model/ApplicationModel.php';
             </div>
             <div id="jobsTable"></div>
         </div>
-
         <div id="companies" class="tab-content">
             <div class="table-controls">
                 <input type="text" class="search-box" id="companySearch" placeholder="Rechercher une entreprise...">
@@ -89,7 +82,6 @@ require_once '../../model/ApplicationModel.php';
             </div>
             <div id="companiesTable"></div>
         </div>
-
         <div id="applications" class="tab-content">
             <div class="table-controls">
                 <input type="text" class="search-box" id="applicationSearch" placeholder="Rechercher une candidature...">
@@ -97,7 +89,6 @@ require_once '../../model/ApplicationModel.php';
             <div id="applicationsTable"></div>
         </div>
     </div>
-
     <div id="userModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -141,7 +132,6 @@ require_once '../../model/ApplicationModel.php';
             </form>
         </div>
     </div>
-
     <div id="jobModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -189,7 +179,6 @@ require_once '../../model/ApplicationModel.php';
             </form>
         </div>
     </div>
-
     <div id="companyModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -221,7 +210,6 @@ require_once '../../model/ApplicationModel.php';
             </form>
         </div>
     </div>
-
     <script>
         let currentTab = 'users';
         let currentPage = {
@@ -231,32 +219,25 @@ require_once '../../model/ApplicationModel.php';
             applications: 1
         };
         const itemsPerPage = 10;
-
         function openTab(evt, tabName) {
             var i, tabcontent, tabbuttons;
-            
             tabcontent = document.getElementsByClassName("tab-content");
             for (i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].classList.remove("active");
             }
-            
             tabbuttons = document.getElementsByClassName("tab-button");
             for (i = 0; i < tabbuttons.length; i++) {
                 tabbuttons[i].classList.remove("active");
             }
-            
             document.getElementById(tabName).classList.add("active");
             evt.currentTarget.classList.add("active");
-            
             currentTab = tabName;
             loadData(tabName);
         }
-
         function loadData(type, page = 1) {
             currentPage[type] = page;
             const tableId = type + 'Table';
             document.getElementById(tableId).innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i> Chargement...</div>';
-
             fetch(`../../api/admin/${type}.php?page=${page}&limit=${itemsPerPage}`)
                 .then(response => {
                     if (!response.ok) {
@@ -283,11 +264,9 @@ require_once '../../model/ApplicationModel.php';
                     document.getElementById(tableId).innerHTML = `<div class="error">❌ Erreur de connexion: ${error.message}</div>`;
                 });
         }
-
         function displayData(type, data) {
             const tableId = type + 'Table';
             let html = '';
-
             if (type === 'users') {
                 html = displayUsersTable(data);
             } else if (type === 'jobs') {
@@ -297,15 +276,12 @@ require_once '../../model/ApplicationModel.php';
             } else if (type === 'applications') {
                 html = displayApplicationsTable(data);
             }
-
             document.getElementById(tableId).innerHTML = html;
         }
-
         function displayUsersTable(data) {
             let html = '<table class="data-table"><thead><tr>';
             html += '<th>ID</th><th>Nom complet</th><th>Email</th><th>Téléphone</th><th>Rôle</th><th>Actions</th>';
             html += '</tr></thead><tbody>';
-
             data.users.forEach(user => {
                 html += '<tr>';
                 html += `<td>${user.user_id}</td>`;
@@ -319,17 +295,14 @@ require_once '../../model/ApplicationModel.php';
                 html += '</td>';
                 html += '</tr>';
             });
-
             html += '</tbody></table>';
             html += generatePagination('users', data.total);
             return html;
         }
-
         function displayJobsTable(data) {
             let html = '<table class="data-table"><thead><tr>';
             html += '<th>ID</th><th>Titre</th><th>Entreprise</th><th>Location</th><th>Type</th><th>Actions</th>';
             html += '</tr></thead><tbody>';
-
             data.jobs.forEach(job => {
                 html += '<tr>';
                 html += `<td>${job.job_id}</td>`;
@@ -343,17 +316,14 @@ require_once '../../model/ApplicationModel.php';
                 html += '</td>';
                 html += '</tr>';
             });
-
             html += '</tbody></table>';
             html += generatePagination('jobs', data.total);
             return html;
         }
-
         function displayCompaniesTable(data) {
             let html = '<table class="data-table"><thead><tr>';
             html += '<th>ID</th><th>Nom</th><th>Location</th><th>Site web</th><th>Actions</th>';
             html += '</tr></thead><tbody>';
-
             data.companies.forEach(company => {
                 html += '<tr>';
                 html += `<td>${company.company_id}</td>`;
@@ -366,17 +336,14 @@ require_once '../../model/ApplicationModel.php';
                 html += '</td>';
                 html += '</tr>';
             });
-
             html += '</tbody></table>';
             html += generatePagination('companies', data.total);
             return html;
         }
-
         function displayApplicationsTable(data) {
             let html = '<table class="data-table"><thead><tr>';
             html += '<th>ID</th><th>Candidat</th><th>Offre</th><th>Entreprise</th><th>Date</th><th>Actions</th>';
             html += '</tr></thead><tbody>';
-
             data.applications.forEach(app => {
                 html += '<tr>';
                 html += `<td>${app.application_id}</td>`;
@@ -389,36 +356,27 @@ require_once '../../model/ApplicationModel.php';
                 html += '</td>';
                 html += '</tr>';
             });
-
             html += '</tbody></table>';
             html += generatePagination('applications', data.total);
             return html;
         }
-
         function generatePagination(type, total) {
             const totalPages = Math.ceil(total / itemsPerPage);
             const current = currentPage[type];
-            
             if (totalPages <= 1) return '';
-
             let html = '<div class="pagination">';
-            
             if (current > 1) {
                 html += `<button class="page-btn" onclick="loadData('${type}', ${current - 1})">« Précédent</button>`;
             }
-
             for (let i = Math.max(1, current - 2); i <= Math.min(totalPages, current + 2); i++) {
                 html += `<button class="page-btn ${i === current ? 'active' : ''}" onclick="loadData('${type}', ${i})">${i}</button>`;
             }
-
             if (current < totalPages) {
                 html += `<button class="page-btn" onclick="loadData('${type}', ${current + 1})">Suivant »</button>`;
             }
-
             html += '</div>';
             return html;
         }
-
         function openCreateUserModal() {
             document.getElementById('userModalTitle').textContent = 'Nouvel utilisateur';
             document.getElementById('userForm').reset();
@@ -427,7 +385,6 @@ require_once '../../model/ApplicationModel.php';
             document.getElementById('password').required = true;
             document.getElementById('userModal').style.display = 'block';
         }
-
         function openCreateJobModal() {
             document.getElementById('jobModalTitle').textContent = 'Nouvelle offre d\'emploi';
             document.getElementById('jobForm').reset();
@@ -435,18 +392,15 @@ require_once '../../model/ApplicationModel.php';
             loadCompaniesForSelect();
             document.getElementById('jobModal').style.display = 'block';
         }
-
         function openCreateCompanyModal() {
             document.getElementById('companyModalTitle').textContent = 'Nouvelle entreprise';
             document.getElementById('companyForm').reset();
             document.getElementById('companyId').value = '';
             document.getElementById('companyModal').style.display = 'block';
         }
-
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
         }
-
         function editUser(id) {
             fetch(`../../api/admin/users.php?id=${id}`)
                 .then(response => response.json())
@@ -466,7 +420,6 @@ require_once '../../model/ApplicationModel.php';
                     }
                 });
         }
-
         function editJob(id) {
             fetch(`../../api/admin/jobs.php?id=${id}`)
                 .then(response => response.json())
@@ -485,7 +438,6 @@ require_once '../../model/ApplicationModel.php';
                     }
                 });
         }
-
         function editCompany(id) {
             fetch(`../../api/admin/companies.php?id=${id}`)
                 .then(response => response.json())
@@ -502,7 +454,6 @@ require_once '../../model/ApplicationModel.php';
                     }
                 });
         }
-
         function deleteUser(id) {
             if (confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) {
                 fetch(`../../api/admin/users.php`, {
@@ -521,7 +472,6 @@ require_once '../../model/ApplicationModel.php';
                 });
             }
         }
-
         function deleteJob(id) {
             if (confirm('Êtes-vous sûr de vouloir supprimer cette offre ?')) {
                 fetch(`../../api/admin/jobs.php`, {
@@ -540,7 +490,6 @@ require_once '../../model/ApplicationModel.php';
                 });
             }
         }
-
         function deleteCompany(id) {
             if (confirm('Êtes-vous sûr de vouloir supprimer cette entreprise ?')) {
                 fetch(`../../api/admin/companies.php`, {
@@ -559,7 +508,6 @@ require_once '../../model/ApplicationModel.php';
                 });
             }
         }
-
         function deleteApplication(id) {
             if (confirm('Êtes-vous sûr de vouloir supprimer cette candidature ?')) {
                 fetch(`../../api/admin/applications.php`, {
@@ -578,7 +526,6 @@ require_once '../../model/ApplicationModel.php';
                 });
             }
         }
-
         function loadCompaniesForSelect(selectedId = null) {
             fetch('../../api/admin/companies.php?all=1')
                 .then(response => response.json())
@@ -598,12 +545,10 @@ require_once '../../model/ApplicationModel.php';
                     }
                 });
         }
-
         function formatDate(dateString) {
             const date = new Date(dateString);
             return date.toLocaleDateString('fr-FR');
         }
-
         function showNotification(message, type) {
             const notification = document.createElement('div');
             notification.className = type;
@@ -614,28 +559,22 @@ require_once '../../model/ApplicationModel.php';
             notification.style.zIndex = '9999';
             notification.style.padding = '1rem';
             notification.style.borderRadius = '8px';
-            
             document.body.appendChild(notification);
-            
             setTimeout(() => {
                 document.body.removeChild(notification);
             }, 3000);
         }
-
         function logout() {
             fetch('../../api/logout.php', {method: 'POST'})
                 .then(() => {
                     window.location.href = '../login.php';
                 });
         }
-
         document.getElementById('userForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const formData = new FormData(this);
             const data = Object.fromEntries(formData);
-            
             const method = data.user_id ? 'PUT' : 'POST';
-            
             fetch('../../api/admin/users.php', {
                 method: method,
                 headers: {'Content-Type': 'application/json'},
@@ -652,14 +591,11 @@ require_once '../../model/ApplicationModel.php';
                 }
             });
         });
-
         document.getElementById('jobForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const formData = new FormData(this);
             const data = Object.fromEntries(formData);
-            
             const method = data.job_id ? 'PUT' : 'POST';
-            
             fetch('../../api/admin/jobs.php', {
                 method: method,
                 headers: {'Content-Type': 'application/json'},
@@ -676,14 +612,11 @@ require_once '../../model/ApplicationModel.php';
                 }
             });
         });
-
         document.getElementById('companyForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const formData = new FormData(this);
             const data = Object.fromEntries(formData);
-            
             const method = data.company_id ? 'PUT' : 'POST';
-            
             fetch('../../api/admin/companies.php', {
                 method: method,
                 headers: {'Content-Type': 'application/json'},
@@ -700,7 +633,6 @@ require_once '../../model/ApplicationModel.php';
                 }
             });
         });
-
         window.onclick = function(event) {
             const modals = ['userModal', 'jobModal', 'companyModal'];
             modals.forEach(modalId => {
@@ -710,7 +642,6 @@ require_once '../../model/ApplicationModel.php';
                 }
             });
         }
-
         document.addEventListener('DOMContentLoaded', function() {
             loadData('users');
         });

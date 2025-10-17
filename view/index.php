@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../assets/css/index.css?v=<?= time() ?>">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Style pour le menu utilisateur */
         .user-menu {
             display: flex;
             align-items: center;
@@ -34,18 +33,15 @@
             align-items: center;
             gap: 15px;
         }
-        #adminLink {
             color: #dc3545 !important;
             font-weight: 600;
         }
-        #adminLink:hover {
             background-color: #f8d7da !important;
             color: #721c24 !important;
         }
     </style>
 </head>
 <body>
-    
     <header class="header header-white">
         <div class="container">
             <div class="nav-wrapper">
@@ -54,12 +50,10 @@
                         <h1 class="logo-text">Job Finder</h1>
                     </a>
                 </div>
-
                 <div class="auth-buttons" id="authButtons">
                     <a href="login.php" class="btn-link">Se connecter</a>
                     <a href="register.php" class="btn-primary">Créer un compte</a>
                 </div>
-                
                 <!-- User menu (hidden by default, shown when logged in) -->
                 <div class="user-menu" id="userMenu" style="display: none;">
                     <span class="welcome-text">Bonjour, <span id="userName"></span></span>
@@ -72,16 +66,13 @@
             </div>
         </div>
     </header>
-    
     <section class="hero">
         <div class="container">
             <div class="hero-content">
                 <h1>Trouvez votre emploi idéal</h1>
                 <p class="hero-subtitle">Découvrez des milliers d'opportunités professionnelles adaptées à votre profil</p>
-                
                 <form class="enhanced-search-form" action="job-ads.html" method="GET">
                     <!-- search-wrapper supprimé -->
-                    
                     <div class="advanced-search" id="advancedSearch" style="display: none;">
                         <div class="advanced-grid">
                             <div class="advanced-field">
@@ -128,9 +119,6 @@
             </div>
         </div>
     </section>
-    
-
-    
     <section class="featured-jobs">
         <div class="container">
             <h2>Offres d'emploi en vedette</h2>
@@ -143,7 +131,6 @@
             <div class="pagination-container" id="jobsPagination"></div>
         </div>
     </section>
-    
     <section class="stats">
         <div class="container">
             <div class="stats-grid">
@@ -166,7 +153,6 @@
             </div>
         </div>
     </section>
-    
     <section class="categories">
         <div class="container">
             <h2>Emplois par secteur</h2>
@@ -204,21 +190,17 @@
             </div>
         </div>
     </section>
-    
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h4>Job Finder</h4>
-                    
                 </div>
                 <div class="footer-section">
                     <h4>Candidats</h4>
-                    
                 </div>
                 <div class="footer-section">
                     <h4>Employeurs</h4>
-                    
                 </div>
                 <div class="footer-section">
                     <h4>Suivez-nous</h4>
@@ -248,20 +230,14 @@
                 advancedSearch.style.display = advancedSearch.style.display === 'none' ? 'block' : 'none';
             }
         }
-        
-        // Vérifier si l'utilisateur est connecté
         async function checkUserSession() {
             try {
                 const response = await fetch('../api/check-session.php');
                 const data = await response.json();
-                
                 if (data.success && data.is_logged_in) {
-                    // Utilisateur connecté
                     document.getElementById('authButtons').style.display = 'none';
                     document.getElementById('userMenu').style.display = 'flex';
                     document.getElementById('userName').textContent = data.user.name;
-                    
-                    // Afficher le lien admin si l'utilisateur est admin
                     const adminLink = document.getElementById('adminLink');
                     if (data.user.role === 'admin') {
                         adminLink.style.display = 'inline-flex';
@@ -269,7 +245,6 @@
                         adminLink.style.display = 'none';
                     }
                 } else {
-                    // Utilisateur non connecté
                     document.getElementById('authButtons').style.display = 'flex';
                     document.getElementById('userMenu').style.display = 'none';
                 }
@@ -277,8 +252,6 @@
                 console.error('Erreur lors de la vérification de session:', error);
             }
         }
-        
-        // Fonction de déconnexion
         async function logout() {
             try {
                 const response = await fetch('../api/logout.php', { method: 'POST' });
@@ -290,13 +263,9 @@
                 window.location.reload();
             }
         }
-        
-        // Vérifier la session au chargement de la page
         document.addEventListener('DOMContentLoaded', checkUserSession);
     </script>
     <script src="../assets/js/featured-jobs.js"></script>
     <script src="../assets/js/application-manager.js"></script>
 </body>
 </html>
-
-

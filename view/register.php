@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../assets/css/index.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Style pour le menu utilisateur */
         .user-menu {
             display: flex;
             align-items: center;
@@ -34,14 +33,11 @@
             align-items: center;
             gap: 15px;
         }
-
-        /* Styles spécifiques pour la page d'inscription */
         .register-section {
             padding: 4rem 0;
             background: #f8fafc;
             min-height: calc(100vh - 200px);
         }
-
         .register-container {
             max-width: 600px;
             margin: 0 auto;
@@ -50,39 +46,32 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             overflow: hidden;
         }
-
         .register-header {
             background: linear-gradient(135deg, var(--primary-dark) 0%, #2c5282 50%, var(--primary-color) 100%);
             color: white;
             padding: 2rem;
             text-align: center;
         }
-
         .register-header h1 {
             font-size: 2rem;
             margin-bottom: 0.5rem;
         }
-
         .register-header p {
             opacity: 0.9;
             font-size: 1.1rem;
         }
-
         .register-form {
             padding: 2rem;
         }
-
         .form-group {
             margin-bottom: 1.5rem;
         }
-
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
             color: var(--text-dark);
         }
-
         .form-group input,
         .form-group select {
             width: 100%;
@@ -92,24 +81,20 @@
             font-size: 1rem;
             transition: all 0.3s ease;
         }
-
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(37, 87, 167, 0.1);
         }
-
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
         }
-
         .password-input {
             position: relative;
         }
-
         .toggle-password {
             position: absolute;
             right: 12px;
@@ -121,11 +106,9 @@
             cursor: pointer;
             padding: 0.25rem;
         }
-
         .toggle-password:hover {
             color: var(--primary-color);
         }
-
         .btn-register {
             background: var(--primary-color);
             color: white;
@@ -142,107 +125,88 @@
             justify-content: center;
             gap: 0.5rem;
         }
-
         .btn-register:hover {
             background: var(--primary-dark);
             transform: translateY(-1px);
         }
-
         .btn-register:disabled {
             background: #cbd5e0;
             cursor: not-allowed;
             transform: none;
         }
-
         .alert {
             padding: 1rem;
             border-radius: 8px;
             margin-bottom: 1rem;
             display: none;
         }
-
         .alert-success {
             background: #f0fff4;
             border: 1px solid #9ae6b4;
             color: #276749;
         }
-
         .alert-error {
             background: #fed7d7;
             border: 1px solid #feb2b2;
             color: #c53030;
         }
-
         .auth-footer {
             text-align: center;
             padding: 1rem 2rem 2rem;
             color: #666;
         }
-
         .auth-footer a {
             color: var(--primary-color);
             text-decoration: none;
             font-weight: 500;
         }
-
         .auth-footer a:hover {
             text-decoration: underline;
         }
-
         .loading-spinner {
             display: none;
             text-align: center;
             padding: 1rem;
         }
-
         .loading-spinner i {
             font-size: 1.5rem;
             color: var(--primary-color);
             animation: spin 1s linear infinite;
         }
-
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
         .password-strength {
             margin-top: 0.5rem;
         }
-
         .strength-bar {
             height: 4px;
             background: #e2e8f0;
             border-radius: 2px;
             overflow: hidden;
         }
-
         .strength-fill {
             height: 100%;
             background: #e53e3e;
             width: 0%;
             transition: all 0.3s ease;
         }
-
         .strength-text {
             font-size: 0.85rem;
             color: #666;
             margin-top: 0.25rem;
         }
-
         @media (max-width: 768px) {
             .form-row {
                 grid-template-columns: 1fr;
             }
-            
             .register-section {
                 padding: 2rem 0;
             }
-            
             .register-header {
                 padding: 1.5rem;
             }
-            
             .register-form {
                 padding: 1.5rem;
             }
@@ -250,7 +214,6 @@
     </style>
 </head>
 <body>
-    
     <header class="header header-white">
         <div class="container">
             <div class="nav-wrapper">
@@ -259,12 +222,10 @@
                         <h1 class="logo-text">Job Finder</h1>
                     </a>
                 </div>
-
                 <div class="auth-buttons" id="authButtons">
                     <a href="login.php" class="btn-link">Se connecter</a>
                     <a href="register.php" class="btn-primary">Créer un compte</a>
                 </div>
-                
                 <!-- User menu (hidden by default, shown when logged in) -->
                 <div class="user-menu" id="userMenu" style="display: none;">
                     <span class="welcome-text">Bonjour, <span id="userName"></span></span>
@@ -274,7 +235,6 @@
             </div>
         </div>
     </header>
-    
     <section class="register-section">
         <div class="container">
             <div class="register-container">
@@ -282,23 +242,19 @@
                     <h1>Créer un compte</h1>
                     <p>Rejoignez Job Finder et trouvez votre emploi idéal</p>
                 </div>
-                
                 <div class="register-form">
                     <div class="alert alert-success" id="successAlert">
                         <i class="fas fa-check-circle"></i>
                         <span id="successMessage">Compte créé avec succès! Redirection en cours...</span>
                     </div>
-                    
                     <div class="alert alert-error" id="errorAlert">
                         <i class="fas fa-exclamation-circle"></i>
                         <span id="errorMessage">Une erreur est survenue</span>
                     </div>
-                    
                     <div class="loading-spinner" id="loadingSpinner">
                         <i class="fas fa-spinner fa-spin"></i>
                         <p>Création du compte en cours...</p>
                     </div>
-                    
                     <form id="registerForm">
                         <div class="form-row">
                             <div class="form-group">
@@ -310,17 +266,14 @@
                                 <input type="text" id="last_name" name="last_name" placeholder="Votre nom" required>
                             </div>
                         </div>
-                        
                         <div class="form-group">
                             <label for="email">Email *</label>
                             <input type="email" id="email" name="email" placeholder="votre.email@exemple.com" required>
                         </div>
-                        
                         <div class="form-group">
                             <label for="phone">Téléphone</label>
                             <input type="tel" id="phone" name="phone" placeholder="06 12 34 56 78">
                         </div>
-                        
                         <div class="form-group">
                             <label for="password">Mot de passe *</label>
                             <div class="password-input">
@@ -336,7 +289,6 @@
                                 <span class="strength-text" id="strengthText">Entrez votre mot de passe</span>
                             </div>
                         </div>
-                        
                         <div class="form-group">
                             <label for="confirmPassword">Confirmer le mot de passe *</label>
                             <div class="password-input">
@@ -346,7 +298,6 @@
                                 </button>
                             </div>
                         </div>
-                        
                         <div class="form-group">
                             <label for="role">Type de profil</label>
                             <select id="role" name="role">
@@ -354,21 +305,18 @@
                                 <option value="recruiter">Recruteur</option>
                             </select>
                         </div>
-                        
                         <button type="submit" class="btn-register" id="registerBtn">
                             <i class="fas fa-user-plus"></i>
                             Créer mon compte
                         </button>
                     </form>
                 </div>
-                
                 <div class="auth-footer">
                     <p>Déjà un compte ? <a href="login.php">Se connecter</a></p>
                 </div>
             </div>
         </div>
     </section>
-    
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -401,19 +349,14 @@
             </div>
         </div>
     </footer>
-
     <script>
-        // Vérifier si l'utilisateur est connecté
         async function checkUserSession() {
             try {
                 const response = await fetch('../api/check-session.php');
                 const data = await response.json();
-                
                 if (data.success && data.is_logged_in) {
-                    // Utilisateur déjà connecté - rediriger vers l'accueil
                     window.location.href = 'index.php';
                 } else {
-                    // Utilisateur non connecté - afficher les boutons d'auth
                     document.getElementById('authButtons').style.display = 'flex';
                     document.getElementById('userMenu').style.display = 'none';
                 }
@@ -421,29 +364,20 @@
                 console.error('Erreur lors de la vérification de session:', error);
             }
         }
-        
-        // Soumettre le formulaire d'inscription
         document.getElementById('registerForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
             const formData = new FormData(this);
             const data = Object.fromEntries(formData.entries());
-            
-            // Vérifier que les mots de passe correspondent
             if (data.password !== data.confirmPassword) {
                 showError('Les mots de passe ne correspondent pas');
                 return;
             }
-            
-            // Vérifier la force du mot de passe
             if (data.password.length < 8) {
                 showError('Le mot de passe doit contenir au moins 8 caractères');
                 return;
             }
-            
             showLoading(true);
             hideAlerts();
-            
             try {
                 const response = await fetch('../api/register.php', {
                     method: 'POST',
@@ -452,9 +386,7 @@
                     },
                     body: JSON.stringify(data)
                 });
-                
                 const result = await response.json();
-                
                 if (result.success) {
                     showSuccess('Compte créé avec succès! Vous pouvez maintenant vous connecter.');
                     setTimeout(() => {
@@ -470,12 +402,9 @@
                 showLoading(false);
             }
         });
-        
-        // Fonction pour basculer l'affichage du mot de passe
         function togglePassword(fieldId) {
             const passwordInput = document.getElementById(fieldId);
             const toggleIcon = document.getElementById(fieldId + 'ToggleIcon');
-            
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
                 toggleIcon.classList.remove('fa-eye');
@@ -486,22 +415,17 @@
                 toggleIcon.classList.add('fa-eye');
             }
         }
-        
-        // Vérification de la force du mot de passe
         document.getElementById('password').addEventListener('input', function() {
             const password = this.value;
             const strengthFill = document.getElementById('strengthFill');
             const strengthText = document.getElementById('strengthText');
-            
             let strength = 0;
             let text = 'Très faible';
             let color = '#e53e3e';
-            
             if (password.length >= 8) strength += 25;
             if (/[a-z]/.test(password)) strength += 25;
             if (/[A-Z]/.test(password)) strength += 25;
             if (/[0-9]/.test(password)) strength += 25;
-            
             if (strength >= 75) {
                 text = 'Fort';
                 color = '#38a169';
@@ -512,13 +436,10 @@
                 text = 'Faible';
                 color = '#f56565';
             }
-            
             strengthFill.style.width = strength + '%';
             strengthFill.style.background = color;
             strengthText.textContent = text;
         });
-        
-        // Fonction de déconnexion
         async function logout() {
             try {
                 const response = await fetch('../api/logout.php', { method: 'POST' });
@@ -530,37 +451,29 @@
                 window.location.href = 'index.php';
             }
         }
-        
-        // Fonctions utilitaires pour l'interface
         function showLoading(show) {
             const spinner = document.getElementById('loadingSpinner');
             const form = document.getElementById('registerForm');
             spinner.style.display = show ? 'block' : 'none';
             form.style.display = show ? 'none' : 'block';
         }
-        
         function showSuccess(message) {
             const alert = document.getElementById('successAlert');
             const messageSpan = document.getElementById('successMessage');
             messageSpan.textContent = message;
             alert.style.display = 'block';
         }
-        
         function showError(message) {
             const alert = document.getElementById('errorAlert');
             const messageSpan = document.getElementById('errorMessage');
             messageSpan.textContent = message;
             alert.style.display = 'block';
         }
-        
         function hideAlerts() {
             document.getElementById('successAlert').style.display = 'none';
             document.getElementById('errorAlert').style.display = 'none';
         }
-        
-        // Vérifier la session au chargement de la page
         document.addEventListener('DOMContentLoaded', checkUserSession);
     </script>
 </body>
 </html>
-

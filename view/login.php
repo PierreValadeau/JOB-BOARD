@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../assets/css/index.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Style pour le menu utilisateur */
         .user-menu {
             display: flex;
             align-items: center;
@@ -34,14 +33,11 @@
             align-items: center;
             gap: 15px;
         }
-
-        /* Styles spécifiques pour la page de connexion */
         .auth-section {
             padding: 4rem 0;
             background: #f8fafc;
             min-height: calc(100vh - 200px);
         }
-
         .auth-container {
             max-width: 500px;
             margin: 0 auto;
@@ -50,39 +46,32 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             overflow: hidden;
         }
-
         .auth-header {
             background: linear-gradient(135deg, var(--primary-dark) 0%, #2c5282 50%, var(--primary-color) 100%);
             color: white;
             padding: 2rem;
             text-align: center;
         }
-
         .auth-header h1 {
             font-size: 2rem;
             margin-bottom: 0.5rem;
         }
-
         .auth-header p {
             opacity: 0.9;
             font-size: 1.1rem;
         }
-
         .auth-form {
             padding: 2rem;
         }
-
         .form-group {
             margin-bottom: 1.5rem;
         }
-
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
             color: var(--text-dark);
         }
-
         .form-group input {
             width: 100%;
             padding: 0.75rem;
@@ -91,17 +80,14 @@
             font-size: 1rem;
             transition: all 0.3s ease;
         }
-
         .form-group input:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(37, 87, 167, 0.1);
         }
-
         .password-input {
             position: relative;
         }
-
         .toggle-password {
             position: absolute;
             right: 12px;
@@ -113,27 +99,22 @@
             cursor: pointer;
             padding: 0.25rem;
         }
-
         .toggle-password:hover {
             color: var(--primary-color);
         }
-
         .form-options {
             display: flex;
             justify-content: flex-end;
             margin-bottom: 1.5rem;
         }
-
         .forgot-password {
             color: var(--primary-color);
             text-decoration: none;
             font-size: 0.9rem;
         }
-
         .forgot-password:hover {
             text-decoration: underline;
         }
-
         .btn-login {
             background: var(--primary-color);
             color: white;
@@ -150,79 +131,65 @@
             justify-content: center;
             gap: 0.5rem;
         }
-
         .btn-login:hover {
             background: var(--primary-dark);
             transform: translateY(-1px);
         }
-
         .btn-login:disabled {
             background: #cbd5e0;
             cursor: not-allowed;
             transform: none;
         }
-
         .alert {
             padding: 1rem;
             border-radius: 8px;
             margin-bottom: 1rem;
             display: none;
         }
-
         .alert-success {
             background: #f0fff4;
             border: 1px solid #9ae6b4;
             color: #276749;
         }
-
         .alert-error {
             background: #fed7d7;
             border: 1px solid #feb2b2;
             color: #c53030;
         }
-
         .auth-footer {
             text-align: center;
             padding: 1rem 2rem 2rem;
             color: #666;
         }
-
         .auth-footer a {
             color: var(--primary-color);
             text-decoration: none;
             font-weight: 500;
         }
-
         .auth-footer a:hover {
             text-decoration: underline;
         }
-
         .loading-spinner {
             display: none;
             text-align: center;
             padding: 1rem;
         }
-
         .loading-spinner i {
             font-size: 1.5rem;
             color: var(--primary-color);
             animation: spin 1s linear infinite;
         }
-
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
         @media (max-width: 768px) {
             .auth-section {
                 padding: 2rem 0;
             }
-            
             .auth-header {
                 padding: 1.5rem;
             }
-            
             .auth-form {
                 padding: 1.5rem;
             }
@@ -230,7 +197,6 @@
     </style>
 </head>
 <body>
-    
     <header class="header header-white">
         <div class="container">
             <div class="nav-wrapper">
@@ -239,12 +205,10 @@
                         <h1 class="logo-text">Job Finder</h1>
                     </a>
                 </div>
-
                 <div class="auth-buttons" id="authButtons">
                     <a href="login.php" class="btn-link">Se connecter</a>
                     <a href="register.php" class="btn-primary">Créer un compte</a>
                 </div>
-                
                 <!-- User menu (hidden by default, shown when logged in) -->
                 <div class="user-menu" id="userMenu" style="display: none;">
                     <span class="welcome-text">Bonjour, <span id="userName"></span></span>
@@ -254,7 +218,6 @@
             </div>
         </div>
     </header>
-    
     <section class="auth-section">
         <div class="container">
             <div class="auth-container">
@@ -262,29 +225,24 @@
                     <h1>Connexion</h1>
                     <p>Accédez à votre espace personnel Job Finder</p>
                 </div>
-                
                 <div class="auth-form">
                     <div class="alert alert-success" id="successAlert">
                         <i class="fas fa-check-circle"></i>
                         <span id="successMessage">Connexion réussie! Redirection en cours...</span>
                     </div>
-                    
                     <div class="alert alert-error" id="errorAlert">
                         <i class="fas fa-exclamation-circle"></i>
                         <span id="errorMessage">Email ou mot de passe incorrect</span>
                     </div>
-                    
                     <div class="loading-spinner" id="loadingSpinner">
                         <i class="fas fa-spinner fa-spin"></i>
                         <p>Connexion en cours...</p>
                     </div>
-                    
                     <form id="loginForm">
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" id="email" name="email" placeholder="votre.email@exemple.com" required>
                         </div>
-                        
                         <div class="form-group">
                             <label for="password">Mot de passe</label>
                             <div class="password-input">
@@ -294,25 +252,21 @@
                                 </button>
                             </div>
                         </div>
-                        
                         <div class="form-options">
                             <a href="#" class="forgot-password">Mot de passe oublié ?</a>
                         </div>
-                        
                         <button type="submit" class="btn-login" id="loginBtn">
                             <i class="fas fa-sign-in-alt"></i>
                             Se connecter
                         </button>
                     </form>
                 </div>
-                
                 <div class="auth-footer">
                     <p>Pas encore de compte ? <a href="register.php">Créer un compte</a></p>
                 </div>
             </div>
         </div>
     </section>
-    
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -345,23 +299,18 @@
             </div>
         </div>
     </footer>
-
     <script>
-        // Vérifier si l'utilisateur est connecté
         async function checkUserSession() {
             try {
                 const response = await fetch('../api/check-session.php');
                 const data = await response.json();
-                
                 if (data.success && data.is_logged_in) {
-                    // Utilisateur déjà connecté - rediriger selon le rôle
                     if (data.user.role === 'admin') {
                         window.location.href = 'admin/index.php';
                     } else {
                         window.location.href = 'index.php';
                     }
                 } else {
-                    // Utilisateur non connecté - afficher les boutons d'auth
                     document.getElementById('authButtons').style.display = 'flex';
                     document.getElementById('userMenu').style.display = 'none';
                 }
@@ -369,20 +318,15 @@
                 console.error('Erreur lors de la vérification de session:', error);
             }
         }
-        
-        // Soumettre le formulaire de connexion
         document.getElementById('loginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
             const formData = new FormData(this);
             const data = {
                 email: formData.get('email'),
                 password: formData.get('password')
             };
-            
             showLoading(true);
             hideAlerts();
-            
             try {
                 const response = await fetch('../api/login.php', {
                     method: 'POST',
@@ -391,9 +335,7 @@
                     },
                     body: JSON.stringify(data)
                 });
-                
                 const result = await response.json();
-                
                 if (result.success) {
                     showSuccess('Connexion réussie! Redirection en cours...');
                     setTimeout(() => {
@@ -413,12 +355,9 @@
                 showLoading(false);
             }
         });
-        
-        // Fonction pour basculer l'affichage du mot de passe
         function togglePassword() {
             const passwordInput = document.getElementById('password');
             const toggleIcon = document.getElementById('passwordToggleIcon');
-            
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
                 toggleIcon.classList.remove('fa-eye');
@@ -429,8 +368,6 @@
                 toggleIcon.classList.add('fa-eye');
             }
         }
-        
-        // Fonction de déconnexion
         async function logout() {
             try {
                 const response = await fetch('../api/logout.php', { method: 'POST' });
@@ -442,35 +379,28 @@
                 window.location.href = 'index.php';
             }
         }
-        
-        // Fonctions utilitaires pour l'interface
         function showLoading(show) {
             const spinner = document.getElementById('loadingSpinner');
             const form = document.getElementById('loginForm');
             spinner.style.display = show ? 'block' : 'none';
             form.style.display = show ? 'none' : 'block';
         }
-        
         function showSuccess(message) {
             const alert = document.getElementById('successAlert');
             const messageSpan = document.getElementById('successMessage');
             messageSpan.textContent = message;
             alert.style.display = 'block';
         }
-        
         function showError(message) {
             const alert = document.getElementById('errorAlert');
             const messageSpan = document.getElementById('errorMessage');
             messageSpan.textContent = message;
             alert.style.display = 'block';
         }
-        
         function hideAlerts() {
             document.getElementById('successAlert').style.display = 'none';
             document.getElementById('errorAlert').style.display = 'none';
         }
-        
-        // Vérifier la session au chargement de la page
         document.addEventListener('DOMContentLoaded', checkUserSession);
     </script>
 </body>

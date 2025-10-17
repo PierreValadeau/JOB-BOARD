@@ -1,19 +1,13 @@
 <?php
-// Utilisation: php -S localhost:8000 server.php
-
 $uri = $_SERVER['REQUEST_URI'];
 $file = __DIR__ . $uri;
-
 if ($uri == '/') {
     include __DIR__ . '/view/index.php';
     exit;
 }
-
 if (is_file($file)) {
     return false; 
 }
-
-// Routes 
 switch ($uri) {
     case '/index.php':
     case '/index':

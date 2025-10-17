@@ -10,22 +10,18 @@ function initializeAuth() {
     if (registerForm) {
         initializeRegisterForm();
     }
-
     initializePasswordToggles();
 }
 function initializeLoginForm() {
     const form = document.getElementById('loginForm');
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
-    
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         if (validateLoginForm()) {
             submitLoginForm();
         }
     });
-    
-    // Validation en temps réel avec correction
     emailInput.addEventListener('input', function() {
         if (this.value.trim()) {
             validateEmail(this.value, 'emailError');
@@ -33,18 +29,14 @@ function initializeLoginForm() {
             hideError('emailError');
         }
     });
-    
     passwordInput.addEventListener('input', function() {
         if (this.value.trim()) {
             hideError('passwordError'); // Pas de validation stricte pour la connexion
         }
     });
-    
-    // Clear errors when user starts typing
     emailInput.addEventListener('focus', function() {
         hideError('emailError');
     });
-    
     passwordInput.addEventListener('focus', function() {
         hideError('passwordError');
     });
@@ -76,12 +68,8 @@ function validateLoginForm() {
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;
     let isValid = true;
-    
-    // Clear previous errors
     hideError('emailError');
     hideError('passwordError');
-    
-    // Simple validation for login
     if (!email) {
         showError('emailError', 'L\'email est requis');
         isValid = false;
@@ -89,16 +77,12 @@ function validateLoginForm() {
         showError('emailError', 'Format d\'email invalide');
         isValid = false;
     }
-    
     if (!password) {
         showError('passwordError', 'Le mot de passe est requis');
         isValid = false;
     }
-    
     return isValid;
 }
-
-// Fonction simplifiée de validation email
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -262,7 +246,6 @@ function showError(errorId, message) {
     const errorElement = document.getElementById(errorId);
     const fieldName = errorId.replace('Error', '');
     const inputElement = document.getElementById(fieldName) || document.querySelector(`[name="${fieldName}"]`);
-    
     if (errorElement) {
         errorElement.textContent = message;
         errorElement.classList.add('show');
@@ -276,7 +259,6 @@ function hideError(errorId) {
     const errorElement = document.getElementById(errorId);
     const fieldName = errorId.replace('Error', '');
     const inputElement = document.getElementById(fieldName) || document.querySelector(`[name="${fieldName}"]`);
-    
     if (errorElement) {
         errorElement.classList.remove('show');
         errorElement.textContent = '';
@@ -291,18 +273,13 @@ function submitLoginForm() {
     const password = document.getElementById('password').value;
     const submitBtn = document.querySelector('.auth-btn');
     const originalBtnText = submitBtn.innerHTML;
-    
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connexion en cours...';
-    
-    // Clear any previous error messages
     hideError('loginError');
-    
     const loginData = {
         email: email,
         password: password
     };
-    
     fetch('../api/login.php', {
         method: 'POST',
         headers: {
@@ -315,10 +292,8 @@ function submitLoginForm() {
         if (data.success) {
             showSuccessMessage('Connexion réussie ! Redirection en cours...');
             setTimeout(() => {
-                // Vérifier s'il y a un paramètre de redirection
                 const urlParams = new URLSearchParams(window.location.search);
                 const redirectUrl = urlParams.get('redirect');
-                
                 if (redirectUrl) {
                     window.location.href = decodeURIComponent(redirectUrl);
                 } else {
@@ -343,16 +318,12 @@ function submitRegisterForm() {
     const data = Object.fromEntries(formData);
     const submitBtn = document.querySelector('.auth-btn');
     const originalBtnText = submitBtn.innerHTML;
-    
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Création du compte...';
-    
-    // Clear any previous error messages
     const existingError = document.querySelector('.register-error');
     if (existingError) {
         existingError.classList.remove('show');
     }
-    
     const registerData = {
         first_name: data.firstName,
         last_name: data.lastName,
@@ -361,7 +332,6 @@ function submitRegisterForm() {
         password: data.password,
         user_type: data.userType
     };
-    
     fetch('../api/register.php', {
         method: 'POST',
         headers: {
@@ -422,22 +392,17 @@ function showSuccessMessage(message) {
     successElement.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
     successElement.classList.add('show');
 }
-
 function showLoginError(message) {
     const errorElement = document.getElementById('loginError');
     const errorMessageElement = document.getElementById('loginErrorMessage');
-    
     if (errorElement && errorMessageElement) {
         errorMessageElement.textContent = message;
         errorElement.classList.add('show');
-        
-        // Hide after 5 seconds
         setTimeout(() => {
             errorElement.classList.remove('show');
         }, 5000);
     }
 }
-
 function showRegisterError(message) {
     let errorElement = document.querySelector('.register-error');
     if (!errorElement) {
@@ -450,13 +415,10 @@ function showRegisterError(message) {
         const form = document.querySelector('.auth-form');
         form.appendChild(errorElement);
     }
-    
     const messageElement = errorElement.querySelector('.register-error-message');
     if (messageElement) {
         messageElement.textContent = message;
         errorElement.classList.add('show');
-        
-        // Hide after 5 seconds
         setTimeout(() => {
             errorElement.classList.remove('show');
         }, 5000);

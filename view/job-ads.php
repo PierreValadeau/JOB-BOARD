@@ -10,7 +10,6 @@
     <link href="https:
 </head>
 <body>
-    
     <header class="header header-white">
         <div class="container">
             <div class="nav-wrapper">
@@ -31,16 +30,13 @@
             </div>
         </div>
     </header>
-    
     <main class="main-content">
         <div class="container">
             <div class="page-header">
                 <h1>Dernières Annonces d'Emploi</h1>
                 <p class="page-subtitle">Découvrez nos opportunités d'emploi disponibles</p>
             </div>
-            
             <div class="job-ads-grid">
-                
                 <article class="job-ad-card" data-job-id="1">
                     <div class="job-ad-header">
                         <h2 class="job-title">Développeur Full Stack Senior</h2>
@@ -63,7 +59,6 @@
                             <i class="fas fa-chevron-down btn-icon"></i>
                         </button>
                     </div>
-                    
                     <div class="job-details" id="job-details-1" style="display: none;">
                         <div class="details-content">
                             <div class="detail-section">
@@ -121,7 +116,6 @@
                         </div>
                     </div>
                 </article>
-                
                 <article class="job-ad-card" data-job-id="2">
                     <div class="job-ad-header">
                         <h2 class="job-title">Designer UX/UI</h2>
@@ -144,7 +138,6 @@
                             <i class="fas fa-chevron-down btn-icon"></i>
                         </button>
                     </div>
-                    
                     <div class="job-details" id="job-details-2" style="display: none;">
                         <div class="details-content">
                             <div class="detail-section">
@@ -202,7 +195,6 @@
                         </div>
                     </div>
                 </article>
-                
                 <article class="job-ad-card" data-job-id="3">
                     <div class="job-ad-header">
                         <h2 class="job-title">Chef de Projet Digital</h2>
@@ -225,7 +217,6 @@
                             <i class="fas fa-chevron-down btn-icon"></i>
                         </button>
                     </div>
-                    
                     <div class="job-details" id="job-details-3" style="display: none;">
                         <div class="details-content">
                             <div class="detail-section">
@@ -283,7 +274,6 @@
                         </div>
                     </div>
                 </article>
-                
                 <article class="job-ad-card" data-job-id="4">
                     <div class="job-ad-header">
                         <h2 class="job-title">Data Scientist</h2>
@@ -306,7 +296,6 @@
                             <i class="fas fa-chevron-down btn-icon"></i>
                         </button>
                     </div>
-                    
                     <div class="job-details" id="job-details-4" style="display: none;">
                         <div class="details-content">
                             <div class="detail-section">
@@ -364,7 +353,6 @@
                         </div>
                     </div>
                 </article>
-                
                 <article class="job-ad-card" data-job-id="5">
                     <div class="job-ad-header">
                         <h2 class="job-title">DevOps Engineer</h2>
@@ -387,7 +375,6 @@
                             <i class="fas fa-chevron-down btn-icon"></i>
                         </button>
                     </div>
-                    
                     <div class="job-details" id="job-details-5" style="display: none;">
                         <div class="details-content">
                             <div class="detail-section">
@@ -445,7 +432,6 @@
                         </div>
                     </div>
                 </article>
-                
                 <article class="job-ad-card" data-job-id="6">
                     <div class="job-ad-header">
                         <h2 class="job-title">Commercial B2B</h2>
@@ -468,7 +454,6 @@
                             <i class="fas fa-chevron-down btn-icon"></i>
                         </button>
                     </div>
-                    
                     <div class="job-details" id="job-details-6" style="display: none;">
                         <div class="details-content">
                             <div class="detail-section">
@@ -529,7 +514,6 @@
             </div>
         </div>
     </main>
-    
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -542,4 +526,3 @@
     <script src="../assets/js/job-cards-simple.js"></script>
 </body>
 </html>
-

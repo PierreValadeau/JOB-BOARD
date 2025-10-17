@@ -10,7 +10,6 @@
     <link href="https:
 </head>
 <body>
-    
     <header class="header header-white">
         <div class="container">
             <div class="nav-wrapper">
@@ -31,7 +30,6 @@
             </div>
         </div>
     </header>
-    
     <div class="breadcrumb-section">
         <div class="container">
             <nav class="breadcrumb">
@@ -43,13 +41,10 @@
             </nav>
         </div>
     </div>
-    
     <section class="job-detail-section">
         <div class="container">
             <div class="job-detail-layout">
-                
                 <main class="job-detail-main">
-                    
                     <div class="job-detail-header">
                         <div class="job-title-section">
                             <h1 class="job-title">Développeur Full Stack Senior</h1>
@@ -103,7 +98,6 @@
                             </button>
                         </div>
                     </div>
-                    
                     <div class="job-tags-section">
                         <div class="tags-list">
                             <span class="tag highlight">Urgent</span>
@@ -114,7 +108,6 @@
                             <span class="tag">Expérience 5+ ans</span>
                         </div>
                     </div>
-                    
                     <div class="job-description-section">
                         <h2>Description du poste</h2>
                         <div class="description-content">
@@ -161,7 +154,6 @@
                             </ul>
                         </div>
                     </div>
-                    
                     <div class="company-description-section">
                         <h2>À propos de TechCorp</h2>
                         <div class="company-content">
@@ -183,7 +175,6 @@
                             </div>
                         </div>
                     </div>
-                    
                     <div class="similar-jobs-section">
                         <h2>Offres similaires</h2>
                         <div class="similar-jobs-grid">
@@ -208,9 +199,7 @@
                         </div>
                     </div>
                 </main>
-                
                 <aside class="job-detail-sidebar">
-                    
                     <div class="apply-section">
                         <button class="btn-primary full-width apply-btn">
                             <i class="fas fa-paper-plane"></i>
@@ -218,7 +207,6 @@
                         </button>
                         <p class="apply-note">En postulant, vous acceptez nos <a href="
                     </div>
-                    
                     <div class="job-info-section">
                         <h3>Informations sur l'emploi</h3>
                         <div class="info-list">
@@ -248,7 +236,6 @@
                             </div>
                         </div>
                     </div>
-                    
                     <div class="share-section">
                         <h3>Partager cette offre</h3>
                         <div class="share-buttons">
@@ -270,7 +257,6 @@
                             </button>
                         </div>
                     </div>
-                    
                     <div class="report-section">
                         <a href="
                             <i class="fas fa-flag"></i>
@@ -281,7 +267,6 @@
             </div>
         </div>
     </section>
-    
     <div id="applicationModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -324,7 +309,6 @@
             </div>
         </div>
     </div>
-    
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -379,4 +363,3 @@
     <script src="../assets/js/job-cards-simple.js"></script>
 </body>
 </html>
-
