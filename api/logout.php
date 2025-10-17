@@ -1,6 +1,23 @@
 <?php
 session_start();
 
+// Si c'est un appel direct (GET) avec redirection
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $redirect = $_GET['redirect'] ?? '';
+    
+    // Détruire la session
+    session_destroy();
+    
+    // Rediriger selon le paramètre
+    if ($redirect === 'index') {
+        header('Location: ../view/index.php');
+    } else {
+        header('Location: ../view/login.php');
+    }
+    exit();
+}
+
+// Pour les appels AJAX (POST)
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
